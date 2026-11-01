@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://4hexi2wdqd68"
+
+[deps]
+
+files=["res://assets/origin/Culture/Ciestundu/CharacterLastNames.Chinese.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.English.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.TraditionalChinese.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.Russian.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.SpanishSpain.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.German.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.Japanese.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.French.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.Polish.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.Korean.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.Turkish.translation"]
+
+source_file="res://assets/origin/Culture/Ciestundu/CharacterLastNames.csv"
+dest_files=["res://assets/origin/Culture/Ciestundu/CharacterLastNames.Chinese.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.English.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.TraditionalChinese.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.Russian.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.SpanishSpain.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.German.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.Japanese.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.French.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.Polish.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.Korean.translation", "res://assets/origin/Culture/Ciestundu/CharacterLastNames.Turkish.translation"]
+
+[params]
+
+compress=true
+delimiter=0

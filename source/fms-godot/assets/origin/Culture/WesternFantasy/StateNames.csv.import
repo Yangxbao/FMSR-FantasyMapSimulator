@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cekdxemnqd3vn"
+
+[deps]
+
+files=["res://assets/origin/Culture/WesternFantasy/StateNames.Chinese.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.English.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.TraditionalChinese.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.Russian.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.SpanishSpain.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.PortugueseBrazil.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.German.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.Japanese.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.French.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.Polish.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.PortuguesePortugal.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.Korean.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.Turkish.translation"]
+
+source_file="res://assets/origin/Culture/WesternFantasy/StateNames.csv"
+dest_files=["res://assets/origin/Culture/WesternFantasy/StateNames.Chinese.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.English.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.TraditionalChinese.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.Russian.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.SpanishSpain.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.PortugueseBrazil.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.German.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.Japanese.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.French.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.Polish.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.PortuguesePortugal.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.Korean.translation", "res://assets/origin/Culture/WesternFantasy/StateNames.Turkish.translation"]
+
+[params]
+
+compress=true
+delimiter=0

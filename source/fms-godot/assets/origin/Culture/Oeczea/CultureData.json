@@ -1,0 +1,725 @@
+{
+  "CultureName": "Oeczea",
+  "CultureColorHex": "#ccebc5",
+  "NameOrder": "FirstNameFirst",
+  "PoliticalSystems": [
+    "Republic",
+    "Federation",
+    "Theocracy"
+  ],
+  "PoliticalSystemProbabilities": {
+    "Kingdom": 30.0,
+    "Empire": 20.0,
+    "Federation": 80.0,
+    "Republic": 90.0,
+    "Tribal": 5.0,
+    "Theocracy": 45.0
+  },
+  "EthnicAttributeProbabilities": {
+    "FishAndHunting": 70.0,
+    "Agriculture": 20.0,
+    "Nomadic": 0.0,
+    "Maritime": 100.0,
+    "Commercial": 100.0
+  },
+  "TraitProbabilities": {
+    "FightToTheEnd": 55.0,
+    "StrengthenCore": 80.0,
+    "ManifestDestiny": 50.0,
+    "BullyTheWeak": 60.0,
+    "DefyTheStrong": 65.0,
+    "TotalWar": 30.0,
+    "WellTrained": 85.0,
+    "CoreDefense": 80.0,
+    "CavalryTradition": 0.0,
+    "HomelandDefense": 90.0,
+    "Conqueror": 40.0,
+    "SiegeCapture": 50.0,
+    "FieldCombatElite": 40.0
+  },
+  "CultureDescriptionTranslations": [
+    "奥克泽雅是港口城邦组成的海洋联盟，凭借强大舰队与发达造船业控制贸易。社会由商人家族与船长议会治理，盛产精密工艺品。",
+    "Oeczea is a maritime league of port city-states, controlling trade with a powerful fleet and advanced shipbuilding. Society is governed by merchant families and captains' councils, and it excels in producing precision crafts.",
+    "奧克澤雅是港口城邦組成的海洋聯盟，憑藉強大艦隊與發達造船業控制貿易。社會由商人家族與船長議會治理，盛產精密工藝品。",
+    "Оэкзея — это морская лига портовых городов-государств, контролирующая торговлю с помощью мощного флота и развитого судостроения. Общество управляется купеческими семьями и советами капитанов, и оно преуспевает в производстве точных ремесленных изделий.",
+    "Oeczea es una liga marítima de ciudades-estado portuarias que controla el comercio con una flota poderosa y una avanzada construcción naval. La sociedad está gobernada por familias de comerciantes y consejos de capitanes, y sobresale en la producción de artesanías de precisión.",
+    "Oeczea é uma liga marítima de cidades-estado portuárias, que controla o comércio com uma frota poderosa e construção naval avançada. A sociedade é governada por famílias de mercadores e conselhos de capitães, e destaca-se na produção de artesanato de precisão.",
+    "Oeczea ist ein Seebund von Hafenstädten, der den Handel mit einer mächtigen Flotte und fortschrittlichem Schiffbau kontrolliert. Die Gesellschaft wird von Handelsfamilien und Kapitänsräten regiert und zeichnet sich durch die Herstellung von Präzisionshandwerk aus.",
+    "オエクゼアは港湾都市国家から成る海洋同盟であり、強力な艦隊と発達した造船業によって貿易を支配している。社会は商人家族と船長評議会によって統治され、精密工芸品の生産に長けている。",
+    "Oeczea est une ligue maritime de cités-États portuaires, contrôlant le commerce grâce à une flotte puissante et une construction navale avancée. La société est gouvernée par des familles de marchands et des conseils de capitaines, et elle excelle dans la production d'artisanat de précision.",
+    "Oeczea to morska liga miast-państw portowych, kontrolująca handel dzięki potężnej flocie i zaawansowanemu przemysłowi stoczniowemu. Społeczeństwo jest rządzone przez rodziny kupieckie i rady kapitanów, a także doskonale radzi sobie z produkcją precyzyjnych wyrobów rzemieślniczych.",
+    "Oeczea es una liga marítima de ciudades-estado portuarias que controla el comercio con una flota poderosa y una avanzada construcción naval. La sociedad está gobernada por familias de comerciantes y consejos de capitanes, y sobresale en la producción de artesanías de precisión.",
+    "Oeczea é uma liga marítima de cidades-estado portuárias, que controla o comércio com uma frota poderosa e construção naval avançada. A sociedade é governada por famílias de mercadores e conselhos de capitães, e destaca-se na produção de artesanato de precisão.",
+    "오엑제아는 항구 도시 국가들로 이루어진 해양 동맹으로, 강력한 함대와 발달된 조선업을 통해 무역을 통제합니다. 사회는 상인 가문과 선장 협의회에 의해 운영되며, 정밀 공예품 생산에 뛰어납니다.",
+    "Oeczea, güçlü bir filo ve gelişmiş gemi yapımıyla ticareti kontrol eden liman şehir devletlerinden oluşan bir denizcilik birliğidir. Toplum, tüccar aileleri ve kaptan konseyleri tarafından yönetilir ve hassas el sanatları üretiminde üstündür."
+  ],
+  "MapCultureTranslations": [
+    "奥克泽雅",
+    "Oeczea",
+    "奧克澤雅",
+    "Оэкзея",
+    "Oeczea",
+    "Oeczea",
+    "Oeczea",
+    "オエクゼア",
+    "Oeczea",
+    "Oeczea",
+    "Oeczea",
+    "Oeczea",
+    "오엑제아",
+    "Oeczea"
+  ],
+  "OfficialTitles": {
+    "PresetId": "Oeczea",
+    "Entries": {
+      "Kingdom|Governor": {
+        "Translations": {
+          "Chinese": "港务长",
+          "TraditionalChinese": "港務長",
+          "English": "Harbormaster",
+          "Russian": "Начальник порта",
+          "SpanishSpain": "Capitán de puerto",
+          "PortugueseBrazil": "Capitão do porto",
+          "German": "Hafenmeister",
+          "Japanese": "港務長",
+          "French": "Capitaine de port",
+          "Polish": "Kapitan portu",
+          "SpanishLatinAmerica": "Capitán de puerto",
+          "PortuguesePortugal": "Capitão do porto",
+          "Korean": "항무장",
+          "Turkish": "Liman Reisi"
+        }
+      },
+      "Kingdom|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "王领港督",
+          "TraditionalChinese": "王領港督",
+          "English": "Crown Harbor Governor",
+          "Russian": "Королевский губернатор гаваней",
+          "SpanishSpain": "Gobernador real de los puertos",
+          "PortugueseBrazil": "Governador real dos portos",
+          "German": "Königlicher Hafengouverneur",
+          "Japanese": "王領港督",
+          "French": "Gouverneur royal des ports",
+          "Polish": "Królewski gubernator portów",
+          "SpanishLatinAmerica": "Gobernador real de los puertos",
+          "PortuguesePortugal": "Governador real dos portos",
+          "Korean": "왕령 항구 총독",
+          "Turkish": "Kraliyet Liman Valisi"
+        }
+      },
+      "Kingdom|Chancellor": {
+        "Translations": {
+          "Chinese": "王廷首席议政",
+          "TraditionalChinese": "王廷首席議政",
+          "English": "First Councillor of the Crown",
+          "Russian": "Первый советник короны",
+          "SpanishSpain": "Primer consejero de la corona",
+          "PortugueseBrazil": "Primeiro conselheiro da coroa",
+          "German": "Erster Ratsherr der Krone",
+          "Japanese": "王廷首席議政",
+          "French": "Premier conseiller de la couronne",
+          "Polish": "Pierwszy radca korony",
+          "SpanishLatinAmerica": "Primer consejero de la corona",
+          "PortuguesePortugal": "Primeiro conselheiro da coroa",
+          "Korean": "왕정 수석 의정",
+          "Turkish": "Tacın Baş Müşaviri"
+        }
+      },
+      "Kingdom|Steward": {
+        "Translations": {
+          "Chinese": "海关铸币大臣",
+          "TraditionalChinese": "海關鑄幣大臣",
+          "English": "Lord of Customs and Coin",
+          "Russian": "Лорд таможни и монеты",
+          "SpanishSpain": "Señor de aduanas y moneda",
+          "PortugueseBrazil": "Senhor das alfândegas e da moeda",
+          "German": "Herr über Zoll und Münze",
+          "Japanese": "税関造幣大臣",
+          "French": "Seigneur des douanes et de la monnaie",
+          "Polish": "Pan ceł i monety",
+          "SpanishLatinAmerica": "Señor de aduanas y moneda",
+          "PortuguesePortugal": "Senhor das alfândegas e da moeda",
+          "Korean": "관세 조폐 대신",
+          "Turkish": "Gümrük ve Sikke Nazırı"
+        }
+      },
+      "Kingdom|Marshal": {
+        "Translations": {
+          "Chinese": "王家大提督",
+          "TraditionalChinese": "王家大提督",
+          "English": "Lord High Admiral",
+          "Russian": "Лорд верховный адмирал",
+          "SpanishSpain": "Gran almirante real",
+          "PortugueseBrazil": "Grande almirante real",
+          "German": "Königlicher Großadmiral",
+          "Japanese": "王家大提督",
+          "French": "Grand amiral royal",
+          "Polish": "Wielki admirał królewski",
+          "SpanishLatinAmerica": "Gran almirante real",
+          "PortuguesePortugal": "Grande almirante real",
+          "Korean": "왕실 대제독",
+          "Turkish": "Kaptan-ı Derya"
+        }
+      },
+      "Kingdom|WarCommander": {
+        "Translations": {
+          "Chinese": "王命远征提督",
+          "TraditionalChinese": "王命遠征提督",
+          "English": "Royal Expeditionary Commander",
+          "Russian": "Командующий королевской экспедицией",
+          "SpanishSpain": "Comandante de la expedición real",
+          "PortugueseBrazil": "Comandante da expedição real",
+          "German": "Königlicher Expeditionskommandant",
+          "Japanese": "王命遠征提督",
+          "French": "Commandant de l'expédition royale",
+          "Polish": "Dowódca królewskiej wyprawy",
+          "SpanishLatinAmerica": "Comandante de la expedición real",
+          "PortuguesePortugal": "Comandante da expedição real",
+          "Korean": "왕명 원정 제독",
+          "Turkish": "Kraliyet Seferi Komutanı"
+        }
+      },
+      "Empire|Governor": {
+        "Translations": {
+          "Chinese": "港市执政",
+          "TraditionalChinese": "港市執政",
+          "English": "Port-City Prefect",
+          "Russian": "Префект портового города",
+          "SpanishSpain": "Prefecto de la ciudad portuaria",
+          "PortugueseBrazil": "Prefeito da cidade portuária",
+          "German": "Präfekt der Hafenstadt",
+          "Japanese": "港市執政",
+          "French": "Préfet de la ville portuaire",
+          "Polish": "Prefekt miasta portowego",
+          "SpanishLatinAmerica": "Prefecto de la ciudad portuaria",
+          "PortuguesePortugal": "Prefeito da cidade portuária",
+          "Korean": "항구 도시 집정관",
+          "Turkish": "Liman Şehri Emini"
+        }
+      },
+      "Empire|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "海区总督",
+          "TraditionalChinese": "海區總督",
+          "English": "Maritime Prefect",
+          "Russian": "Морской префект",
+          "SpanishSpain": "Prefecto marítimo",
+          "PortugueseBrazil": "Prefeito marítimo",
+          "German": "Seepräfekt",
+          "Japanese": "海区総督",
+          "French": "Préfet maritime",
+          "Polish": "Prefekt morski",
+          "SpanishLatinAmerica": "Prefecto marítimo",
+          "PortuguesePortugal": "Prefeito marítimo",
+          "Korean": "해역 총독",
+          "Turkish": "Derya Beyi"
+        }
+      },
+      "Empire|Chancellor": {
+        "Translations": {
+          "Chinese": "潮议院大执政",
+          "TraditionalChinese": "潮議院大執政",
+          "English": "Chancellor of the Tidal Council",
+          "Russian": "Канцлер Совета приливов",
+          "SpanishSpain": "Canciller del Consejo de las Mareas",
+          "PortugueseBrazil": "Chanceler do Conselho das Marés",
+          "German": "Kanzler des Gezeitenrates",
+          "Japanese": "潮議院大執政",
+          "French": "Chancelier du Conseil des marées",
+          "Polish": "Kanclerz Rady Pływów",
+          "SpanishLatinAmerica": "Canciller del Consejo de las Mareas",
+          "PortuguesePortugal": "Chanceler do Conselho das Marés",
+          "Korean": "조수 의회 대집정관",
+          "Turkish": "Gelgit Meclisi Şansölyesi"
+        }
+      },
+      "Empire|Steward": {
+        "Translations": {
+          "Chinese": "帝国贸易总监",
+          "TraditionalChinese": "帝國貿易總監",
+          "English": "Imperial Comptroller of Trade",
+          "Russian": "Имперский распорядитель торговли",
+          "SpanishSpain": "Interventor imperial de comercio",
+          "PortugueseBrazil": "Controlador imperial do comércio",
+          "German": "Kaiserlicher Handelsverwalter",
+          "Japanese": "帝国貿易総監",
+          "French": "Intendant impérial du commerce",
+          "Polish": "Cesarski zarządca handlu",
+          "SpanishLatinAmerica": "Interventor imperial de comercio",
+          "PortuguesePortugal": "Controlador imperial do comércio",
+          "Korean": "제국 무역 총감",
+          "Turkish": "İmparatorluk Ticaret Emini"
+        }
+      },
+      "Empire|Marshal": {
+        "Translations": {
+          "Chinese": "帝国大提督",
+          "TraditionalChinese": "帝國大提督",
+          "English": "Grand Admiral",
+          "Russian": "Великий адмирал",
+          "SpanishSpain": "Gran almirante",
+          "PortugueseBrazil": "Grande almirante",
+          "German": "Großadmiral",
+          "Japanese": "帝国大提督",
+          "French": "Grand amiral",
+          "Polish": "Wielki admirał",
+          "SpanishLatinAmerica": "Gran almirante",
+          "PortuguesePortugal": "Grande almirante",
+          "Korean": "제국 대제독",
+          "Turkish": "Büyük Amiral"
+        }
+      },
+      "Empire|WarCommander": {
+        "Translations": {
+          "Chinese": "帝国远征提督",
+          "TraditionalChinese": "帝國遠征提督",
+          "English": "Imperial Expeditionary Commander",
+          "Russian": "Командующий имперской экспедицией",
+          "SpanishSpain": "Comandante de la expedición imperial",
+          "PortugueseBrazil": "Comandante da expedição imperial",
+          "German": "Kaiserlicher Expeditionskommandant",
+          "Japanese": "帝国遠征提督",
+          "French": "Commandant de l'expédition impériale",
+          "Polish": "Dowódca cesarskiej wyprawy",
+          "SpanishLatinAmerica": "Comandante de la expedición imperial",
+          "PortuguesePortugal": "Comandante da expedição imperial",
+          "Korean": "제국 원정 제독",
+          "Turkish": "İmparatorluk Seferi Komutanı"
+        }
+      },
+      "Federation|Governor": {
+        "Translations": {
+          "Chinese": "泊港总管",
+          "TraditionalChinese": "泊港總管",
+          "English": "Master of the Anchorage",
+          "Russian": "Управляющий якорной стоянкой",
+          "SpanishSpain": "Maestre del fondeadero",
+          "PortugueseBrazil": "Mestre do ancoradouro",
+          "German": "Meister des Ankerplatzes",
+          "Japanese": "泊港総管",
+          "French": "Maître du mouillage",
+          "Polish": "Zarządca kotwicowiska",
+          "SpanishLatinAmerica": "Maestre del fondeadero",
+          "PortuguesePortugal": "Mestre do ancoradouro",
+          "Korean": "정박지 총관",
+          "Turkish": "Demirleme Emini"
+        }
+      },
+      "Federation|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "港务执政官",
+          "TraditionalChinese": "港務執政官",
+          "English": "Harbor Provost",
+          "Russian": "Прево гавани",
+          "SpanishSpain": "Preboste del puerto",
+          "PortugueseBrazil": "Preboste do porto",
+          "German": "Hafenvogt",
+          "Japanese": "港務執政官",
+          "French": "Prévôt du port",
+          "Polish": "Wójt portowy",
+          "SpanishLatinAmerica": "Preboste del puerto",
+          "PortuguesePortugal": "Preboste do porto",
+          "Korean": "항무 집정관",
+          "Turkish": "Liman Emini"
+        }
+      },
+      "Federation|Chancellor": {
+        "Translations": {
+          "Chinese": "诸港首席议长",
+          "TraditionalChinese": "諸港首席議長",
+          "English": "First Speaker of the Ports",
+          "Russian": "Первый спикер портов",
+          "SpanishSpain": "Primer portavoz de los puertos",
+          "PortugueseBrazil": "Primeiro porta-voz dos portos",
+          "German": "Erster Sprecher der Häfen",
+          "Japanese": "諸港首席議長",
+          "French": "Premier porte-parole des ports",
+          "Polish": "Pierwszy mówca portów",
+          "SpanishLatinAmerica": "Primer portavoz de los puertos",
+          "PortuguesePortugal": "Primeiro porta-voz dos portos",
+          "Korean": "제항 수석의장",
+          "Turkish": "Limanlar Baş Sözcüsü"
+        }
+      },
+      "Federation|Steward": {
+        "Translations": {
+          "Chinese": "公账总管",
+          "TraditionalChinese": "公帳總管",
+          "English": "Master of the Common Ledger",
+          "Russian": "Хранитель общих счетов",
+          "SpanishSpain": "Maestre del libro común",
+          "PortugueseBrazil": "Mestre do livro-razão comum",
+          "German": "Meister des gemeinsamen Hauptbuchs",
+          "Japanese": "公帳総管",
+          "French": "Maître du grand livre commun",
+          "Polish": "Zarządca wspólnej księgi",
+          "SpanishLatinAmerica": "Maestre del libro común",
+          "PortuguesePortugal": "Mestre do livro-razão comum",
+          "Korean": "공동 장부 총관",
+          "Turkish": "Ortak Defter Emini"
+        }
+      },
+      "Federation|Marshal": {
+        "Translations": {
+          "Chinese": "联盟舰队提督",
+          "TraditionalChinese": "聯盟艦隊提督",
+          "English": "Admiral of the League",
+          "Russian": "Адмирал лиги",
+          "SpanishSpain": "Almirante de la liga",
+          "PortugueseBrazil": "Almirante da liga",
+          "German": "Admiral des Bundes",
+          "Japanese": "連盟艦隊提督",
+          "French": "Amiral de la ligue",
+          "Polish": "Admirał ligi",
+          "SpanishLatinAmerica": "Almirante de la liga",
+          "PortuguesePortugal": "Almirante da liga",
+          "Korean": "연맹 함대 제독",
+          "Turkish": "Birlik Amirali"
+        }
+      },
+      "Federation|WarCommander": {
+        "Translations": {
+          "Chinese": "联军远征提督",
+          "TraditionalChinese": "聯軍遠征提督",
+          "English": "Allied Expeditionary Commander",
+          "Russian": "Командующий союзной экспедицией",
+          "SpanishSpain": "Comandante de la expedición aliada",
+          "PortugueseBrazil": "Comandante da expedição aliada",
+          "German": "Alliierter Expeditionskommandant",
+          "Japanese": "連合遠征提督",
+          "French": "Commandant de l'expédition alliée",
+          "Polish": "Dowódca sprzymierzonej wyprawy",
+          "SpanishLatinAmerica": "Comandante de la expedición aliada",
+          "PortuguesePortugal": "Comandante da expedição aliada",
+          "Korean": "연합군 원정 제독",
+          "Turkish": "Müttefik Sefer Komutanı"
+        }
+      },
+      "Republic|Governor": {
+        "Translations": {
+          "Chinese": "市舶官",
+          "TraditionalChinese": "市舶官",
+          "English": "Customs Magistrate",
+          "Russian": "Таможенный магистрат",
+          "SpanishSpain": "Magistrado de aduanas",
+          "PortugueseBrazil": "Magistrado das alfândegas",
+          "German": "Zollmagistrat",
+          "Japanese": "市舶官",
+          "French": "Magistrat des douanes",
+          "Polish": "Zarządca ceł",
+          "SpanishLatinAmerica": "Magistrado de aduanas",
+          "PortuguesePortugal": "Magistrado das alfândegas",
+          "Korean": "시박관",
+          "Turkish": "Gümrük Kadısı"
+        }
+      },
+      "Republic|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "港城执政官",
+          "TraditionalChinese": "港城執政官",
+          "English": "Port Magistrate",
+          "Russian": "Магистрат порта",
+          "SpanishSpain": "Magistrado del puerto",
+          "PortugueseBrazil": "Magistrado do porto",
+          "German": "Hafenmagistrat",
+          "Japanese": "港城執政官",
+          "French": "Magistrat du port",
+          "Polish": "Zarządca portu",
+          "SpanishLatinAmerica": "Magistrado del puerto",
+          "PortuguesePortugal": "Magistrado do porto",
+          "Korean": "항구 집정관",
+          "Turkish": "Liman Kadısı"
+        }
+      },
+      "Republic|Chancellor": {
+        "Translations": {
+          "Chinese": "首席执政官",
+          "TraditionalChinese": "首席執政官",
+          "English": "First Consul",
+          "Russian": "Первый консул",
+          "SpanishSpain": "Primer cónsul",
+          "PortugueseBrazil": "Primeiro cônsul",
+          "German": "Erster Konsul",
+          "Japanese": "首席執政官",
+          "French": "Premier consul",
+          "Polish": "Pierwszy konsul",
+          "SpanishLatinAmerica": "Primer cónsul",
+          "PortuguesePortugal": "Primeiro cônsul",
+          "Korean": "수석 집정관",
+          "Turkish": "Birinci Konsül"
+        }
+      },
+      "Republic|Steward": {
+        "Translations": {
+          "Chinese": "交易所财务官",
+          "TraditionalChinese": "交易所財務官",
+          "English": "Treasurer of the Exchange",
+          "Russian": "Казначей биржи",
+          "SpanishSpain": "Tesorero de la lonja",
+          "PortugueseBrazil": "Tesoureiro da bolsa",
+          "German": "Schatzmeister der Börse",
+          "Japanese": "取引所財務官",
+          "French": "Trésorier de la bourse",
+          "Polish": "Skarbnik giełdy",
+          "SpanishLatinAmerica": "Tesorero de la lonja",
+          "PortuguesePortugal": "Tesoureiro da bolsa",
+          "Korean": "거래소 재무관",
+          "Turkish": "Borsa Hazinedarı"
+        }
+      },
+      "Republic|Marshal": {
+        "Translations": {
+          "Chinese": "共和国舰队总长",
+          "TraditionalChinese": "共和國艦隊總長",
+          "English": "Captain-General of the Fleet",
+          "Russian": "Капитан-генерал флота",
+          "SpanishSpain": "Capitán general de la flota",
+          "PortugueseBrazil": "Capitão-general da frota",
+          "German": "Generalkapitän der Flotte",
+          "Japanese": "共和国艦隊総長",
+          "French": "Capitaine général de la flotte",
+          "Polish": "Kapitan generalny floty",
+          "SpanishLatinAmerica": "Capitán general de la flota",
+          "PortuguesePortugal": "Capitão-general da frota",
+          "Korean": "공화국 함대 총장",
+          "Turkish": "Donanma Başkaptanı"
+        }
+      },
+      "Republic|WarCommander": {
+        "Translations": {
+          "Chinese": "战时远征提督",
+          "TraditionalChinese": "戰時遠征提督",
+          "English": "Expeditionary Commander",
+          "Russian": "Командующий экспедицией",
+          "SpanishSpain": "Comandante de expedición",
+          "PortugueseBrazil": "Comandante de expedição",
+          "German": "Expeditionskommandant",
+          "Japanese": "戦時遠征提督",
+          "French": "Commandant d'expédition",
+          "Polish": "Dowódca wyprawy",
+          "SpanishLatinAmerica": "Comandante de expedición",
+          "PortuguesePortugal": "Comandante de expedição",
+          "Korean": "전시 원정 제독",
+          "Turkish": "Sefer Amirali"
+        }
+      },
+      "Tribal|Governor": {
+        "Translations": {
+          "Chinese": "泊地头人",
+          "TraditionalChinese": "泊地頭人",
+          "English": "Anchorage Headman",
+          "Russian": "Староста якорной стоянки",
+          "SpanishSpain": "Jefe del fondeadero",
+          "PortugueseBrazil": "Chefe do ancoradouro",
+          "German": "Vorsteher des Ankerplatzes",
+          "Japanese": "泊地の頭人",
+          "French": "Chef du mouillage",
+          "Polish": "Starosta przystani",
+          "SpanishLatinAmerica": "Jefe del fondeadero",
+          "PortuguesePortugal": "Chefe do ancoradouro",
+          "Korean": "정박지 촌장",
+          "Turkish": "Demirleme Ağası"
+        }
+      },
+      "Tribal|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "港族首领",
+          "TraditionalChinese": "港族首領",
+          "English": "Haven Chief",
+          "Russian": "Вождь гавани",
+          "SpanishSpain": "Caudillo del puerto",
+          "PortugueseBrazil": "Chefe do porto",
+          "German": "Hafenhäuptling",
+          "Japanese": "港族の首領",
+          "French": "Chef du havre",
+          "Polish": "Wódz przystani",
+          "SpanishLatinAmerica": "Caudillo del puerto",
+          "PortuguesePortugal": "Chefe do porto",
+          "Korean": "항구 부족장",
+          "Turkish": "Liman Beyi"
+        }
+      },
+      "Tribal|Chancellor": {
+        "Translations": {
+          "Chinese": "船长议会首席",
+          "TraditionalChinese": "船長議會首席",
+          "English": "First Voice of the Captains",
+          "Russian": "Первый голос капитанов",
+          "SpanishSpain": "Primera voz de los capitanes",
+          "PortugueseBrazil": "Primeira voz dos capitães",
+          "German": "Erste Stimme der Kapitäne",
+          "Japanese": "船長議会首席",
+          "French": "Première voix des capitaines",
+          "Polish": "Pierwszy głos kapitanów",
+          "SpanishLatinAmerica": "Primera voz de los capitanes",
+          "PortuguesePortugal": "Primeira voz dos capitães",
+          "Korean": "선장 의회 수석",
+          "Turkish": "Kaptanların Baş Sesi"
+        }
+      },
+      "Tribal|Steward": {
+        "Translations": {
+          "Chinese": "贡货保管者",
+          "TraditionalChinese": "貢貨保管者",
+          "English": "Keeper of Tribute Cargo",
+          "Russian": "Хранитель груза дани",
+          "SpanishSpain": "Guardián del cargamento de tributo",
+          "PortugueseBrazil": "Guardião da carga de tributo",
+          "German": "Hüter der Tributfracht",
+          "Japanese": "貢納品の管理人",
+          "French": "Gardien de la cargaison de tribut",
+          "Polish": "Strażnik ładunku daniny",
+          "SpanishLatinAmerica": "Guardián del cargamento de tributo",
+          "PortuguesePortugal": "Guardião da carga de tributo",
+          "Korean": "공물 화물 보관인",
+          "Turkish": "Haraç Yükü Emini"
+        }
+      },
+      "Tribal|Marshal": {
+        "Translations": {
+          "Chinese": "海战酋长",
+          "TraditionalChinese": "海戰酋長",
+          "English": "Sea-War Chief",
+          "Russian": "Вождь морской войны",
+          "SpanishSpain": "Jefe de la guerra del mar",
+          "PortugueseBrazil": "Chefe da guerra do mar",
+          "German": "Seekriegshäuptling",
+          "Japanese": "海戦の酋長",
+          "French": "Chef de la guerre des mers",
+          "Polish": "Wódz wojny morskiej",
+          "SpanishLatinAmerica": "Jefe de la guerra del mar",
+          "PortuguesePortugal": "Chefe da guerra do mar",
+          "Korean": "해전 족장",
+          "Turkish": "Deniz Savaş Beyi"
+        }
+      },
+      "Tribal|WarCommander": {
+        "Translations": {
+          "Chinese": "诸舟远征提督",
+          "TraditionalChinese": "諸舟遠征提督",
+          "English": "High Expeditionary Commander",
+          "Russian": "Верховный предводитель морского похода",
+          "SpanishSpain": "Gran comandante de la expedición",
+          "PortugueseBrazil": "Grande comandante da expedição",
+          "German": "Hoher Expeditionskommandant",
+          "Japanese": "諸船遠征提督",
+          "French": "Grand commandant de l'expédition",
+          "Polish": "Wielki dowódca wyprawy",
+          "SpanishLatinAmerica": "Gran comandante de la expedición",
+          "PortuguesePortugal": "Grande comandante da expedição",
+          "Korean": "제선 원정 제독",
+          "Turkish": "Ulu Sefer Amirali"
+        }
+      },
+      "Theocracy|Governor": {
+        "Translations": {
+          "Chinese": "港湾祭司",
+          "TraditionalChinese": "港灣祭司",
+          "English": "Harbor Priest",
+          "Russian": "Жрец гавани",
+          "SpanishSpain": "Sacerdote del puerto",
+          "PortugueseBrazil": "Sacerdote do porto",
+          "German": "Hafenpriester",
+          "Japanese": "港湾祭司",
+          "French": "Prêtre du port",
+          "Polish": "Kapłan portu",
+          "SpanishLatinAmerica": "Sacerdote del puerto",
+          "PortuguesePortugal": "Sacerdote do porto",
+          "Korean": "항만 사제",
+          "Turkish": "Liman Rahibi"
+        }
+      },
+      "Theocracy|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "潮汐主教",
+          "TraditionalChinese": "潮汐主教",
+          "English": "Bishop of the Tides",
+          "Russian": "Епископ приливов",
+          "SpanishSpain": "Obispo de las mareas",
+          "PortugueseBrazil": "Bispo das marés",
+          "German": "Bischof der Gezeiten",
+          "Japanese": "潮汐主教",
+          "French": "Évêque des marées",
+          "Polish": "Biskup pływów",
+          "SpanishLatinAmerica": "Obispo de las mareas",
+          "PortuguesePortugal": "Bispo das marés",
+          "Korean": "조수의 주교",
+          "Turkish": "Gelgit Piskoposu"
+        }
+      },
+      "Theocracy|Chancellor": {
+        "Translations": {
+          "Chinese": "深海首席祭司",
+          "TraditionalChinese": "深海首席祭司",
+          "English": "First Priest of the Deep",
+          "Russian": "Первый жрец глубин",
+          "SpanishSpain": "Primer sacerdote de las profundidades",
+          "PortugueseBrazil": "Primeiro sacerdote das profundezas",
+          "German": "Erster Priester der Tiefe",
+          "Japanese": "深海の首席祭司",
+          "French": "Premier prêtre des profondeurs",
+          "Polish": "Pierwszy kapłan głębin",
+          "SpanishLatinAmerica": "Primer sacerdote de las profundidades",
+          "PortuguesePortugal": "Primeiro sacerdote das profundezas",
+          "Korean": "심해 수석 사제",
+          "Turkish": "Derinliğin Başrahibi"
+        }
+      },
+      "Theocracy|Steward": {
+        "Translations": {
+          "Chinese": "圣库什一监",
+          "TraditionalChinese": "聖庫什一監",
+          "English": "Keeper of Sacred Tithes",
+          "Russian": "Хранитель священной десятины",
+          "SpanishSpain": "Guardián de los diezmos sagrados",
+          "PortugueseBrazil": "Guardião dos dízimos sagrados",
+          "German": "Hüter des heiligen Zehnten",
+          "Japanese": "聖庫十分の一税監",
+          "French": "Gardien des dîmes sacrées",
+          "Polish": "Strażnik świętych dziesięcin",
+          "SpanishLatinAmerica": "Guardián de los diezmos sagrados",
+          "PortuguesePortugal": "Guardião dos dízimos sagrados",
+          "Korean": "신성 십일조 관리인",
+          "Turkish": "Kutsal Öşür Emini"
+        }
+      },
+      "Theocracy|Marshal": {
+        "Translations": {
+          "Chinese": "圣舰队大提督",
+          "TraditionalChinese": "聖艦隊大提督",
+          "English": "Grand Admiral of the Sacred Fleet",
+          "Russian": "Великий адмирал священного флота",
+          "SpanishSpain": "Gran almirante de la flota sagrada",
+          "PortugueseBrazil": "Grande almirante da frota sagrada",
+          "German": "Großadmiral der heiligen Flotte",
+          "Japanese": "聖艦隊大提督",
+          "French": "Grand amiral de la flotte sacrée",
+          "Polish": "Wielki admirał świętej floty",
+          "SpanishLatinAmerica": "Gran almirante de la flota sagrada",
+          "PortuguesePortugal": "Grande almirante da frota sagrada",
+          "Korean": "성함대 대제독",
+          "Turkish": "Kutsal Donanma Büyük Amirali"
+        }
+      },
+      "Theocracy|WarCommander": {
+        "Translations": {
+          "Chinese": "潮汐远征提督",
+          "TraditionalChinese": "潮汐遠征提督",
+          "English": "Expeditionary Commander of the Tides",
+          "Russian": "Командующий экспедицией приливов",
+          "SpanishSpain": "Comandante de la expedición de las mareas",
+          "PortugueseBrazil": "Comandante da expedição das marés",
+          "German": "Expeditionskommandant der Gezeiten",
+          "Japanese": "潮汐遠征提督",
+          "French": "Commandant de l'expédition des marées",
+          "Polish": "Dowódca wyprawy pływów",
+          "SpanishLatinAmerica": "Comandante de la expedición de las mareas",
+          "PortuguesePortugal": "Comandante da expedição das marés",
+          "Korean": "조수 원정 제독",
+          "Turkish": "Gelgit Sefer Komutanı"
+        }
+      }
+    }
+  }
+}

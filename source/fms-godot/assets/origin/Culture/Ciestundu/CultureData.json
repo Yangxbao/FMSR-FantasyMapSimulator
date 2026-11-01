@@ -1,0 +1,725 @@
+{
+  "CultureName": "Ciestundu",
+  "CultureColorHex": "#fb8072",
+  "NameOrder": "FirstNameFirst",
+  "PoliticalSystems": [
+    "Federation",
+    "Kingdom",
+    "Theocracy"
+  ],
+  "PoliticalSystemProbabilities": {
+    "Kingdom": 70.0,
+    "Empire": 25.0,
+    "Federation": 85.0,
+    "Republic": 15.0,
+    "Tribal": 20.0,
+    "Theocracy": 40.0
+  },
+  "EthnicAttributeProbabilities": {
+    "FishAndHunting": 40.0,
+    "Agriculture": 50.0,
+    "Nomadic": 5.0,
+    "Maritime": 0.0,
+    "Commercial": 50.0
+  },
+  "TraitProbabilities": {
+    "FightToTheEnd": 80.0,
+    "StrengthenCore": 85.0,
+    "ManifestDestiny": 30.0,
+    "BullyTheWeak": 40.0,
+    "DefyTheStrong": 90.0,
+    "TotalWar": 50.0,
+    "WellTrained": 75.0,
+    "CoreDefense": 100.0,
+    "CavalryTradition": 10.0,
+    "HomelandDefense": 100.0,
+    "Conqueror": 30.0,
+    "SiegeCapture": 60.0,
+    "FieldCombatElite": 60.0
+  },
+  "CultureDescriptionTranslations": [
+    "塞斯顿都是山地封建邦联，以坚固城堡、重装步兵和矿冶闻名。世袭领主统治，经济依赖矿产与军械制造，崇拜山脉及锻造之神。",
+    "Ciestundu is a mountainous feudal confederation, renowned for its strong castles, heavy infantry, and mining/metallurgy. Hereditary lords rule, the economy relies on minerals and armament manufacturing, and they worship mountain and forging gods.",
+    "塞斯頓都是山地封建邦聯，以堅固城堡、重裝步兵和礦冶聞名。世襲領主統治，經濟依賴礦產與軍械製造，崇拜山脈及鍛造之神。",
+    "Сиестунду — это горная феодальная конфедерация, известная своими крепкими замками, тяжелой пехотой и горнодобычей/металлургией. Правят потомственные лорды, экономика зависит от полезных ископаемых и производства вооружений, и они поклоняются горным богам и богам кузнечного дела.",
+    "Ciestundu es una confederación feudal montañosa, renombrada por sus sólidos castillos, infantería pesada y minería/metalurgia. Gobiernan señores hereditarios, la economía se basa en los minerales y la fabricación de armamento, y adoran a los dioses de la montaña y la forja.",
+    "Ciestundu é uma confederação feudal montanhosa, renomada por seus castelos fortes, infantaria pesada e mineração/metalurgia. Lordes hereditários governam, a economia depende de minerais e da fabricação de armamentos, e eles adoram os deuses da montanha e da forja.",
+    "Ciestundu ist eine gebirgige Feudalkonföderation, bekannt für ihre starken Burgen, schwere Infanterie und Bergbau/Metallurgie. Erbliche Herren regieren, die Wirtschaft stützt sich auf Mineralien und Waffenherstellung, und sie verehren Berg- und Schmiedegötter.",
+    "シエストゥンドゥは山岳封建連合国家であり、堅固な城、重装歩兵、鉱業・冶金で名高い。世襲の領主が統治し、経済は鉱物と武具製造に依存し、山と鍛冶の神を崇拝している。",
+    "Ciestundu est une confédération féodale montagneuse, réputée pour ses solides châteaux, son infanterie lourde et ses activités minières/métallurgiques. Des seigneurs héréditaires gouvernent, l'économie repose sur les minéraux et la fabrication d'armements, et ils vénèrent les dieux de la montagne et de la forge.",
+    "Ciestundu to górska konfederacja feudalna, znana z potężnych zamków, ciężkiej piechoty oraz górnictwa i metalurgii. Rządzą dziedziczni władcy, gospodarka opiera się na minerałach i produkcji uzbrojenia, a ludność czci bogów gór i kowalstwa.",
+    "Ciestundu es una confederación feudal montañosa, renombrada por sus sólidos castillos, infantería pesada y minería/metalurgia. Gobiernan señores hereditarios, la economía se basa en los minerales y la fabricación de armamento, y adoran a los dioses de la montaña y la forja.",
+    "Ciestundu é uma confederação feudal montanhosa, de renome pelos seus castelos fortes, infantaria pesada e mineração/metalurgia. Lordes hereditários governam, a economia depende de minerais e do fabrico de armamento, e adoram os deuses da montanha e da forja.",
+    "시에스툰두는 견고한 성, 중장보병, 광업 및 야금술로 유명한 산악 봉건 연방입니다. 세습 영주가 통치하며 경제는 광물과 군수품 제조에 의존하고 산과 대장장이 신을 숭배합니다.",
+    "Ciestundu, güçlü kaleleri, ağır piyadeleri ve madencilik/metalurjisiyle tanınan dağlık bir feodal konfederasyondur. Kalıtsal lordlar hüküm sürer, ekonomi minerallere ve silah üretimine dayanır ve dağ ile demircilik tanrılarına taparlar."
+  ],
+  "MapCultureTranslations": [
+    "塞斯顿都",
+    "Ciestundu",
+    "塞斯頓都",
+    "Сиестунду",
+    "Ciestundu",
+    "Ciestundu",
+    "Ciestundu",
+    "シエストゥンドゥ",
+    "Ciestundu",
+    "Ciestundu",
+    "Ciestundu",
+    "Ciestundu",
+    "시에스툰두",
+    "Ciestundu"
+  ],
+  "OfficialTitles": {
+    "PresetId": "Ciestundu",
+    "Entries": {
+      "Kingdom|Governor": {
+        "Translations": {
+          "Chinese": "堡主",
+          "TraditionalChinese": "堡主",
+          "English": "Hold Master",
+          "Russian": "Хозяин крепости",
+          "SpanishSpain": "Maestre de la fortaleza",
+          "PortugueseBrazil": "Mestre da fortaleza",
+          "German": "Festungsherr",
+          "Japanese": "砦の主",
+          "French": "Maître du bastion",
+          "Polish": "Pan twierdzy",
+          "SpanishLatinAmerica": "Maestre de la fortaleza",
+          "PortuguesePortugal": "Mestre da fortaleza",
+          "Korean": "요새의 주인",
+          "Turkish": "Kale Ağası"
+        }
+      },
+      "Kingdom|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "王领守堡官",
+          "TraditionalChinese": "王領守堡官",
+          "English": "Royal Castellan",
+          "Russian": "Королевский кастелян",
+          "SpanishSpain": "Alcaide real",
+          "PortugueseBrazil": "Alcaide real",
+          "German": "Königlicher Kastellan",
+          "Japanese": "王領の城代",
+          "French": "Châtelain royal",
+          "Polish": "Kasztelan królewski",
+          "SpanishLatinAmerica": "Alcaide real",
+          "PortuguesePortugal": "Alcaide real",
+          "Korean": "왕령 성주",
+          "Turkish": "Kraliyet Dizdarı"
+        }
+      },
+      "Kingdom|Chancellor": {
+        "Translations": {
+          "Chinese": "石厅大法官",
+          "TraditionalChinese": "石廳大法官",
+          "English": "High Justice of the Stone Hall",
+          "Russian": "Верховный судья Каменного зала",
+          "SpanishSpain": "Gran juez del Salón de Piedra",
+          "PortugueseBrazil": "Grão-juiz do Salão de Pedra",
+          "German": "Oberrichter der Steinhalle",
+          "Japanese": "石殿の大法官",
+          "French": "Grand juge de la Salle de Pierre",
+          "Polish": "Wielki sędzia Kamiennej Sali",
+          "SpanishLatinAmerica": "Gran juez del Salón de Piedra",
+          "PortuguesePortugal": "Grão-juiz do Salão de Pedra",
+          "Korean": "석전 대법관",
+          "Turkish": "Taş Divan Başyargıcı"
+        }
+      },
+      "Kingdom|Steward": {
+        "Translations": {
+          "Chinese": "矿税总管",
+          "TraditionalChinese": "礦稅總管",
+          "English": "Master of Mine Revenues",
+          "Russian": "Управляющий рудными податями",
+          "SpanishSpain": "Maestre de las rentas mineras",
+          "PortugueseBrazil": "Mestre das rendas das minas",
+          "German": "Meister der Minenerträge",
+          "Japanese": "鉱山税の総管",
+          "French": "Maître des revenus miniers",
+          "Polish": "Zarządca dochodów kopalnianych",
+          "SpanishLatinAmerica": "Maestre de las rentas mineras",
+          "PortuguesePortugal": "Mestre das rendas das minas",
+          "Korean": "광산세 총관",
+          "Turkish": "Maden Gelirleri Emini"
+        }
+      },
+      "Kingdom|Marshal": {
+        "Translations": {
+          "Chinese": "王国统军官",
+          "TraditionalChinese": "王國統軍官",
+          "English": "Lord Constable of the Realm",
+          "Russian": "Коннетабль королевства",
+          "SpanishSpain": "Condestable del reino",
+          "PortugueseBrazil": "Condestável do reino",
+          "German": "Konnetabel des Königreichs",
+          "Japanese": "王国統軍官",
+          "French": "Connétable du royaume",
+          "Polish": "Konetabl królestwa",
+          "SpanishLatinAmerica": "Condestable del reino",
+          "PortuguesePortugal": "Condestável do reino",
+          "Korean": "왕국 코네타블",
+          "Turkish": "Krallık Konetablı"
+        }
+      },
+      "Kingdom|WarCommander": {
+        "Translations": {
+          "Chinese": "王师元帅",
+          "TraditionalChinese": "王師元帥",
+          "English": "Marshal of the Royal Host",
+          "Russian": "Маршал королевского воинства",
+          "SpanishSpain": "Mariscal de la hueste real",
+          "PortugueseBrazil": "Marechal da hoste real",
+          "German": "Marschall des königlichen Heeres",
+          "Japanese": "王師元帥",
+          "French": "Maréchal de l'ost royal",
+          "Polish": "Marszałek zastępów królewskich",
+          "SpanishLatinAmerica": "Mariscal de la hueste real",
+          "PortuguesePortugal": "Marechal da hoste real",
+          "Korean": "왕실 원수",
+          "Turkish": "Kraliyet Ordusu Mareşali"
+        }
+      },
+      "Empire|Governor": {
+        "Translations": {
+          "Chinese": "石城守备",
+          "TraditionalChinese": "石城守備",
+          "English": "Stone-City Warden",
+          "Russian": "Страж каменного города",
+          "SpanishSpain": "Guardián de la ciudad de piedra",
+          "PortugueseBrazil": "Guardião da cidade de pedra",
+          "German": "Steinstadt-Vogt",
+          "Japanese": "石城守備官",
+          "French": "Gardien de la cité de pierre",
+          "Polish": "Strażnik kamiennego miasta",
+          "SpanishLatinAmerica": "Guardián de la ciudad de piedra",
+          "PortuguesePortugal": "Guardião da cidade de pedra",
+          "Korean": "석성 수비관",
+          "Turkish": "Taş Şehir Muhafızı"
+        }
+      },
+      "Empire|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "山塞总督",
+          "TraditionalChinese": "山塞總督",
+          "English": "Mountain-March Prefect",
+          "Russian": "Префект горной марки",
+          "SpanishSpain": "Prefecto de la marca montañosa",
+          "PortugueseBrazil": "Prefeito da marca das montanhas",
+          "German": "Präfekt der Bergmark",
+          "Japanese": "山塞総督",
+          "French": "Préfet de la marche des montagnes",
+          "Polish": "Prefekt górskiej marchii",
+          "SpanishLatinAmerica": "Prefecto de la marca montañosa",
+          "PortuguesePortugal": "Prefeito da marca das montanhas",
+          "Korean": "산채 총독",
+          "Turkish": "Dağ Uçbeyi"
+        }
+      },
+      "Empire|Chancellor": {
+        "Translations": {
+          "Chinese": "帝国石厅首席",
+          "TraditionalChinese": "帝國石廳首席",
+          "English": "First Minister of the Imperial Stone Hall",
+          "Russian": "Первый министр имперского Каменного зала",
+          "SpanishSpain": "Primer ministro del Salón de Piedra imperial",
+          "PortugueseBrazil": "Primeiro-ministro do Salão de Pedra imperial",
+          "German": "Erster Minister der kaiserlichen Steinhalle",
+          "Japanese": "帝国石殿首席",
+          "French": "Premier ministre de la Salle de Pierre impériale",
+          "Polish": "Pierwszy minister cesarskiej Kamiennej Sali",
+          "SpanishLatinAmerica": "Primer ministro del Salón de Piedra imperial",
+          "PortuguesePortugal": "Primeiro-ministro do Salão de Pedra imperial",
+          "Korean": "제국 석전 수석",
+          "Turkish": "İmparatorluk Taş Divanı Başveziri"
+        }
+      },
+      "Empire|Steward": {
+        "Translations": {
+          "Chinese": "帝国铸币监",
+          "TraditionalChinese": "帝國鑄幣監",
+          "English": "Imperial Master of the Mint",
+          "Russian": "Имперский мастер монетного двора",
+          "SpanishSpain": "Maestre imperial de la ceca",
+          "PortugueseBrazil": "Mestre imperial da casa da moeda",
+          "German": "Kaiserlicher Münzmeister",
+          "Japanese": "帝国造幣監",
+          "French": "Maître impérial de la Monnaie",
+          "Polish": "Mistrz mennicy cesarskiej",
+          "SpanishLatinAmerica": "Maestre imperial de la ceca",
+          "PortuguesePortugal": "Mestre imperial da casa da moeda",
+          "Korean": "제국 조폐감",
+          "Turkish": "Darphane Emini"
+        }
+      },
+      "Empire|Marshal": {
+        "Translations": {
+          "Chinese": "帝国统军官",
+          "TraditionalChinese": "帝國統軍官",
+          "English": "Constable of the Empire",
+          "Russian": "Коннетабль империи",
+          "SpanishSpain": "Condestable del imperio",
+          "PortugueseBrazil": "Condestável do império",
+          "German": "Konnetabel des Kaiserreichs",
+          "Japanese": "帝国統軍官",
+          "French": "Connétable de l'Empire",
+          "Polish": "Konetabl cesarstwa",
+          "SpanishLatinAmerica": "Condestable del imperio",
+          "PortuguesePortugal": "Condestável do império",
+          "Korean": "제국 코네타블",
+          "Turkish": "İmparatorluk Konetablı"
+        }
+      },
+      "Empire|WarCommander": {
+        "Translations": {
+          "Chinese": "帝国元帅",
+          "TraditionalChinese": "帝國元帥",
+          "English": "Marshal of the Empire",
+          "Russian": "Маршал империи",
+          "SpanishSpain": "Mariscal del imperio",
+          "PortugueseBrazil": "Marechal do império",
+          "German": "Marschall des Kaiserreichs",
+          "Japanese": "帝国元帥",
+          "French": "Maréchal de l'Empire",
+          "Polish": "Marszałek cesarstwa",
+          "SpanishLatinAmerica": "Mariscal del imperio",
+          "PortuguesePortugal": "Marechal do império",
+          "Korean": "제국 원수",
+          "Turkish": "İmparatorluk Mareşali"
+        }
+      },
+      "Federation|Governor": {
+        "Translations": {
+          "Chinese": "堡镇执政",
+          "TraditionalChinese": "堡鎮執政",
+          "English": "Hold-Town Provost",
+          "Russian": "Прево твердыни",
+          "SpanishSpain": "Preboste del burgo",
+          "PortugueseBrazil": "Preboste do burgo",
+          "German": "Vogt der Festungsstadt",
+          "Japanese": "砦町執政",
+          "French": "Prévôt du bourg",
+          "Polish": "Wójt grodu",
+          "SpanishLatinAmerica": "Preboste del burgo",
+          "PortuguesePortugal": "Preboste do burgo",
+          "Korean": "요새 도시 집정관",
+          "Turkish": "Hisar Kasabası Emini"
+        }
+      },
+      "Federation|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "盟堡执政官",
+          "TraditionalChinese": "盟堡執政官",
+          "English": "Hold Provost",
+          "Russian": "Прево союзных крепостей",
+          "SpanishSpain": "Preboste de la fortaleza",
+          "PortugueseBrazil": "Preboste da fortaleza",
+          "German": "Festungsvogt",
+          "Japanese": "盟砦執政官",
+          "French": "Prévôt du bastion",
+          "Polish": "Wójt twierdzy",
+          "SpanishLatinAmerica": "Preboste de la fortaleza",
+          "PortuguesePortugal": "Preboste da fortaleza",
+          "Korean": "동맹 요새 집정관",
+          "Turkish": "Hisar Emini"
+        }
+      },
+      "Federation|Chancellor": {
+        "Translations": {
+          "Chinese": "诸堡首席议长",
+          "TraditionalChinese": "諸堡首席議長",
+          "English": "First Speaker of the Holds",
+          "Russian": "Первый спикер крепостей",
+          "SpanishSpain": "Primer portavoz de las fortalezas",
+          "PortugueseBrazil": "Primeiro porta-voz das fortalezas",
+          "German": "Erster Sprecher der Festungen",
+          "Japanese": "諸砦首席議長",
+          "French": "Premier porte-parole des bastions",
+          "Polish": "Pierwszy mówca twierdz",
+          "SpanishLatinAmerica": "Primer portavoz de las fortalezas",
+          "PortuguesePortugal": "Primeiro porta-voz das fortalezas",
+          "Korean": "제요새 수석의장",
+          "Turkish": "Hisarlar Baş Sözcüsü"
+        }
+      },
+      "Federation|Steward": {
+        "Translations": {
+          "Chinese": "诸堡司库",
+          "TraditionalChinese": "諸堡司庫",
+          "English": "Treasurer of the Holds",
+          "Russian": "Казначей крепостей",
+          "SpanishSpain": "Tesorero de las fortalezas",
+          "PortugueseBrazil": "Tesoureiro das fortalezas",
+          "German": "Schatzmeister der Festungen",
+          "Japanese": "諸砦司庫",
+          "French": "Trésorier des bastions",
+          "Polish": "Skarbnik twierdz",
+          "SpanishLatinAmerica": "Tesorero de las fortalezas",
+          "PortuguesePortugal": "Tesoureiro das fortalezas",
+          "Korean": "제요새 재무관",
+          "Turkish": "Hisarlar Hazinedarı"
+        }
+      },
+      "Federation|Marshal": {
+        "Translations": {
+          "Chinese": "诸堡统军官",
+          "TraditionalChinese": "諸堡統軍官",
+          "English": "Constable of the Holds",
+          "Russian": "Коннетабль крепостей",
+          "SpanishSpain": "Condestable de las fortalezas",
+          "PortugueseBrazil": "Condestável das fortalezas",
+          "German": "Konnetabel der Festungen",
+          "Japanese": "諸砦統軍官",
+          "French": "Connétable des bastions",
+          "Polish": "Konetabl twierdz",
+          "SpanishLatinAmerica": "Condestable de las fortalezas",
+          "PortuguesePortugal": "Condestável das fortalezas",
+          "Korean": "제요새 코네타블",
+          "Turkish": "Hisarlar Konetablı"
+        }
+      },
+      "Federation|WarCommander": {
+        "Translations": {
+          "Chinese": "誓盟元帅",
+          "TraditionalChinese": "誓盟元帥",
+          "English": "Marshal of the Oath-League",
+          "Russian": "Маршал клятвенного союза",
+          "SpanishSpain": "Mariscal de la liga juramentada",
+          "PortugueseBrazil": "Marechal da liga juramentada",
+          "German": "Marschall des Eidbundes",
+          "Japanese": "誓盟元帥",
+          "French": "Maréchal de la ligue du serment",
+          "Polish": "Marszałek związku przysięgi",
+          "SpanishLatinAmerica": "Mariscal de la liga juramentada",
+          "PortuguesePortugal": "Marechal da liga juramentada",
+          "Korean": "서약 동맹 원수",
+          "Turkish": "Yeminli Birlik Mareşali"
+        }
+      },
+      "Republic|Governor": {
+        "Translations": {
+          "Chinese": "矿市执政官",
+          "TraditionalChinese": "礦市執政官",
+          "English": "Mine-Town Magistrate",
+          "Russian": "Магистрат рудничного города",
+          "SpanishSpain": "Magistrado de la villa minera",
+          "PortugueseBrazil": "Magistrado da vila mineira",
+          "German": "Magistrat der Minenstadt",
+          "Japanese": "鉱市執政官",
+          "French": "Magistrat du bourg minier",
+          "Polish": "Rajca górniczego miasta",
+          "SpanishLatinAmerica": "Magistrado de la villa minera",
+          "PortuguesePortugal": "Magistrado da vila mineira",
+          "Korean": "광산 도시 행정관",
+          "Turkish": "Maden Şehri Kadısı"
+        }
+      },
+      "Republic|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "堡城执政官",
+          "TraditionalChinese": "堡城執政官",
+          "English": "Civic Castellan",
+          "Russian": "Гражданский кастелян",
+          "SpanishSpain": "Alcaide cívico",
+          "PortugueseBrazil": "Alcaide cívico",
+          "German": "Bürgerlicher Kastellan",
+          "Japanese": "市民城代",
+          "French": "Châtelain civique",
+          "Polish": "Kasztelan miejski",
+          "SpanishLatinAmerica": "Alcaide cívico",
+          "PortuguesePortugal": "Alcaide cívico",
+          "Korean": "시민 성주",
+          "Turkish": "Halk Dizdarı"
+        }
+      },
+      "Republic|Chancellor": {
+        "Translations": {
+          "Chinese": "石厅首席执政",
+          "TraditionalChinese": "石廳首席執政",
+          "English": "First Magistrate of the Stone Hall",
+          "Russian": "Первый магистрат Каменного зала",
+          "SpanishSpain": "Primer magistrado del Salón de Piedra",
+          "PortugueseBrazil": "Primeiro magistrado do Salão de Pedra",
+          "German": "Erster Magistrat der Steinhalle",
+          "Japanese": "石殿首席執政",
+          "French": "Premier magistrat de la Salle de Pierre",
+          "Polish": "Pierwszy zarządca Kamiennej Sali",
+          "SpanishLatinAmerica": "Primer magistrado del Salón de Piedra",
+          "PortuguesePortugal": "Primeiro magistrado do Salão de Pedra",
+          "Korean": "석전 수석 집정관",
+          "Turkish": "Taş Divan Baş Kadısı"
+        }
+      },
+      "Republic|Steward": {
+        "Translations": {
+          "Chinese": "矿务铸币官",
+          "TraditionalChinese": "礦務鑄幣官",
+          "English": "Commissioner of Mines and Mint",
+          "Russian": "Комиссар рудников и монетного двора",
+          "SpanishSpain": "Comisionado de minas y ceca",
+          "PortugueseBrazil": "Comissário de minas e moeda",
+          "German": "Kommissar für Minen und Münze",
+          "Japanese": "鉱務造幣官",
+          "French": "Commissaire aux mines et à la Monnaie",
+          "Polish": "Komisarz kopalń i mennicy",
+          "SpanishLatinAmerica": "Comisionado de minas y ceca",
+          "PortuguesePortugal": "Comissário de minas e moeda",
+          "Korean": "광무 조폐관",
+          "Turkish": "Maden ve Darphane Emini"
+        }
+      },
+      "Republic|Marshal": {
+        "Translations": {
+          "Chinese": "民军统领",
+          "TraditionalChinese": "民軍統領",
+          "English": "Captain of the Civic Host",
+          "Russian": "Капитан гражданского ополчения",
+          "SpanishSpain": "Capitán de la hueste cívica",
+          "PortugueseBrazil": "Capitão da hoste cívica",
+          "German": "Hauptmann des Bürgerheeres",
+          "Japanese": "市民軍統領",
+          "French": "Capitaine de l'ost civique",
+          "Polish": "Kapitan zastępów obywatelskich",
+          "SpanishLatinAmerica": "Capitán de la hueste cívica",
+          "PortuguesePortugal": "Capitão da hoste cívica",
+          "Korean": "시민군 대장",
+          "Turkish": "Yurttaş Ordusu Komutanı"
+        }
+      },
+      "Republic|WarCommander": {
+        "Translations": {
+          "Chinese": "公选元帅",
+          "TraditionalChinese": "公選元帥",
+          "English": "Elected Marshal",
+          "Russian": "Избранный маршал",
+          "SpanishSpain": "Mariscal electo",
+          "PortugueseBrazil": "Marechal eleito",
+          "German": "Gewählter Marschall",
+          "Japanese": "公選元帥",
+          "French": "Maréchal élu",
+          "Polish": "Wybrany marszałek",
+          "SpanishLatinAmerica": "Mariscal electo",
+          "PortuguesePortugal": "Marechal eleito",
+          "Korean": "선출 원수",
+          "Turkish": "Seçilmiş Mareşal"
+        }
+      },
+      "Tribal|Governor": {
+        "Translations": {
+          "Chinese": "石寨头人",
+          "TraditionalChinese": "石寨頭人",
+          "English": "Stone-Camp Headman",
+          "Russian": "Староста каменного стойбища",
+          "SpanishSpain": "Jefe del campamento de piedra",
+          "PortugueseBrazil": "Chefe do acampamento de pedra",
+          "German": "Vorsteher des Steinlagers",
+          "Japanese": "石寨の頭人",
+          "French": "Chef du camp de pierre",
+          "Polish": "Starosta kamiennej osady",
+          "SpanishLatinAmerica": "Jefe del campamento de piedra",
+          "PortuguesePortugal": "Chefe do acampamento de pedra",
+          "Korean": "석채 두령",
+          "Turkish": "Taş Oba Ağası"
+        }
+      },
+      "Tribal|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "氏族守堡官",
+          "TraditionalChinese": "氏族守堡官",
+          "English": "Clan Castellan",
+          "Russian": "Клановый кастелян",
+          "SpanishSpain": "Alcaide del clan",
+          "PortugueseBrazil": "Alcaide do clã",
+          "German": "Sippenkastellan",
+          "Japanese": "氏族の城代",
+          "French": "Châtelain du clan",
+          "Polish": "Kasztelan klanowy",
+          "SpanishLatinAmerica": "Alcaide del clan",
+          "PortuguesePortugal": "Alcaide do clã",
+          "Korean": "씨족 성주",
+          "Turkish": "Oymak Dizdarı"
+        }
+      },
+      "Tribal|Chancellor": {
+        "Translations": {
+          "Chinese": "誓约长老",
+          "TraditionalChinese": "誓約長老",
+          "English": "Elder of Oaths",
+          "Russian": "Старейшина клятв",
+          "SpanishSpain": "Anciano de los juramentos",
+          "PortugueseBrazil": "Ancião dos juramentos",
+          "German": "Ältester der Eide",
+          "Japanese": "誓約の長老",
+          "French": "Ancien des serments",
+          "Polish": "Starszy przysiąg",
+          "SpanishLatinAmerica": "Anciano de los juramentos",
+          "PortuguesePortugal": "Ancião dos juramentos",
+          "Korean": "맹약 장로",
+          "Turkish": "Yemin Aksakalı"
+        }
+      },
+      "Tribal|Steward": {
+        "Translations": {
+          "Chinese": "炉贡保管者",
+          "TraditionalChinese": "爐貢保管者",
+          "English": "Keeper of Forge Tribute",
+          "Russian": "Хранитель кузнечной дани",
+          "SpanishSpain": "Guardián del tributo de la forja",
+          "PortugueseBrazil": "Guardião do tributo da forja",
+          "German": "Hüter des Schmiedetributs",
+          "Japanese": "炉貢の管理人",
+          "French": "Gardien du tribut de la forge",
+          "Polish": "Strażnik daniny kuźni",
+          "SpanishLatinAmerica": "Guardián del tributo de la forja",
+          "PortuguesePortugal": "Guardião do tributo da forja",
+          "Korean": "화로 공물 보관인",
+          "Turkish": "Ocak Haracı Emini"
+        }
+      },
+      "Tribal|Marshal": {
+        "Translations": {
+          "Chinese": "氏族战酋",
+          "TraditionalChinese": "氏族戰酋",
+          "English": "Clan War-Chief",
+          "Russian": "Военный вождь кланов",
+          "SpanishSpain": "Jefe de guerra del clan",
+          "PortugueseBrazil": "Chefe de guerra do clã",
+          "German": "Kriegshäuptling der Sippen",
+          "Japanese": "氏族の戦酋長",
+          "French": "Chef de guerre des clans",
+          "Polish": "Wódz wojenny klanów",
+          "SpanishLatinAmerica": "Jefe de guerra del clan",
+          "PortuguesePortugal": "Chefe de guerra do clã",
+          "Korean": "씨족 전쟁 족장",
+          "Turkish": "Klan Savaş Beyi"
+        }
+      },
+      "Tribal|WarCommander": {
+        "Translations": {
+          "Chinese": "诸氏战酋",
+          "TraditionalChinese": "諸氏戰酋",
+          "English": "War-Chief of All Clans",
+          "Russian": "Военный вождь всех кланов",
+          "SpanishSpain": "Jefe de guerra de todos los clanes",
+          "PortugueseBrazil": "Chefe de guerra de todos os clãs",
+          "German": "Kriegshäuptling aller Sippen",
+          "Japanese": "諸氏族戦酋長",
+          "French": "Chef de guerre de tous les clans",
+          "Polish": "Wódz wojenny wszystkich klanów",
+          "SpanishLatinAmerica": "Jefe de guerra de todos los clanes",
+          "PortuguesePortugal": "Chefe de guerra de todos os clãs",
+          "Korean": "제씨족 전쟁 족장",
+          "Turkish": "Klanların Savaş Beyi"
+        }
+      },
+      "Theocracy|Governor": {
+        "Translations": {
+          "Chinese": "圣堂守卫官",
+          "TraditionalChinese": "聖堂守衛官",
+          "English": "Warden of the Shrine",
+          "Russian": "Страж святилища",
+          "SpanishSpain": "Guardián del santuario",
+          "PortugueseBrazil": "Guardião do santuário",
+          "German": "Hüter des Schreins",
+          "Japanese": "聖堂守衛官",
+          "French": "Gardien du sanctuaire",
+          "Polish": "Strażnik przybytku",
+          "SpanishLatinAmerica": "Guardián del santuario",
+          "PortuguesePortugal": "Guardião do santuário",
+          "Korean": "성당 수호관",
+          "Turkish": "Mabet Muhafızı"
+        }
+      },
+      "Theocracy|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "圣山守堡官",
+          "TraditionalChinese": "聖山守堡官",
+          "English": "Warden of the Sacred Hold",
+          "Russian": "Страж священной крепости",
+          "SpanishSpain": "Guardián de la fortaleza sagrada",
+          "PortugueseBrazil": "Guardião da fortaleza sagrada",
+          "German": "Hüter der heiligen Festung",
+          "Japanese": "聖山の城代",
+          "French": "Gardien du bastion sacré",
+          "Polish": "Strażnik świętej twierdzy",
+          "SpanishLatinAmerica": "Guardián de la fortaleza sagrada",
+          "PortuguesePortugal": "Guardião da fortaleza sagrada",
+          "Korean": "성산 성주",
+          "Turkish": "Kutsal Hisar Dizdarı"
+        }
+      },
+      "Theocracy|Chancellor": {
+        "Translations": {
+          "Chinese": "首席锻炉祭司",
+          "TraditionalChinese": "首席鍛爐祭司",
+          "English": "First Priest of the Forge",
+          "Russian": "Первый жрец горна",
+          "SpanishSpain": "Primer sacerdote de la forja",
+          "PortugueseBrazil": "Primeiro sacerdote da forja",
+          "German": "Erster Priester der Esse",
+          "Japanese": "鍛炉の首席祭司",
+          "French": "Premier prêtre de la forge",
+          "Polish": "Pierwszy kapłan kuźni",
+          "SpanishLatinAmerica": "Primer sacerdote de la forja",
+          "PortuguesePortugal": "Primeiro sacerdote da forja",
+          "Korean": "수석 대장간 사제",
+          "Turkish": "Ocağın Başrahibi"
+        }
+      },
+      "Theocracy|Steward": {
+        "Translations": {
+          "Chinese": "圣矿什一监",
+          "TraditionalChinese": "聖礦什一監",
+          "English": "Keeper of the Sacred Mine-Tithe",
+          "Russian": "Хранитель десятины священных рудников",
+          "SpanishSpain": "Guardián del diezmo de la mina sagrada",
+          "PortugueseBrazil": "Guardião do dízimo da mina sagrada",
+          "German": "Hüter des heiligen Minenzehnten",
+          "Japanese": "聖鉱十分の一税監",
+          "French": "Gardien de la dîme des mines sacrées",
+          "Polish": "Strażnik dziesięciny świętych kopalń",
+          "SpanishLatinAmerica": "Guardián del diezmo de la mina sagrada",
+          "PortuguesePortugal": "Guardião do dízimo da mina sagrada",
+          "Korean": "신성 광산 십일조 관리인",
+          "Turkish": "Kutsal Maden Öşürü Emini"
+        }
+      },
+      "Theocracy|Marshal": {
+        "Translations": {
+          "Chinese": "护炉军统领",
+          "TraditionalChinese": "護爐軍統領",
+          "English": "Captain of the Forge Guard",
+          "Russian": "Капитан стражи священного горна",
+          "SpanishSpain": "Capitán de la guardia de la forja",
+          "PortugueseBrazil": "Capitão da guarda da forja",
+          "German": "Hauptmann der Essenwache",
+          "Japanese": "護炉軍統領",
+          "French": "Capitaine de la garde de la forge",
+          "Polish": "Kapitan straży kuźni",
+          "SpanishLatinAmerica": "Capitán de la guardia de la forja",
+          "PortuguesePortugal": "Capitão da guarda da forja",
+          "Korean": "성화로 수비대장",
+          "Turkish": "Kutsal Ocak Muhafızları Komutanı"
+        }
+      },
+      "Theocracy|WarCommander": {
+        "Translations": {
+          "Chinese": "圣炉团长",
+          "TraditionalChinese": "聖爐團長",
+          "English": "Master of the Sacred Forge Order",
+          "Russian": "Магистр Священного горна",
+          "SpanishSpain": "Maestre de la forja sagrada",
+          "PortugueseBrazil": "Mestre da forja sagrada",
+          "German": "Ordensmeister der Heiligen Esse",
+          "Japanese": "聖炉団長",
+          "French": "Maître de la forge sacrée",
+          "Polish": "Mistrz świętej kuźni",
+          "SpanishLatinAmerica": "Maestre de la forja sagrada",
+          "PortuguesePortugal": "Mestre da forja sagrada",
+          "Korean": "성화로 기사단장",
+          "Turkish": "Kutsal Ocak Üstadı"
+        }
+      }
+    }
+  }
+}

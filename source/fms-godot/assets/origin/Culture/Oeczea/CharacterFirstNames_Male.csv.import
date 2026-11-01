@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://be38sxmm6xcfj"
+
+[deps]
+
+files=["res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.Chinese.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.English.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.TraditionalChinese.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.Russian.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.SpanishSpain.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.PortugueseBrazil.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.German.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.Japanese.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.French.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.Polish.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.PortuguesePortugal.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.Korean.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.Turkish.translation"]
+
+source_file="res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.csv"
+dest_files=["res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.Chinese.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.English.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.TraditionalChinese.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.Russian.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.SpanishSpain.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.PortugueseBrazil.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.German.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.Japanese.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.French.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.Polish.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.PortuguesePortugal.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.Korean.translation", "res://assets/origin/Culture/Oeczea/CharacterFirstNames_Male.Turkish.translation"]
+
+[params]
+
+compress=true
+delimiter=0

@@ -1,0 +1,549 @@
+extends RefCounted
+## 高度图模板 DSL 解释器（原版 HeightMapGenerator 的忠实移植）
+##
+## 【实现依据】三路证据互相印证，缺一不可：
+##   A. 反编译：World.GenerateHeightMap → HeightMapGenerator.GenerateHeightMap → GenerateFromTemplate(this, 3, 0)
+##      GenerateFromTemplate：取 Templates[3].Template 文本 → Split('\n') → Trim → Split(' ') → 行数<2 报错 → addStep
+##   B. 字面量：5 份模板正文取自 global-metadata.dat 字符串字面量表（assets/origin/heightmap_templates.json）
+##   C. 算法蓝本：本工程识别的 DSL 语法（Hill/Range/Trough/Strait/Pit/Mask/Multiply/Add/Smooth +
+##      `Multiply 0.6 land` 这类写法）与开源项目 Azgaar's Fantasy Map Generator 的高度图生成器同构；
+##      已反编译的 smooth 公式 (avg+(a-1)*cur+b)/a、Lim(...,0) 与之逐字一致，
+##      且 HeightMapGenerator 的字段名（blobPowerMap/linePowerMap/heights/blobPower/linePower/graphWidth/graphHeight）
+##      与该开源实现一一对应。参考副本存于 reference/azgaar/heightmap-generator.ts。
+##
+## 【已知差异（不是原版行为，不得当作原版参数引用）】
+##   1) 原版运行在维诺图上（cell 数 10000/20000/40000/80000），邻居 = voronoi 邻接；
+##      本工程是 480×280 方格 → 8 邻域。形状语义相同，网格拓扑不同。
+##   2) 原版随机流是 Unity 全局 RNG；本工程用独立 RandomNumberGenerator。
+##      因此同一 seed **不会**逐格重现原版地图，只有统计/形态可比。
+##   3) blobPower/linePower 取自原版按 cell 数查表的同一张表，但 134400 格超出表格范围 →
+##      走表中默认值 0.98 / 0.81（表中最大档 100000 为 0.9973 / 0.93）。
+
+const W := 480
+const H := 280
+const SEA_LEVEL := 20          ## 原版 world+0x178 = 0x14（0..100 制）
+
+## 原版 blobPowerMap / linePowerMap（按目标 cell 数查表；表外走默认值）
+const BLOB_POWER_MAP := {
+	1000: 0.93, 2000: 0.95, 5000: 0.97, 10000: 0.98, 20000: 0.99,
+	30000: 0.991, 40000: 0.993, 50000: 0.994, 60000: 0.995,
+	70000: 0.9955, 80000: 0.996, 90000: 0.9964, 100000: 0.9973,
+}
+const LINE_POWER_MAP := {
+	1000: 0.75, 2000: 0.77, 5000: 0.79, 10000: 0.81, 20000: 0.82,
+	30000: 0.83, 40000: 0.84, 50000: 0.86, 60000: 0.87,
+	70000: 0.88, 80000: 0.91, 90000: 0.92, 100000: 0.93,
+}
+
+var heights := PackedInt32Array()   ## 0..100 整数（原版 heights 为 Uint8Array，逐次写入即截断）
+var w := W
+var h := H
+var blob_power := 0.98
+var line_power := 0.81
+var _rng := RandomNumberGenerator.new()
+
+func _init(seed_val: int, ww: int = W, hh: int = H, cells_desired: int = -1) -> void:
+	w = ww
+	h = hh
+	heights.resize(w * h)
+	heights.fill(0)
+	_rng.seed = seed_val
+	## blobPower/linePower 在原版里是按「目标 cell 数」查表的（不是实际网格数）
+	var key := cells_desired if cells_desired > 0 else w * h
+	blob_power = float(BLOB_POWER_MAP.get(key, 0.98))
+	line_power = float(LINE_POWER_MAP.get(key, 0.81))
+
+# ---------- 基础工具：JS 语义逐个对齐 ----------
+
+## Clamp 到 0..100（原版 lim）
+static func _lim(v: float) -> float:
+	return clampf(v, 0.0, 100.0)
+
+## 原版 rand(min,max)：闭区间整数随机 → floor(random*(max-min+1))+min
+func _rand(mn: float, mx: float) -> int:
+	return int(floor(_rng.randf() * (mx - mn + 1.0)) + mn)
+
+## 原版 P(p)：p>=1 true；p<=0 false；否则 random < p
+func _p(p: float) -> bool:
+	if p >= 1.0:
+		return true
+	if p <= 0.0:
+		return false
+	return _rng.randf() < p
+
+## 原版 RandomUtils.GetNumberInRange
+##   "3"   → 3
+##   "0.5" → 0 + (rand<0.5 ? 1 : 0)   （小数部分是「概率进位」）
+##   "1-4" → 闭区间整数随机
+func _num(s: String) -> int:
+	if s.is_valid_float():
+		var v := s.to_float()
+		var iv := int(v)                      ## ~~r：向零截断
+		var frac := v - float(iv)
+		return iv + (1 if _p(frac) else 0)
+	var body := s
+	var sign := -1.0 if body.begins_with("-") else 1.0
+	if body.length() > 0 and not body.substr(0, 1).is_valid_int():
+		body = body.substr(1)
+	var parts := body.split("-")
+	if parts.size() < 2:
+		return 0
+	var a := parts[0].to_float() * sign
+	var b := parts[1].to_float()
+	var c := _rand(a, b)
+	return 0 if c < 0 else c
+
+## 原版 getPointInRange(range, length)：百分比区间 → 该维度上的整数坐标
+func _point(s: String, length: int) -> int:
+	var parts := s.split("-")
+	var mn := 0.0
+	var mx := 0.0
+	if parts.size() >= 1 and parts[0].is_valid_int():
+		mn = float(parts[0].to_int()) / 100.0
+	mx = mn
+	if parts.size() >= 2 and parts[1].is_valid_int():
+		mx = float(parts[1].to_int()) / 100.0
+	return _rand(mn * float(length), mx * float(length))
+
+## 原版 Lattice.findSlot：连续坐标 → 最近 cell（方格上即四舍五入 + 裁剪）
+func _slot(x: float, y: float) -> int:
+	var cx := clampi(int(round(x)), 0, w - 1)
+	var cy := clampi(int(round(y)), 0, h - 1)
+	return cy * w + cx
+
+func _cell_x(i: int) -> int:
+	return i % w
+
+func _cell_y(i: int) -> int:
+	return i / w
+
+# ---------- 算子 ----------
+
+## Hill：在随机点放一个团块，按 blobPower 衰减扩散（原版 addHill / addOneHill）
+## 依据（findings §15.5，反编译逐字证实）：
+##   - 写回阈值：仅 change > 4.0 的格写回（原版 `if (4.0 < fVar11)`）；
+##   - change 为浮点字典，衰减逐级无截断（原版 Dictionary<float>，FUN_1802d1a20 = powf）；
+##   - 抖动 = Random.value*0.2 + 0.9；>1.0 才入队；重试 `90 < h+height` 且 <50 次 —— 均与原版一致。
+func _add_hill(a2: String, a3: String, a4: String, a5: String) -> void:
+	var n := _num(a2)
+	for _k in n:
+		var change := PackedFloat32Array()
+		change.resize(w * h)
+		var hh := _lim(float(_num(a3)))
+		var start := 0
+		var limit := 0
+		while true:
+			var x := _point(a4, w)
+			var y := _point(a5, h)
+			start = _slot(float(x), float(y))
+			limit += 1
+			if not (heights[start] + hh > 90 and limit < 50):
+				break
+		change[start] = hh
+		var queue: Array[int] = [start]
+		var head := 0
+		while head < queue.size():
+			var q: int = queue[head]
+			head += 1
+			var cq := change[q]
+			for c in _nbrs(q):
+				if change[c] != 0.0:
+					continue
+				change[c] = pow(cq, blob_power) * (_rng.randf() * 0.2 + 0.9)
+				if change[c] > 1.0:
+					queue.append(c)
+		for i in w * h:
+			if change[i] > 4.0:
+				heights[i] = int(_lim(heights[i] + change[i]))
+
+## Pit：与 Hill 同构，但是向下挖（原版 addPit / addOnePit）
+func _add_pit(a2: String, a3: String, a4: String, a5: String) -> void:
+	var n := _num(a2)
+	for _k in n:
+		var used := PackedByteArray()
+		used.resize(w * h)
+		var hh := float(_num(a3))
+		var start := 0
+		var limit := 0
+		while true:
+			var x := _point(a4, w)
+			var y := _point(a5, h)
+			start = _slot(float(x), float(y))
+			limit += 1
+			if not (heights[start] < 20 and limit < 50):
+				break
+		var queue: Array[int] = [start]
+		var head := 0
+		while head < queue.size():
+			var q: int = queue[head]
+			head += 1
+			hh = pow(hh, blob_power) * (_rng.randf() * 0.2 + 0.9)
+			if hh < 1.0:
+				break
+			for c in _nbrs(q):
+				if used[c] == 1:
+					continue
+				heights[c] = int(_lim(float(heights[c]) - hh * (_rng.randf() * 0.2 + 0.9)))
+				used[c] = 1
+				queue.append(c)
+
+## Range：从起点向终点贪心走出一条脊线再抬升（原版 addRange / addOneRange）
+func _add_range(a2: String, a3: String, a4: String, a5: String) -> void:
+	var n := _num(a2)
+	for _k in n:
+		_add_one_range(a3, a4, a5)
+
+func _add_one_range(height_s: String, rx: String, ry: String, randomness := 0.15) -> void:
+	var used := PackedByteArray()
+	used.resize(w * h)
+	var hh := float(_num(height_s))
+	var start_cell := -1
+	var end_cell := -1
+	if rx != "" and ry != "":
+		var sx := _point(rx, w)
+		var sy := _point(ry, h)
+		var ex := 0.0
+		var ey := 0.0
+		var limit := 0
+		while true:
+			ex = _rng.randf() * float(w) * 0.8 + float(w) * 0.1
+			ey = _rng.randf() * float(h) * 0.7 + float(h) * 0.15
+			var dist := absf(ey - float(sy)) + absf(ex - float(sx))
+			limit += 1
+			if not ((dist < float(w) / 8.0 or dist > float(w) / 3.0) and limit < 50):
+				break
+		start_cell = _slot(float(sx), float(sy))
+		end_cell = _slot(ex, ey)
+	var ridge := _greedy_ridge(start_cell, end_cell, used, randomness)
+	# 抬升主脊 + 逐步向外扩散
+	# 依据（findings §15.6，反编译逐字证实）：抬升 = (Random.value + 0.85) × h + cur（因子域 0.85~1.85，
+	# 不是 Azgaar 的 rand*0.3+0.85）；Lim(...,0) 下限钳制（上限语义待 MathUtility$$Lim）。
+	var queue: Array[int] = ridge.duplicate()
+	var depth := 0
+	while queue.size() > 0:
+		var frontier := queue.duplicate()
+		queue = []
+		depth += 1
+		for c: int in frontier:
+			heights[c] = int(_lim(float(heights[c]) + hh * (_rng.randf() + 0.85)))
+		hh = pow(hh, line_power) - 1.0
+		if hh < 2.0:
+			break
+		for f: int in frontier:
+			for nb in _nbrs(f):
+				if used[nb] == 0:
+					queue.append(nb)
+					used[nb] = 1
+	# 山脊突刺：沿脊线每隔 6 格向下坡走 depth 步并做平滑抬升
+	var di := 0
+	while di < ridge.size():
+		var cur: int = ridge[di]
+		for _l in depth:
+			var nbs := _nbrs(cur)
+			if nbs.size() == 0:
+				break
+			var best: int = nbs[0]
+			var best_v := heights[best]
+			for nb in nbs:
+				if heights[nb] < best_v:
+					best_v = heights[nb]
+					best = nb
+			heights[best] = int((float(heights[cur]) * 2.0 + float(heights[best])) / 3.0)
+			cur = best
+		di += 6
+
+## Trough：与 Range 同构，但是下陷（原版 addTrough / addOneTrough）
+func _add_trough(a2: String, a3: String, a4: String, a5: String) -> void:
+	var n := _num(a2)
+	for _k in n:
+		var used := PackedByteArray()
+		used.resize(w * h)
+		var hh := float(_num(a3))
+		var start_cell := -1
+		var end_cell := -1
+		if a4 != "" and a5 != "":
+			var sx := 0
+			var sy := 0
+			var limit := 0
+			while true:
+				sx = _point(a4, w)
+				sy = _point(a5, h)
+				start_cell = _slot(float(sx), float(sy))
+				limit += 1
+				if not (heights[start_cell] < 20 and limit < 50):
+					break
+			var ex := 0.0
+			var ey := 0.0
+			limit = 0
+			while true:
+				ex = _rng.randf() * float(w) * 0.8 + float(w) * 0.1
+				ey = _rng.randf() * float(h) * 0.7 + float(h) * 0.15
+				var dist := absf(ey - float(sy)) + absf(ex - float(sx))
+				limit += 1
+				if not ((dist < float(w) / 8.0 or dist > float(w) / 2.0) and limit < 50):
+					break
+			end_cell = _slot(ex, ey)
+		var ridge := _greedy_ridge(start_cell, end_cell, used, 0.2)
+		var queue: Array[int] = ridge.duplicate()
+		var depth := 0
+		while queue.size() > 0:
+			var frontier := queue.duplicate()
+			queue = []
+			depth += 1
+			for c: int in frontier:
+				heights[c] = int(_lim(float(heights[c]) - hh * (_rng.randf() * 0.3 + 0.85)))
+			hh = pow(hh, line_power) - 1.0
+			if hh < 2.0:
+				break
+			for f: int in frontier:
+				for nb in _nbrs(f):
+					if used[nb] == 0:
+						queue.append(nb)
+						used[nb] = 1
+		var di := 0
+		while di < ridge.size():
+			var cur: int = ridge[di]
+			for _l in depth:
+				var nbs := _nbrs(cur)
+				if nbs.size() == 0:
+					break
+				var best: int = nbs[0]
+				var best_v := heights[best]
+				for nb in nbs:
+					if heights[nb] < best_v:
+						best_v = heights[nb]
+						best = nb
+				heights[best] = int((float(heights[cur]) * 2.0 + float(heights[best])) / 3.0)
+				cur = best
+			di += 6
+
+## Strait：竖直/水平切一条海峡（原版 addStrait）
+func _add_strait(a2: String, direction := "vertical") -> void:
+	var desired := mini(_num(a2), int(float(w) / 3.0))
+	if desired < 1 and _p(float(desired)):
+		return
+	var used := PackedByteArray()
+	used.resize(w * h)
+	var vert := direction == "vertical"
+	var start_x := 0
+	var start_y := 0
+	if vert:
+		start_x = int(floor(_rng.randf() * float(w) * 0.4 + float(w) * 0.3))
+		start_y = 5
+	else:
+		start_x = 5
+		start_y = int(floor(_rng.randf() * float(h) * 0.4 + float(h) * 0.3))
+	var end_x := 0
+	var end_y := 0
+	if vert:
+		end_x = int(floor(float(w) - float(start_x) - float(w) * 0.1 + _rng.randf() * float(w) * 0.2))
+		end_y = h - 5
+	else:
+		end_x = w - 5
+		end_y = int(floor(float(h) - float(start_y) - float(h) * 0.1 + _rng.randf() * float(h) * 0.2))
+	var start := _slot(float(start_x), float(start_y))
+	var end := _slot(float(end_x), float(end_y))
+	var range_cells := _greedy_ridge(start, end, null, 0.2)
+	var query: Array[int] = []
+	var step := 0.1 / float(maxi(desired, 1))
+	for i in desired:
+		var remaining := float(desired - i)
+		var exp := 0.9 - step * remaining
+		for r: int in range_cells:
+			for e in _nbrs(r):
+				if used[e] == 1:
+					continue
+				used[e] = 1
+				query.append(e)
+				heights[e] = int(pow(float(heights[e]), exp))
+				if heights[e] > 100:
+					heights[e] = 5
+		range_cells = query.slice(0) if not query.is_empty() else []
+		query = []
+
+## Mask：按到中心的距离衰减（原版 mask）
+func _mask(power: float) -> void:
+	var fr := absf(power) if power != 0.0 else 1.0
+	for i in w * h:
+		var x := float(_cell_x(i))
+		var y := float(_cell_y(i))
+		var nx := (2.0 * x) / float(w) - 1.0
+		var ny := (2.0 * y) / float(h) - 1.0
+		var distance := (1.0 - nx * nx) * (1.0 - ny * ny)
+		if power < 0.0:
+			distance = 1.0 - distance
+		var hv := float(heights[i])
+		var masked := hv * distance
+		heights[i] = int(_lim((hv * (fr - 1.0) + masked) / fr))
+
+## Modify：对区间内高度做加/乘/幂（Add 与 Multiply 共用；原版 modify）
+func _modify(range_s: String, add: float, mult: float, power := 0.0) -> void:
+	var mn := 0.0
+	var mx := 100.0
+	if range_s == "land":
+		mn = 20.0
+		mx = 100.0
+	elif range_s == "all":
+		mn = 0.0
+		mx = 100.0
+	else:
+		var parts := range_s.split("-")
+		mn = float(parts[0].to_int())
+		mx = float(parts[1].to_int()) if parts.size() > 1 else 100.0
+	var is_land := is_equal_approx(mn, 20.0)
+	for i in w * h:
+		var hv := float(heights[i])
+		if hv < mn or hv > mx:
+			continue
+		if add != 0.0:
+			hv = maxf(hv + add, 20.0) if is_land else hv + add
+		if mult != 1.0:
+			hv = (hv - 20.0) * mult + 20.0 if is_land else hv * mult
+		if power != 0.0:
+			hv = pow(hv - 20.0, power) + 20.0 if is_land else pow(hv, power)
+		heights[i] = int(_lim(hv))
+
+## Smooth：邻域均值与自身的加权混合（原版 smooth；公式经反编译逐字确认）
+##   fr == 1 → mean + add
+##   否则     → max(0, (cur*(fr-1) + mean + add) / fr)
+func _smooth(fr := 2, add := 0) -> void:
+	var out := PackedInt32Array()
+	out.resize(w * h)
+	for i in w * h:
+		var sum := 0.0
+		var cnt := 0
+		var x := _cell_x(i)
+		var y := _cell_y(i)
+		for dy: int in [-1, 0, 1]:
+			for dx: int in [-1, 0, 1]:
+				var nx: int = x + dx
+				var ny: int = y + dy
+				if nx < 0 or ny < 0 or nx >= w or ny >= h:
+					continue
+				sum += float(heights[ny * w + nx])
+				cnt += 1
+		var avg := sum / float(cnt)
+		var v := 0.0
+		if fr == 1:
+			v = avg + float(add)
+		else:
+			v = maxf(0.0, (float(heights[i]) * float(fr - 1) + avg + float(add)) / float(fr))
+		out[i] = int(v)
+	for i in w * h:
+		heights[i] = out[i]
+
+## 贪心脊线：每步走向「离终点最近且未访问」的邻格，有 randomness 概率把距离减半（原版内部 getRange）
+func _greedy_ridge(start: int, end: int, used: Variant, randomness: float) -> Array[int]:
+	var ridge: Array[int] = [start]
+	if start < 0 or end < 0:
+		return ridge
+	var visited: Variant = used
+	if visited == null:
+		visited = PackedByteArray()
+		visited.resize(w * h)
+	visited[start] = 1
+	var cur := start
+	var guard := 0
+	var ex := _cell_x(end)
+	var ey := _cell_y(end)
+	while cur != end and guard < w * h:
+		guard += 1
+		var best := -1
+		var best_d := INF
+		var nbs := _nbrs(cur)
+		for e in nbs:
+			if visited[e] == 1:
+				continue
+			var dx := float(_cell_x(e) - ex)
+			var dy := float(_cell_y(e) - ey)
+			var diff := dx * dx + dy * dy
+			if _rng.randf() > 1.0 - randomness:
+				diff *= 0.5
+			if diff < best_d:
+				best_d = diff
+				best = e
+		if best < 0:
+			break
+		cur = best
+		ridge.append(cur)
+		visited[cur] = 1
+	return ridge
+
+## 8 邻域（原版在维诺图上是 voronoi 邻接；本工程方格等价物）
+func _nbrs(i: int) -> Array[int]:
+	var out: Array[int] = []
+	var x := _cell_x(i)
+	var y := _cell_y(i)
+	if x > 0:
+		out.append(i - 1)
+	if x < w - 1:
+		out.append(i + 1)
+	if y > 0:
+		out.append(i - w)
+	if y < h - 1:
+		out.append(i + w)
+	if x > 0 and y > 0:
+		out.append(i - w - 1)
+	if x < w - 1 and y > 0:
+		out.append(i - w + 1)
+	if x > 0 and y < h - 1:
+		out.append(i + w - 1)
+	if x < w - 1 and y < h - 1:
+		out.append(i + w + 1)
+	return out
+
+## 按原版 addStep 的分发规则逐行执行
+## 返回未识别的算子名列表（空 = 全部执行）
+func run_steps(steps: Array) -> Array:
+	var unknown := []
+	for st in steps:
+		var op := String(st["op"])
+		var a: PackedStringArray = st["args"]
+		var a2 := a[0] if a.size() > 0 else ""
+		var a3 := a[1] if a.size() > 1 else ""
+		var a4 := a[2] if a.size() > 2 else ""
+		var a5 := a[3] if a.size() > 3 else ""
+		match op:
+			"Hill":
+				_add_hill(a2, a3, a4, a5)
+			"Pit":
+				_add_pit(a2, a3, a4, a5)
+			"Range":
+				_add_range(a2, a3, a4, a5)
+			"Trough":
+				_add_trough(a2, a3, a4, a5)
+			"Strait":
+				_add_strait(a2, a3)
+			"Mask":
+				_mask(a2.to_float())
+			"Add":
+				_modify(a3, a2.to_float(), 1.0)
+			"Multiply":
+				_modify(a3, 0.0, a2.to_float())
+			"Smooth":
+				_smooth(int(a2.to_float()))
+			_:
+				if not unknown.has(op):
+					unknown.append(op)
+	return unknown
+
+## 统计：陆地格数（> 海平面）、最值、均值
+func stats() -> Dictionary:
+	var land := 0
+	var mx := -1
+	var mn := 999
+	var sum := 0
+	for i in w * h:
+		var v := heights[i]
+		sum += v
+		mx = maxi(mx, v)
+		mn = mini(mn, v)
+		if v > SEA_LEVEL:
+			land += 1
+	return {
+		"land": land,
+		"land_ratio": float(land) / float(w * h),
+		"max": mx,
+		"min": mn,
+		"mean": float(sum) / float(w * h),
+	}

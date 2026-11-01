@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bc07uskqegi5a"
+
+[deps]
+
+files=["res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.Chinese.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.English.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.TraditionalChinese.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.Russian.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.SpanishSpain.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.PortugueseBrazil.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.German.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.Japanese.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.French.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.Polish.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.SpanishLatinAmerica.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.PortuguesePortugal.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.Korean.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.Turkish.translation"]
+
+source_file="res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.csv"
+dest_files=["res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.Chinese.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.English.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.TraditionalChinese.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.Russian.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.SpanishSpain.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.PortugueseBrazil.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.German.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.Japanese.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.French.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.Polish.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.SpanishLatinAmerica.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.PortuguesePortugal.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.Korean.translation", "res://assets/origin/Culture/WesternFantasy/CharacterFirstNames_Male.Turkish.translation"]
+
+[params]
+
+compress=true
+delimiter=0

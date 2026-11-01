@@ -1,0 +1,720 @@
+{
+  "CultureColorHex": "#FFF793",
+  "NameOrder": "LastNameFirst",
+  "PoliticalSystems": [],
+  "PoliticalSystemProbabilities": {
+    "Kingdom": 50.0,
+    "Empire": 50.0,
+    "Federation": 0.0,
+    "Republic": 0.0,
+    "Tribal": 0.0,
+    "Theocracy": 0.0
+  },
+  "EthnicAttributeProbabilities": {
+    "FishAndHunting": 50.0,
+    "Agriculture": 50.0,
+    "Nomadic": 50.0,
+    "Maritime": 50.0,
+    "Commercial": 50.0
+  },
+  "TraitProbabilities": {
+    "FightToTheEnd": 50.0,
+    "StrengthenCore": 50.0,
+    "ManifestDestiny": 50.0,
+    "BullyTheWeak": 50.0,
+    "DefyTheStrong": 50.0,
+    "TotalWar": 50.0,
+    "WellTrained": 50.0,
+    "CoreDefense": 50.0,
+    "CavalryTradition": 50.0,
+    "HomelandDefense": 50.0,
+    "Conqueror": 50.0,
+    "SiegeCapture": 50.0,
+    "FieldCombatElite": 50.0
+  },
+  "CultureDescriptionTranslations": [
+    "东方架空文化模板",
+    "Oriental overhead culture template",
+    "東方架空文化範本",
+    "Шаблон восточной накладной культуры",
+    "Plantilla de cultura aérea oriental",
+    "Modelo de cultura aérea oriental",
+    "Vorlage für eine orientalische Overhead-Kultur",
+    "オリエンタルオーバーヘッドカルチャーテンプレート",
+    "Modèle de culture orientale aérienne",
+    "Szablon orientalnej kultury napowietrznej",
+    "Plantilla de cultura aérea oriental",
+    "Modelo de cultura aérea oriental",
+    "동양 머리 위 문화 템플릿",
+    "Oryantal havai kültür şablonu"
+  ],
+  "MapCultureTranslations": [
+    "东方架空",
+    "Oriental overhead",
+    "東方架空",
+    "Восточный потолок",
+    "Techo oriental",
+    "Sobrecarga oriental",
+    "Orientalischer Überkopf",
+    "オリエンタルオーバーヘッド",
+    "Oriental aérien",
+    "Orientalny nad głową",
+    "Techo oriental",
+    "Sobrecarga oriental",
+    "동양 오버헤드",
+    "Oryantal tepegöz"
+  ],
+  "OfficialTitles": {
+    "PresetId": "EasternFantasy",
+    "Entries": {
+      "Kingdom|Governor": {
+        "Translations": {
+          "Chinese": "太守",
+          "TraditionalChinese": "太守",
+          "English": "Grand Administrator",
+          "Russian": "Великий управитель",
+          "SpanishSpain": "Gran administrador",
+          "PortugueseBrazil": "Grande administrador",
+          "German": "Großverwalter",
+          "Japanese": "太守",
+          "French": "Grand administrateur",
+          "Polish": "Wielki zarządca",
+          "SpanishLatinAmerica": "Gran administrador",
+          "PortuguesePortugal": "Grande administrador",
+          "Korean": "태수",
+          "Turkish": "Büyük Yönetici"
+        }
+      },
+      "Kingdom|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "刺史",
+          "TraditionalChinese": "刺史",
+          "English": "Regional Inspector",
+          "Russian": "Областной инспектор",
+          "SpanishSpain": "Inspector regional",
+          "PortugueseBrazil": "Inspetor regional",
+          "German": "Regionalinspektor",
+          "Japanese": "刺史",
+          "French": "Inspecteur régional",
+          "Polish": "Inspektor regionalny",
+          "SpanishLatinAmerica": "Inspector regional",
+          "PortuguesePortugal": "Inspetor regional",
+          "Korean": "자사",
+          "Turkish": "Bölge Müfettişi"
+        }
+      },
+      "Kingdom|Chancellor": {
+        "Translations": {
+          "Chinese": "丞相",
+          "TraditionalChinese": "丞相",
+          "English": "Chancellor",
+          "Russian": "Канцлер",
+          "SpanishSpain": "Canciller",
+          "PortugueseBrazil": "Chanceler",
+          "German": "Kanzler",
+          "Japanese": "丞相",
+          "French": "Chancelier",
+          "Polish": "Kanclerz",
+          "SpanishLatinAmerica": "Canciller",
+          "PortuguesePortugal": "Chanceler",
+          "Korean": "승상",
+          "Turkish": "Başvezir"
+        }
+      },
+      "Kingdom|Steward": {
+        "Translations": {
+          "Chinese": "大司农",
+          "TraditionalChinese": "大司農",
+          "English": "Minister of the Treasury",
+          "Russian": "Министр казны",
+          "SpanishSpain": "Ministro del tesoro",
+          "PortugueseBrazil": "Ministro do tesouro",
+          "German": "Schatzminister",
+          "Japanese": "大司農",
+          "French": "Ministre du Trésor",
+          "Polish": "Minister skarbu",
+          "SpanishLatinAmerica": "Ministro del tesoro",
+          "PortuguesePortugal": "Ministro do tesouro",
+          "Korean": "대사농",
+          "Turkish": "Defterdar"
+        }
+      },
+      "Kingdom|Marshal": {
+        "Translations": {
+          "Chinese": "大司马",
+          "TraditionalChinese": "大司馬",
+          "English": "Grand Marshal",
+          "Russian": "Великий маршал",
+          "SpanishSpain": "Gran mariscal",
+          "PortugueseBrazil": "Grande marechal",
+          "German": "Großmarschall",
+          "Japanese": "大司馬",
+          "French": "Grand maréchal",
+          "Polish": "Wielki marszałek",
+          "SpanishLatinAmerica": "Gran mariscal",
+          "PortuguesePortugal": "Grande marechal",
+          "Korean": "대사마",
+          "Turkish": "Büyük Mareşal"
+        }
+      },
+      "Kingdom|WarCommander": {
+        "Translations": {
+          "Chinese": "大将军",
+          "TraditionalChinese": "大將軍",
+          "English": "Grand General",
+          "Russian": "Великий полководец",
+          "SpanishSpain": "Gran general",
+          "PortugueseBrazil": "Grande general",
+          "German": "Großgeneral",
+          "Japanese": "大将軍",
+          "French": "Grand général",
+          "Polish": "Wielki generał",
+          "SpanishLatinAmerica": "Gran general",
+          "PortuguesePortugal": "Grande general",
+          "Korean": "대장군",
+          "Turkish": "Başkomutan"
+        }
+      },
+      "Empire|Governor": {
+        "Translations": {
+          "Chinese": "知府",
+          "TraditionalChinese": "知府",
+          "English": "City Prefect",
+          "Russian": "Городской префект",
+          "SpanishSpain": "Prefecto de la ciudad",
+          "PortugueseBrazil": "Prefeito da cidade",
+          "German": "Stadtpräfekt",
+          "Japanese": "知府",
+          "French": "Préfet de la ville",
+          "Polish": "Prefekt miasta",
+          "SpanishLatinAmerica": "Prefecto de la ciudad",
+          "PortuguesePortugal": "Prefeito da cidade",
+          "Korean": "지부",
+          "Turkish": "Şehremini"
+        }
+      },
+      "Empire|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "总督",
+          "TraditionalChinese": "總督",
+          "English": "Governor-General",
+          "Russian": "Генерал-губернатор",
+          "SpanishSpain": "Gobernador general",
+          "PortugueseBrazil": "Governador-geral",
+          "German": "Generalgouverneur",
+          "Japanese": "総督",
+          "French": "Gouverneur général",
+          "Polish": "Generał-gubernator",
+          "SpanishLatinAmerica": "Gobernador general",
+          "PortuguesePortugal": "Governador-geral",
+          "Korean": "총독",
+          "Turkish": "Beylerbeyi"
+        }
+      },
+      "Empire|Chancellor": {
+        "Translations": {
+          "Chinese": "内阁首辅",
+          "TraditionalChinese": "內閣首輔",
+          "English": "Chief Grand Secretary",
+          "Russian": "Первый великий секретарь",
+          "SpanishSpain": "Gran secretario jefe",
+          "PortugueseBrazil": "Grão-secretário-chefe",
+          "German": "Erster Großsekretär",
+          "Japanese": "内閣首輔",
+          "French": "Premier grand secrétaire",
+          "Polish": "Pierwszy wielki sekretarz",
+          "SpanishLatinAmerica": "Gran secretario jefe",
+          "PortuguesePortugal": "Grão-secretário-chefe",
+          "Korean": "내각수보",
+          "Turkish": "Sadrazam"
+        }
+      },
+      "Empire|Steward": {
+        "Translations": {
+          "Chinese": "户部尚书",
+          "TraditionalChinese": "戶部尚書",
+          "English": "Minister of Revenue",
+          "Russian": "Министр финансов",
+          "SpanishSpain": "Ministro de hacienda",
+          "PortugueseBrazil": "Ministro da fazenda",
+          "German": "Finanzminister",
+          "Japanese": "戸部尚書",
+          "French": "Ministre des Finances",
+          "Polish": "Minister finansów",
+          "SpanishLatinAmerica": "Ministro de hacienda",
+          "PortuguesePortugal": "Ministro da fazenda",
+          "Korean": "호부상서",
+          "Turkish": "Maliye Nazırı"
+        }
+      },
+      "Empire|Marshal": {
+        "Translations": {
+          "Chinese": "兵部尚书",
+          "TraditionalChinese": "兵部尚書",
+          "English": "Minister of War",
+          "Russian": "Военный министр",
+          "SpanishSpain": "Ministro de la guerra",
+          "PortugueseBrazil": "Ministro da guerra",
+          "German": "Kriegsminister",
+          "Japanese": "兵部尚書",
+          "French": "Ministre de la Guerre",
+          "Polish": "Minister wojny",
+          "SpanishLatinAmerica": "Ministro de la guerra",
+          "PortuguesePortugal": "Ministro da guerra",
+          "Korean": "병부상서",
+          "Turkish": "Harbiye Nazırı"
+        }
+      },
+      "Empire|WarCommander": {
+        "Translations": {
+          "Chinese": "经略",
+          "TraditionalChinese": "經略",
+          "English": "Grand Campaign Commander",
+          "Russian": "Верховный полководец похода",
+          "SpanishSpain": "Gran comandante de campaña",
+          "PortugueseBrazil": "Grande comandante de campanha",
+          "German": "Großer Feldzugskommandant",
+          "Japanese": "経略",
+          "French": "Grand commandant de campagne",
+          "Polish": "Wielki dowódca kampanii",
+          "SpanishLatinAmerica": "Gran comandante de campaña",
+          "PortuguesePortugal": "Grande comandante de campanha",
+          "Korean": "경략",
+          "Turkish": "Sefer Serdarı"
+        }
+      },
+      "Federation|Governor": {
+        "Translations": {
+          "Chinese": "城守",
+          "TraditionalChinese": "城守",
+          "English": "City Warden",
+          "Russian": "Градоначальник",
+          "SpanishSpain": "Guardián de la ciudad",
+          "PortugueseBrazil": "Guardião da cidade",
+          "German": "Stadtvogt",
+          "Japanese": "城守",
+          "French": "Gardien de la ville",
+          "Polish": "Włodarz miasta",
+          "SpanishLatinAmerica": "Guardián de la ciudad",
+          "PortuguesePortugal": "Guardião da cidade",
+          "Korean": "수성관",
+          "Turkish": "Şehir Muhafızı"
+        }
+      },
+      "Federation|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "州牧",
+          "TraditionalChinese": "州牧",
+          "English": "Provincial Governor",
+          "Russian": "Губернатор провинции",
+          "SpanishSpain": "Gobernador provincial",
+          "PortugueseBrazil": "Governador provincial",
+          "German": "Provinzgouverneur",
+          "Japanese": "州牧",
+          "French": "Gouverneur de province",
+          "Polish": "Gubernator prowincji",
+          "SpanishLatinAmerica": "Gobernador provincial",
+          "PortuguesePortugal": "Governador provincial",
+          "Korean": "주목",
+          "Turkish": "Eyalet Valisi"
+        }
+      },
+      "Federation|Chancellor": {
+        "Translations": {
+          "Chinese": "首席议政",
+          "TraditionalChinese": "首席議政",
+          "English": "First Councillor",
+          "Russian": "Первый советник",
+          "SpanishSpain": "Primer consejero",
+          "PortugueseBrazil": "Primeiro conselheiro",
+          "German": "Erster Ratsherr",
+          "Japanese": "首席議政",
+          "French": "Premier conseiller",
+          "Polish": "Pierwszy radca",
+          "SpanishLatinAmerica": "Primer consejero",
+          "PortuguesePortugal": "Primeiro conselheiro",
+          "Korean": "수석 의정",
+          "Turkish": "Baş Müşavir"
+        }
+      },
+      "Federation|Steward": {
+        "Translations": {
+          "Chinese": "度支使",
+          "TraditionalChinese": "度支使",
+          "English": "Revenue Commissioner",
+          "Russian": "Налоговый комиссар",
+          "SpanishSpain": "Comisionado de rentas",
+          "PortugueseBrazil": "Comissário de receitas",
+          "German": "Steuerkommissar",
+          "Japanese": "度支使",
+          "French": "Commissaire aux revenus",
+          "Polish": "Komisarz podatkowy",
+          "SpanishLatinAmerica": "Comisionado de rentas",
+          "PortuguesePortugal": "Comissário de receitas",
+          "Korean": "탁지사",
+          "Turkish": "Gelir Emini"
+        }
+      },
+      "Federation|Marshal": {
+        "Translations": {
+          "Chinese": "都军使",
+          "TraditionalChinese": "都軍使",
+          "English": "Military Commissioner",
+          "Russian": "Военный комиссар",
+          "SpanishSpain": "Comisionado militar",
+          "PortugueseBrazil": "Comissário militar",
+          "German": "Militärkommissar",
+          "Japanese": "都軍使",
+          "French": "Commissaire militaire",
+          "Polish": "Komisarz wojskowy",
+          "SpanishLatinAmerica": "Comisionado militar",
+          "PortuguesePortugal": "Comissário militar",
+          "Korean": "도군사",
+          "Turkish": "Ordu Emini"
+        }
+      },
+      "Federation|WarCommander": {
+        "Translations": {
+          "Chinese": "联军都统",
+          "TraditionalChinese": "聯軍都統",
+          "English": "Allied Commander",
+          "Russian": "Командующий союзной армией",
+          "SpanishSpain": "Comandante aliado",
+          "PortugueseBrazil": "Comandante aliado",
+          "German": "Alliierter Befehlshaber",
+          "Japanese": "連合軍都統",
+          "French": "Commandant allié",
+          "Polish": "Dowódca sprzymierzonych",
+          "SpanishLatinAmerica": "Comandante aliado",
+          "PortuguesePortugal": "Comandante aliado",
+          "Korean": "연합군 사령관",
+          "Turkish": "Müttefik Komutanı"
+        }
+      },
+      "Republic|Governor": {
+        "Translations": {
+          "Chinese": "县令",
+          "TraditionalChinese": "縣令",
+          "English": "City Magistrate",
+          "Russian": "Городской магистрат",
+          "SpanishSpain": "Magistrado de la ciudad",
+          "PortugueseBrazil": "Magistrado da cidade",
+          "German": "Stadtmagistrat",
+          "Japanese": "県令",
+          "French": "Magistrat de la ville",
+          "Polish": "Zarządca miejski",
+          "SpanishLatinAmerica": "Magistrado de la ciudad",
+          "PortuguesePortugal": "Magistrado da cidade",
+          "Korean": "현령",
+          "Turkish": "Şehir Kadısı"
+        }
+      },
+      "Republic|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "郡守",
+          "TraditionalChinese": "郡守",
+          "English": "Prefect",
+          "Russian": "Префект",
+          "SpanishSpain": "Prefecto",
+          "PortugueseBrazil": "Prefeito regional",
+          "German": "Präfekt",
+          "Japanese": "郡守",
+          "French": "Préfet",
+          "Polish": "Prefekt",
+          "SpanishLatinAmerica": "Prefecto",
+          "PortuguesePortugal": "Prefeito regional",
+          "Korean": "군수",
+          "Turkish": "Sancakbeyi"
+        }
+      },
+      "Republic|Chancellor": {
+        "Translations": {
+          "Chinese": "首席议政",
+          "TraditionalChinese": "首席議政",
+          "English": "First Councillor",
+          "Russian": "Первый советник",
+          "SpanishSpain": "Primer consejero",
+          "PortugueseBrazil": "Primeiro conselheiro",
+          "German": "Erster Ratsherr",
+          "Japanese": "首席議政",
+          "French": "Premier conseiller",
+          "Polish": "Pierwszy radca",
+          "SpanishLatinAmerica": "Primer consejero",
+          "PortuguesePortugal": "Primeiro conselheiro",
+          "Korean": "수석 의정",
+          "Turkish": "Baş Müşavir"
+        }
+      },
+      "Republic|Steward": {
+        "Translations": {
+          "Chinese": "财政使",
+          "TraditionalChinese": "財政使",
+          "English": "Finance Commissioner",
+          "Russian": "Финансовый комиссар",
+          "SpanishSpain": "Comisionado de finanzas",
+          "PortugueseBrazil": "Comissário de finanças",
+          "German": "Finanzkommissar",
+          "Japanese": "財政使",
+          "French": "Commissaire aux finances",
+          "Polish": "Komisarz finansowy",
+          "SpanishLatinAmerica": "Comisionado de finanzas",
+          "PortuguesePortugal": "Comissário de finanças",
+          "Korean": "재정사",
+          "Turkish": "Maliye Emini"
+        }
+      },
+      "Republic|Marshal": {
+        "Translations": {
+          "Chinese": "兵政使",
+          "TraditionalChinese": "兵政使",
+          "English": "Military Commissioner",
+          "Russian": "Военный комиссар",
+          "SpanishSpain": "Comisionado militar",
+          "PortugueseBrazil": "Comissário militar",
+          "German": "Militärkommissar",
+          "Japanese": "兵政使",
+          "French": "Commissaire militaire",
+          "Polish": "Komisarz wojskowy",
+          "SpanishLatinAmerica": "Comisionado militar",
+          "PortuguesePortugal": "Comissário militar",
+          "Korean": "병정사",
+          "Turkish": "Ordu Emini"
+        }
+      },
+      "Republic|WarCommander": {
+        "Translations": {
+          "Chinese": "讨伐都督",
+          "TraditionalChinese": "討伐都督",
+          "English": "Expedition Commander",
+          "Russian": "Командующий экспедицией",
+          "SpanishSpain": "Comandante de expedición",
+          "PortugueseBrazil": "Comandante de expedição",
+          "German": "Expeditionskommandant",
+          "Japanese": "討伐都督",
+          "French": "Commandant d'expédition",
+          "Polish": "Dowódca wyprawy",
+          "SpanishLatinAmerica": "Comandante de expedición",
+          "PortuguesePortugal": "Comandante de expedição",
+          "Korean": "토벌 도독",
+          "Turkish": "Sefer Komutanı"
+        }
+      },
+      "Tribal|Governor": {
+        "Translations": {
+          "Chinese": "寨落头人",
+          "TraditionalChinese": "寨落頭人",
+          "English": "Village Headman",
+          "Russian": "Деревенский староста",
+          "SpanishSpain": "Jefe de aldea",
+          "PortugueseBrazil": "Chefe da aldeia",
+          "German": "Dorfvorsteher",
+          "Japanese": "集落の頭人",
+          "French": "Chef de village",
+          "Polish": "Starosta wioski",
+          "SpanishLatinAmerica": "Jefe de aldea",
+          "PortuguesePortugal": "Chefe da aldeia",
+          "Korean": "마을 촌장",
+          "Turkish": "Köy Ağası"
+        }
+      },
+      "Tribal|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "部族头领",
+          "TraditionalChinese": "部族頭領",
+          "English": "Tribal Warden",
+          "Russian": "Племенной предводитель",
+          "SpanishSpain": "Guardián tribal",
+          "PortugueseBrazil": "Guardião tribal",
+          "German": "Stammesvogt",
+          "Japanese": "部族頭領",
+          "French": "Gardien tribal",
+          "Polish": "Naczelnik plemienny",
+          "SpanishLatinAmerica": "Guardián tribal",
+          "PortuguesePortugal": "Guardião tribal",
+          "Korean": "부족 두령",
+          "Turkish": "Boy Beyi"
+        }
+      },
+      "Tribal|Chancellor": {
+        "Translations": {
+          "Chinese": "长老首席",
+          "TraditionalChinese": "長老首席",
+          "English": "First Elder",
+          "Russian": "Первый старейшина",
+          "SpanishSpain": "Primer anciano",
+          "PortugueseBrazil": "Primeiro ancião",
+          "German": "Erster Ältester",
+          "Japanese": "首席長老",
+          "French": "Premier ancien",
+          "Polish": "Pierwszy starszy",
+          "SpanishLatinAmerica": "Primer anciano",
+          "PortuguesePortugal": "Primeiro ancião",
+          "Korean": "수석 장로",
+          "Turkish": "Baş Aksakal"
+        }
+      },
+      "Tribal|Steward": {
+        "Translations": {
+          "Chinese": "掌库人",
+          "TraditionalChinese": "掌庫人",
+          "English": "Keeper of Tribute",
+          "Russian": "Хранитель дани",
+          "SpanishSpain": "Guardián del tributo",
+          "PortugueseBrazil": "Guardião do tributo",
+          "German": "Hüter des Tributs",
+          "Japanese": "蔵守",
+          "French": "Gardien du tribut",
+          "Polish": "Strażnik daniny",
+          "SpanishLatinAmerica": "Guardián del tributo",
+          "PortuguesePortugal": "Guardião do tributo",
+          "Korean": "공물 관리인",
+          "Turkish": "Haraç Emini"
+        }
+      },
+      "Tribal|Marshal": {
+        "Translations": {
+          "Chinese": "战酋",
+          "TraditionalChinese": "戰酋",
+          "English": "War Chief",
+          "Russian": "Военный вождь",
+          "SpanishSpain": "Jefe de guerra",
+          "PortugueseBrazil": "Chefe de guerra",
+          "German": "Kriegshäuptling",
+          "Japanese": "戦酋長",
+          "French": "Chef de guerre",
+          "Polish": "Wódz wojenny",
+          "SpanishLatinAmerica": "Jefe de guerra",
+          "PortuguesePortugal": "Chefe de guerra",
+          "Korean": "전쟁 족장",
+          "Turkish": "Savaş Beyi"
+        }
+      },
+      "Tribal|WarCommander": {
+        "Translations": {
+          "Chinese": "大统领",
+          "TraditionalChinese": "大統領",
+          "English": "High War Leader",
+          "Russian": "Верховный военный вождь",
+          "SpanishSpain": "Gran líder de guerra",
+          "PortugueseBrazil": "Grande líder de guerra",
+          "German": "Oberster Kriegsführer",
+          "Japanese": "総頭領",
+          "French": "Grand chef de guerre",
+          "Polish": "Najwyższy wódz wojenny",
+          "SpanishLatinAmerica": "Gran líder de guerra",
+          "PortuguesePortugal": "Grande líder de guerra",
+          "Korean": "총두령",
+          "Turkish": "Ulu Savaş Önderi"
+        }
+      },
+      "Theocracy|Governor": {
+        "Translations": {
+          "Chinese": "祭酒",
+          "TraditionalChinese": "祭酒",
+          "English": "Libationer",
+          "Russian": "Иерофант",
+          "SpanishSpain": "Hierofante",
+          "PortugueseBrazil": "Hierofante",
+          "German": "Hierophant",
+          "Japanese": "祭酒",
+          "French": "Hiérophante",
+          "Polish": "Hierofant",
+          "SpanishLatinAmerica": "Hierofante",
+          "PortuguesePortugal": "Hierofante",
+          "Korean": "좨주",
+          "Turkish": "Hiyerofant"
+        }
+      },
+      "Theocracy|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "大祭酒",
+          "TraditionalChinese": "大祭酒",
+          "English": "Grand Libationer",
+          "Russian": "Верховный иерофант",
+          "SpanishSpain": "Gran hierofante",
+          "PortugueseBrazil": "Grão-hierofante",
+          "German": "Großhierophant",
+          "Japanese": "大祭酒",
+          "French": "Grand hiérophante",
+          "Polish": "Wielki hierofant",
+          "SpanishLatinAmerica": "Gran hierofante",
+          "PortuguesePortugal": "Grão-hierofante",
+          "Korean": "대좨주",
+          "Turkish": "Baş Hiyerofant"
+        }
+      },
+      "Theocracy|Chancellor": {
+        "Translations": {
+          "Chinese": "首席祭司",
+          "TraditionalChinese": "首席祭司",
+          "English": "High Priest",
+          "Russian": "Верховный жрец",
+          "SpanishSpain": "Sumo sacerdote",
+          "PortugueseBrazil": "Sumo sacerdote",
+          "German": "Hohepriester",
+          "Japanese": "首席祭司",
+          "French": "Grand prêtre",
+          "Polish": "Arcykapłan",
+          "SpanishLatinAmerica": "Sumo sacerdote",
+          "PortuguesePortugal": "Sumo sacerdote",
+          "Korean": "수석 제사장",
+          "Turkish": "Başrahip"
+        }
+      },
+      "Theocracy|Steward": {
+        "Translations": {
+          "Chinese": "圣库监",
+          "TraditionalChinese": "聖庫監",
+          "English": "Keeper of the Sacred Treasury",
+          "Russian": "Хранитель священной казны",
+          "SpanishSpain": "Guardián del tesoro sagrado",
+          "PortugueseBrazil": "Guardião do tesouro sagrado",
+          "German": "Hüter des heiligen Schatzes",
+          "Japanese": "聖庫監",
+          "French": "Gardien du trésor sacré",
+          "Polish": "Strażnik świętego skarbca",
+          "SpanishLatinAmerica": "Guardián del tesoro sagrado",
+          "PortuguesePortugal": "Guardião do tesouro sagrado",
+          "Korean": "신성 금고 관리인",
+          "Turkish": "Kutsal Hazine Emini"
+        }
+      },
+      "Theocracy|Marshal": {
+        "Translations": {
+          "Chinese": "护教大将军",
+          "TraditionalChinese": "護教大將軍",
+          "English": "Grand Defender of the Faith",
+          "Russian": "Великий защитник веры",
+          "SpanishSpain": "Gran defensor de la fe",
+          "PortugueseBrazil": "Grande defensor da fé",
+          "German": "Großer Verteidiger des Glaubens",
+          "Japanese": "護教大将軍",
+          "French": "Grand défenseur de la foi",
+          "Polish": "Wielki obrońca wiary",
+          "SpanishLatinAmerica": "Gran defensor de la fe",
+          "PortuguesePortugal": "Grande defensor da fé",
+          "Korean": "호교 대장군",
+          "Turkish": "İnancın Ulu Muhafızı"
+        }
+      },
+      "Theocracy|WarCommander": {
+        "Translations": {
+          "Chinese": "护教军统帅",
+          "TraditionalChinese": "護教軍統帥",
+          "English": "Commander of the Faithful",
+          "Russian": "Полководец правоверных",
+          "SpanishSpain": "Comandante de los fieles",
+          "PortugueseBrazil": "Comandante dos fiéis",
+          "German": "Befehlshaber der Gläubigen",
+          "Japanese": "護教軍統帥",
+          "French": "Commandant des fidèles",
+          "Polish": "Dowódca wiernych",
+          "SpanishLatinAmerica": "Comandante de los fieles",
+          "PortuguesePortugal": "Comandante dos fiéis",
+          "Korean": "호교군 통수",
+          "Turkish": "Müminlerin Emiri"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,967 @@
+class_name Simulation
+## 月度模拟心跳：人口增长 / 扩张压力 / 战争 / 省份易手 / 历史记录
+## 规则参数可被 user://mods/*.json 覆盖（对应需求 F3/F4：可配置玩法规则 + 独立扩展模块）
+
+signal history_added(text: String)
+signal map_changed
+
+var gen: MapGen
+var year := 861
+var month := 1
+var day := 1
+var rules := {
+	"war_chance_per_month": 0.06,   # 每国每月发动战争概率基数
+	"expand_pressure": 0.15,        # 每月无战扩张尝试概率
+	"pop_growth": 0.004,            # 月人口增长率
+	"battle_randomness": 0.35,      # 战斗结果随机占比
+	# === 全局指令面板的真实开关（字段名对齐原版 EditPanelUI 的 GlobalCommandsPanel 按钮）===
+	"allow_rebellion": true,             # AllowRebellionButton      允许叛乱
+	"allow_civil_war": true,             # AllowCivilWarButton       允许内战
+	"allow_family_rebellion": true,      # AllowFamilyRebellionButton 允许家族叛乱
+	"allow_vassal_rebel": true,          # AllowVassalRebelButton    允许附庸叛乱
+	"allow_alliance": true,              # AllowAllianceButton       允许联盟
+	"enable_vassal": true,               # EnableVassalButton        启用附庸
+	"allow_auto_diplomacy": true,        # AllowDiplomacyButton      允许自主外交
+	"assist_allies_occupy_land": true,   # AssistAlliesOccupyLandButton 协助盟友占领土地
+	"allow_auto_abandon_isolated": true, # AllowAutoAbandonIsolatedProvincesButton 自动放弃孤立行省
+	"generate_desert_and_snow": true,    # GenerateDesertAndSnowButton
+	"auto_save_enabled": false,          # AutoSaveButton
+	"auto_save_interval_minutes": 10,    # AutoSaveIntervalMinutes
+	"max_war_duration_months": 120,      # c_MaxMonthBeforeForceEndWar
+	"rebel_interval_months": 24,         # RebelIntervalSettingsButton
+}
+var history: Array = []            # {date:String, text:String, state:int}
+var rng := RandomNumberGenerator.new()
+
+# ---------- 战争系统（对齐原版 WarManagerV2 的可观测字段） ----------
+# 类型/目标键取自原版官方文案（assets/origin/zh_strings.json），共 12 种战争类型
+const WAR_TYPES := ["WarTypeConquest", "WarTypeLiberation", "WarTypeRebel", "WarTypeVassalization",
+	"WarTypeFamilyRebellion", "WarTypeForceMannul", "WarTypeCivilWar", "WarTypeCivilWarIndependence",
+	"WarTypeCivilWarOverthrow", "WarTypeCivilWarReform", "WarTypeCivilWarSuccession"]
+const WAR_GOALS := ["WarGoalAnnex", "WarGoalCedeProvince", "WarGoalOccupyCount",
+	"WarV2_GoalReparations", "WarV2_GoalVassalize"]
+var wars: Array = []               # {id,a,d,type,goal,months,score,active,ceded:[],log:[{date,text}]}
+var war_records: Array = []        # 已结束战争的战报（原版 WarRecord）
+var next_war_id := 1
+var zh := {}
+
+func t(key: String, fallback: String) -> String:
+	return zh.get(key, fallback)
+
+func setup(g: MapGen, seed_val: int) -> void:
+	gen = g
+	rng.seed = seed_val + 7
+	wars.clear()
+	war_records.clear()
+	next_war_id = 1
+	var zf := FileAccess.open("res://assets/origin/zh_strings.json", FileAccess.READ)
+	if zf:
+		var parsed: Variant = JSON.parse_string(zf.get_as_text())
+		if parsed is Dictionary:
+			zh = parsed
+	_init_armies()
+	apply_mods()
+
+## 军队/战舰初始化：原版 StateInfoUI 有 Army / WarshipCount 字段（军队部署）
+var armies: Array = []   ## Army 实体（schema 见 reports/decompile-findings.md §15.30）
+
+func _init_armies() -> void:
+	for si in gen.states.size():
+		var s: Dictionary = gen.states[si]
+		var power := _state_power(si)
+		s.army = maxi(1, power / 900)
+		s.warships = maxi(0, s.provinces.size() / 4)
+
+func apply_mods() -> void:
+	# F4：mods 目录中的 .json 与内置规则浅合并，独立启用/关闭
+	var dir := DirAccess.open("user://")
+	if dir == null:
+		return
+	if not dir.dir_exists("mods"):
+		return
+	dir = DirAccess.open("user://mods")
+	for f in dir.get_files():
+		if f.ends_with(".json"):
+			var txt := FileAccess.get_file_as_string("user://mods/" + f)
+			var data: Variant = JSON.parse_string(txt)
+			if data is Dictionary:
+				for k in data:
+					if rules.has(k):
+						rules[k] = data[k]
+						history.append({"date": date_str(), "text": "[mod] %s 覆盖规则 %s = %s" % [f, k, str(data[k])]})
+
+func date_str() -> String:
+	return "公元%d年-%d-%d" % [year, month, day]
+
+func tick_month() -> void:
+	month += 1
+	if month > 12:
+		month = 1
+		year += 1
+	_grow_population()
+	_economy_tick()
+	_advance_armies()
+	_diplomacy_and_war()
+	_try_alliances()
+	_abandon_isolated_provinces()
+	map_changed.emit()
+
+## 月度财政循环（第十一轮补充，方向调整后第一项玩法实现）。
+## 【证据边界】字段名 gold/goldPerMonth/foodReserve/armyCostGold 为原版 schema（官渡存档解密实测）；
+## 具体收支公式未从原版反编译（Town/经济类待读）——当前公式为重建版实现并显式标注，
+## 结构上保证：国家有真实月度收入/支出/赤字后果，参与存档。
+func _economy_tick() -> void:
+	for si in _alive_states():
+		var st: Dictionary = gen.states[si]
+		var income := 0.0
+		for pi in st.get("provinces", []):
+			var prov: Dictionary = gen.provinces[pi]
+			# 税基 = 省人口；每千人月税 1 金（重建版公式，标注待证据）
+			income += float(prov.get("pop", 0)) * 0.001
+		# 军费：活跃战争中的国家军费加倍（战争有真实财政代价）
+		var expense := float(st.get("army_cost", 0)) * (2.0 if is_at_war(si) else 1.0)
+		var gold: float = float(st.get("gold", 0.0)) + income - expense
+		# 赤字后果：金库为负 → 欠饷 → 人口流失（真实状态变化，非提示）
+		if gold < 0.0:
+			gold = 0.0
+			for pi2 in st.get("provinces", []):
+				var prov2: Dictionary = gen.provinces[pi2]
+				prov2.pop = int(float(prov2.get("pop", 0)) * 0.995)
+
+		st["gold"] = gold
+		st["gold_per_month"] = income - expense
+
+## ---- 军队系统（第十一轮方向调整后实现）----
+## 【证据边界】字段名与取值域 = 原版 schema（官渡/欧洲1.1.1 存档解密实测：armyID/currentCell/
+## preCell/homeProvince/state/armyCount(float)/armyType(BorderGuard|FieldArmy|Garrison)/
+## armyOrder("AttackEnemyProvince")/currentState/participatedCampaigns…）；
+## 编成比例（边防 94.5%/野战/驻防）与兵力 200 起步 = 存档统计实测；
+## 移动/战斗/占领的**逐步规则**为重建版实现（原版逐步逻辑在 main.js/Campaign 类，待反编译），已标注。
+func _init_armies_for_state(si: int) -> void:
+	var st: Dictionary = gen.states[si]
+	if int(st.get("armies_initialized", 0)) == 1:
+		return
+	st["armies_initialized"] = 1
+	var border := []
+	var capital_prov: int = int(st.get("capital", -1))
+	for pi in st.get("provinces", []):
+		var is_border := bool(gen.provinces[pi].get("neighbors", {}).size() > 0)
+		if is_border:
+			border.append(pi)
+	var aid_base := armies.size() + 1
+	# 驻防军（首都）
+	if capital_prov >= 0:
+		armies.append({"army_id": aid_base, "state": si, "home_province": capital_prov,
+			"current_cell": _province_cell(capital_prov), "pre_cell": -1,
+			"army_count": 200.0, "army_type": "Garrison", "army_order": "HoldPosition",
+			"current_state": "Idle", "target_province": -1, "is_elite": false,
+			"is_manual_created": false, "is_emergency_call": false,
+			"base_combat_efficiency": 1.0, "founding_time": float(year),
+			"participated_campaigns": [], "enemy_army_destroyed_count": 0.0,
+			"conquered_provinces_info": []})
+		aid_base += 1
+	# 边防军（每 2 个边境省 1 支，上限 40 支）
+	var bg := 0
+	for pi2 in border:
+		if bg >= 40:
+			break
+		if pi2 % 2 == 0:
+			armies.append({"army_id": aid_base, "state": si, "home_province": pi2,
+				"current_cell": _province_cell(pi2), "pre_cell": -1,
+				"army_count": 200.0, "army_type": "BorderGuard", "army_order": "GuardBorder",
+				"current_state": "Idle", "target_province": -1, "is_elite": false,
+				"is_manual_created": false, "is_emergency_call": false,
+				"base_combat_efficiency": 1.0, "founding_time": float(year),
+				"participated_campaigns": [], "enemy_army_destroyed_count": 0.0,
+				"conquered_provinces_info": []})
+			aid_base += 1
+			bg += 1
+	# 野战军（1 支，首都附近）
+	if capital_prov >= 0:
+		armies.append({"army_id": aid_base, "state": si, "home_province": capital_prov,
+			"current_cell": _province_cell(capital_prov), "pre_cell": -1,
+			"army_count": 200.0, "army_type": "FieldArmy", "army_order": "HoldPosition",
+			"current_state": "Idle", "target_province": -1, "is_elite": false,
+			"is_manual_created": false, "is_emergency_call": false,
+			"base_combat_efficiency": 1.0, "founding_time": float(year),
+			"participated_campaigns": [], "enemy_army_destroyed_count": 0.0,
+			"conquered_provinces_info": []})
+
+func _province_cell(pi: int) -> int:
+	var cells: PackedInt32Array = gen.provinces[pi].get("cells", PackedInt32Array())
+	if cells.size() == 0:
+		return -1
+	return cells[cells.size() / 2]
+
+## 宣战时：给交战双方发"AttackEnemyProvince"野战令（真实 armyOrder 变化）
+func _mobilize_armies(si: int) -> void:
+	for a in armies:
+		if int(a["state"]) == si:
+			a["army_order"] = "AttackEnemyProvince"
+			a["current_state"] = "Marching"
+
+## 月度军队推进：向目标省移动一格（cell 级），抵达后开始占领（currentCampaign）
+func _advance_armies() -> void:
+	for a in armies:
+		var si: int = int(a["state"])
+		if not gen.states[si].get("alive", false):
+			continue
+		var order: String = str(a["army_order"])
+		if order != "AttackEnemyProvince":
+			continue
+		if not is_at_war(si):
+			a["army_order"] = "HoldPosition"
+			a["current_state"] = "Idle"
+			continue
+		var cur: int = int(a["current_cell"])
+		var tgt: int = int(a["target_province"])
+		if tgt < 0:
+			for nb in _neighbor_states(si):
+				if is_at_war(si) and si != nb and is_at_war(nb):
+					var tp := _border_province_of(nb, si)
+					if tp >= 0:
+						tgt = tp
+						a["target_province"] = tp
+					break
+			if tgt < 0:
+				continue
+		# 贪心走向目标省中心（每次一格，preCell 留痕）；通过 province.neighbors 判定可通行
+		var tprov: Dictionary = gen.provinces[tgt]
+		var tcenter: Vector2 = tprov.get("burg", Vector2.ZERO)
+		var best := -1
+		var bd := 1 << 30
+		var cx: int = cur % gen.W
+		var cy: int = cur / gen.W
+		for dy in range(-1, 2):
+			for dx in range(-1, 2):
+				if dx == 0 and dy == 0:
+					continue
+				var nx: int = cx + dx
+				var ny: int = cy + dy
+				if nx < 0 or ny < 0 or nx >= gen.W or ny >= gen.H:
+					continue
+				var nb: int = ny * gen.W + nx
+				var pi2: int = int(gen.cell_province[nb])
+				if pi2 < 0:
+					continue
+				var owner: int = int(gen.provinces[pi2].get("state", -1))
+				if owner != si and not is_at_war(si):
+					continue
+				var d: int = absi(nx - int(tcenter.x)) + absi(ny - int(tcenter.y))
+				if d < bd:
+					bd = d
+					best = nb
+		if best >= 0 and best != cur:
+			a["pre_cell"] = cur
+			a["current_cell"] = best
+			var pi3: int = int(gen.cell_province[best])
+			if pi3 >= 0:
+				var owner2: int = int(gen.provinces[pi3].get("state", -1))
+				if owner2 != si:
+					_occupy_province(pi3, si, a)
+
+## 占领省：真实转移归属（记录征服历史；军队留驻）
+func _occupy_province(pi: int, si: int, army: Dictionary) -> void:
+	var from_si: int = int(gen.provinces[pi].get("state", -1))
+	if from_si == si:
+		return
+	_transfer(pi, from_si, si, "occupied")
+	army["conquered_provinces_info"].append({"province": pi, "from": from_si, "time": "%d-%d" % [year, month]})
+	history.append({"date": date_str(), "text": "占领 %s" % gen.provinces[pi].get("name", ""),
+		"state": si})
+	if history.size() > 800:
+		history = history.slice(history.size() - 600)
+
+func _grow_population() -> void:
+	# 人口增长受"最大人口"约束（原版 ProvinceInfoUI 的 当前人口/最大人口）
+	for p in gen.provinces:
+		var cap: int = int(p.get("max_pop", 0))
+		var grown := int(p.pop * (1.0 + rules.pop_growth) + 1)
+		p.pop = grown if cap <= 0 else mini(grown, cap)
+
+func _alive_states() -> Array[int]:
+	var out: Array[int] = []
+	for si in gen.states.size():
+		if gen.states[si].alive:
+			out.append(si)
+	return out
+
+func _state_power(si: int) -> int:
+	var power := 0
+	for pi in gen.states[si].provinces:
+		power += gen.provinces[pi].pop
+	return maxi(power, 1)
+
+## 联盟缔结（原版 AllowAllianceButton 的玩法效果）：相邻且非交战国之间按概率结盟，
+## 文案用官方 AllianceFormedBetweenStates
+func _try_alliances() -> void:
+	if not bool(rules.allow_alliance):
+		return
+	for si in _alive_states():
+		if gen.states[si].provinces.is_empty():
+			continue
+		if rng.randf() > 0.03:
+			continue
+		var cands: Array[int] = []
+		for ti in _neighbor_states(si):
+			if gen.states[si].get("allies", []).has(ti):
+				continue
+			if is_at_war(si) or is_at_war(ti):
+				continue
+			cands.append(ti)
+		if cands.is_empty():
+			continue
+		var ti2: int = cands[rng.randi() % cands.size()]
+		if not gen.states[si].has("allies"):
+			gen.states[si].allies = []
+		if not gen.states[ti2].has("allies"):
+			gen.states[ti2].allies = []
+		gen.states[si].allies.append(ti2)
+		gen.states[ti2].allies.append(si)
+		var txt: String = t("AllianceFormedBetweenStates", "{0}与{1}结成联盟").format({
+			"0": gen.states[si].name, "1": gen.states[ti2].name})
+		history.append({"date": date_str(), "text": txt, "state": si})
+		history.append({"date": date_str(), "text": txt, "state": ti2})
+
+## 自动放弃孤立行省（原版 AllowAutoAbandonIsolatedProvincesButton）：
+## 行省与本国主体不连通、且四周邻省都不属本国 → 一年后放弃（官方 GlobalCommandTutorial 原文）
+func _abandon_isolated_provinces() -> void:
+	if not bool(rules.allow_auto_abandon_isolated):
+		return
+	for si in _alive_states():
+		var provs: Array = gen.states[si].provinces.duplicate()
+		if provs.size() <= 1:
+			continue
+		var capital: int = gen.states[si].capital
+		if not provs.has(capital):
+			continue
+		var reachable := {}
+		var stack: Array[int] = [capital]
+		reachable[capital] = true
+		while not stack.is_empty():
+			var cur: int = stack.pop_back()
+			for nb in gen.provinces[cur].neighbors:
+				if reachable.has(nb):
+					continue
+				if gen.provinces[nb].state == si:
+					reachable[nb] = true
+					stack.append(nb)
+		for pi in provs:
+			if reachable.has(pi):
+				gen.provinces[pi].isolated_months = 0
+				continue
+			var surrounded_by_others := true
+			for nb2 in gen.provinces[pi].neighbors:
+				if gen.provinces[nb2].state == si:
+					surrounded_by_others = false
+					break
+			if not surrounded_by_others:
+				gen.provinces[pi].isolated_months = 0
+				continue
+			var months: int = int(gen.provinces[pi].get("isolated_months", 0)) + 1
+			gen.provinces[pi].isolated_months = months
+			if months >= 12:
+				gen.provinces[pi].state = -1
+				gen.provinces[pi].isolated_months = 0
+				var txt2: String = t("IsolatedProvinceAbandoned", "%s 放弃了孤立行省 %s") % [
+					gen.states[si].name, gen.provinces[pi].name]
+				history.append({"date": date_str(), "text": txt2, "state": si})
+	gen.rebuild_after_state_edit()
+
+## 全局指令：结束所有战争
+func end_all_wars() -> void:
+	var n := 0
+	for w in wars:
+		if w.active:
+			w.active = false
+			n += 1
+	history.append({"date": date_str(), "text": "【全局指令】结束所有战争（%d 场）" % n})
+
+## 全局指令：结束所有联盟
+func end_all_alliances() -> void:
+	for s in gen.states:
+		s.allies = []
+	history.append({"date": date_str(), "text": "【全局指令】解除所有联盟"})
+
+## 全局指令：清空历史
+func clear_history() -> void:
+	history.clear()
+	war_records.clear()
+
+## 全局指令：设置自定义时间（原版 SetCustomTimeButton）
+func set_time(y: int, m: int) -> void:
+	year = maxi(1, y)
+	month = clampi(m, 1, 12)
+	history.append({"date": date_str(), "text": "【全局指令】时间设为 %d 年 %d 月" % [year, month]})
+
+## 全局指令：重新生成区域（原版 RegenerateDistrictsButton）
+## 重建版区域是行省的子字段 → 按行省规模重新分配区域人口/防御上限
+func regenerate_districts() -> void:
+	var rng2 := RandomNumberGenerator.new()
+	rng2.seed = year * 131 + month * 17
+	for p in gen.provinces:
+		if p.get("is_sea", false):
+			continue
+		var n: int = p.cells.size()
+		p.district_max_pop = maxi(50, n * rng2.randi_range(8, 18))
+		p.district_pop = int(float(p.district_max_pop) * rng2.randf_range(0.25, 0.8))
+		p.district_max_defense = maxi(30, n * rng2.randi_range(2, 5))
+		p.district_defense = int(float(p.district_max_defense) * rng2.randf_range(0.3, 0.9))
+	history.append({"date": date_str(), "text": t("DistrictRegenerated", "已重新生成所有区域")})
+
+func _diplomacy_and_war() -> void:
+	_advance_wars()
+	var alive := _alive_states()
+	for si in alive:
+		if si >= gen.states.size() or not gen.states[si].alive:
+			continue
+		if is_at_war(si):
+			continue  # 已在战争中不再另开战线（原版同一时刻只打一场主要战争）
+		var roll := rng.randf()
+		if roll < rules.war_chance_per_month:
+			_try_war(si)
+		elif roll < rules.war_chance_per_month + rules.expand_pressure:
+			_try_peaceful_expansion(si)
+
+func is_at_war(si: int) -> bool:
+	for w in wars:
+		if w.active and (int(w.a) == si or int(w.d) == si):
+			return true
+	return false
+
+## 该国参与的所有战争（默认只看进行中的）
+func state_wars(si: int, only_active := true) -> Array:
+	var out: Array = []
+	for w in wars:
+		if only_active and not w.active:
+			continue
+		if int(w.a) == si or int(w.d) == si:
+			out.append(w)
+	return out
+
+func _neighbor_states(si: int) -> Array[int]:
+	var seen := {}
+	var out: Array[int] = []
+	for pi in gen.states[si].provinces:
+		for nb in gen.provinces[pi].neighbors:
+			var os: int = gen.provinces[nb].state
+			if os >= 0 and os != si and gen.states[os].alive and not seen.has(os):
+				seen[os] = true
+				out.append(os)
+	return out
+
+func _try_war(si: int) -> void:
+	var targets := _neighbor_states(si)
+	if targets.is_empty():
+		return
+	var ti: int = targets[rng.randi() % targets.size()]
+	var my := _state_power(si)
+	var foe := _state_power(ti)
+	# 类型/目标按国力对比挑选（原版 WarManagerV2 有 12 种类型、多种战争目标）
+	var type_key := "WarTypeConquest"
+	var goal_key := "WarGoalCedeProvince"
+	if my > foe * 3.0:
+		goal_key = "WarGoalAnnex"
+	elif my < foe * 0.5:
+		type_key = "WarTypeLiberation"
+		goal_key = "WarGoalOccupyCount"
+	elif bool(rules.enable_vassal) and rng.randf() < 0.25:
+		type_key = "WarTypeVassalization"
+		goal_key = "WarV2_GoalVassalize"
+	declare_war(si, ti, type_key, goal_key)
+
+## 宣战：写入战争列表 + 历史（文案用原版 WarV2_Declared）
+func declare_war(a: int, d: int, type_key: String, goal_key: String) -> int:
+	_mobilize_armies(a)
+	_mobilize_armies(d)
+	var w := {"id": next_war_id, "a": a, "d": d, "type": type_key, "goal": goal_key,
+		"months": 0, "score": 0.0, "active": true, "ceded": []}
+	next_war_id += 1
+	wars.append(w)
+	var short_goal: String = t(goal_key, goal_key)
+	if goal_key == "WarGoalAnnex":
+		short_goal = t("WarGoalAnnex", "吞并")
+	var text: String = t("WarV2_Declared", "{0}以{1}为由对{2}宣战，目标：{3}").format({
+		"0": gen.states[a].name, "1": short_goal,
+		"2": gen.states[d].name, "3": t("WarV2_GoalAnnex" if goal_key == "WarGoalAnnex" else goal_key, short_goal)})
+	history.append({"date": date_str(), "text": text, "state": a})
+	history.append({"date": date_str(), "text": text, "state": d})
+	return int(w.id)
+
+## 月度推进：战争分数累积 + 战时占领（原版 WarScore / WarResults 的表现面）
+func _advance_wars() -> void:
+	for w in wars:
+		if not w.active:
+			continue
+		var a: int = int(w.a)
+		var d: int = int(w.d)
+		if not gen.states[a].alive or not gen.states[d].alive:
+			w.active = false
+			continue
+		w.months = int(w.months) + 1
+		if int(w.months) >= int(rules.max_war_duration_months):
+			_settle_war(w)
+			continue
+		var pa := float(_state_power(a)) * (1.0 + float(gen.states[a].army) * 0.05)
+		var pd := float(_state_power(d)) * (1.0 + float(gen.states[d].army) * 0.05)
+		var ratio := (pa - pd) / maxf(pa, pd)
+		w.score = clampf(float(w.score) + ratio * 12.0 + rng.randf_range(-4.0, 4.0), -100.0, 100.0)
+		if absf(float(w.score)) > 45.0 and rng.randf() < 0.18:
+			var winner: int = a if float(w.score) > 0.0 else d
+			var loser: int = d if winner == a else a
+			if gen.states[loser].provinces.size() > 1:
+				var bp := _border_province_of(loser, winner)
+				if bp >= 0:
+					_transfer(bp, loser, winner, "战争占领")
+					w.ceded.append(bp)
+		if absf(float(w.score)) >= 100.0:
+			_settle_war(w)
+
+func _dur_text(months: int) -> String:
+	var y := months / 12
+	var m := months % 12
+	if y > 0 and m > 0:
+		return t("WarV2_StatsSuffix", "，历时{0}").format({"0": t("WarV2_DurYM", "{0}年{1}个月").format({"0": y, "1": m})})
+	if y > 0:
+		return t("WarV2_StatsSuffix", "，历时{0}").format({"0": t("WarV2_DurY", "{0}年").format({"0": y})})
+	return t("WarV2_StatsSuffix", "，历时{0}").format({"0": t("WarV2_DurM", "{0}个月").format({"0": maxi(m, 1)})})
+
+## 战争结算：按目标执行领土/赔款/附庸条款，并写战报（原版 WarRecord）
+func _settle_war(w: Dictionary) -> void:
+	w.active = false
+	var a: int = int(w.a)
+	var d: int = int(w.d)
+	var score: float = float(w.score)
+	var dur := _dur_text(int(w.months))
+	var attacker_won := score > 0.0
+	var winner: int = a if attacker_won else d
+	var loser: int = d if attacker_won else a
+	var clause := ""
+	if absf(score) < 30.0:
+		_record_war(w, t("WarV2_SettledStalemate", "{0}与{1}停战，{2}").format({
+			"0": gen.states[a].name, "1": gen.states[d].name, "2": ""}) + dur)
+		return
+	var goal: String = str(w.goal)
+	if attacker_won and goal == "WarGoalAnnex":
+		var provs: Array = gen.states[loser].provinces.duplicate()
+		for pi in provs:
+			_move_province(int(pi), loser, winner)
+		gen.states[loser].alive = false
+		_record_war(w, t("WarV2_SettledAnnex", "{0}击灭并吞并{1}，{2}").format({
+			"0": gen.states[winner].name, "1": gen.states[loser].name, "2": ""}) + dur)
+		return
+	if attacker_won and goal == "WarV2_GoalVassalize":
+		gen.states[loser].vassal_of = winner
+		clause = t("Vassal", "附庸") + gen.states[winner].name
+	elif attacker_won and goal == "WarV2_GoalReparations":
+		for pi in gen.states[loser].provinces:
+			gen.provinces[pi].pop = int(gen.provinces[pi].pop * 0.8)
+		clause = "索取赔款"
+	else:
+		# 割让 / 占领：转移 1~2 个边境省
+		var take := 2 if goal == "WarGoalOccupyCount" else 1
+		for _i in take:
+			if gen.states[loser].provinces.size() <= 1:
+				break
+			var bp := _border_province_of(loser, winner)
+			if bp < 0:
+				break
+			var receiver := winner
+			if bool(rules.assist_allies_occupy_land) and not _touches_state(bp, winner):
+				for ally in gen.states[winner].get("allies", []):
+					if _touches_state(bp, int(ally)):
+						receiver = int(ally)
+						break
+			_move_province(bp, loser, receiver)
+			clause += t("WarV2_CededClause", "，割得{0}省").format({"0": gen.provinces[bp].name})
+	if gen.states[loser].alive:
+		var line := ""
+		if attacker_won:
+			line = t("WarV2_SettledAttackerWin", "{0}战胜{1}，{2}").format({
+				"0": gen.states[winner].name, "1": gen.states[loser].name, "2": clause})
+		else:
+			line = t("WarV2_SettledDefenderWin", "{0}击退{1}，{2}").format({
+				"0": gen.states[winner].name, "1": gen.states[loser].name, "2": clause})
+		_record_war(w, line + dur)
+	else:
+		_record_war(w, t("WarV2_SettledAnnex", "{0}击灭并吞并{1}，{2}").format({
+			"0": gen.states[winner].name, "1": gen.states[loser].name, "2": ""}) + dur)
+
+## 该行省是否与指定国家相邻（协助盟友占领土地的判定）
+func _touches_state(pi: int, si: int) -> bool:
+	if si < 0 or si >= gen.states.size():
+		return false
+	for nb in gen.provinces[pi].neighbors:
+		if gen.provinces[nb].state == si:
+			return true
+	return false
+
+func _record_war(w: Dictionary, text: String) -> void:
+	war_records.append({"date": date_str(), "text": text, "a": int(w.a), "d": int(w.d),
+		"type": str(w.type), "goal": str(w.goal), "score": snappedf(float(w.score), 1.0),
+		"months": int(w.months)})
+	history.append({"date": date_str(), "text": text, "state": int(w.a)})
+	history.append({"date": date_str(), "text": text, "state": int(w.d)})
+	if history.size() > 800:
+		history = history.slice(history.size() - 600)
+
+## 只搬家不写历史（用于吞并等批量转移，最后由 _record_war 统一记一条）
+func _move_province(pi: int, from_si: int, to_si: int) -> void:
+	gen.provinces[pi].state = to_si
+	gen.states[from_si].provinces.erase(pi)
+	if not gen.states[to_si].provinces.has(pi):
+		gen.states[to_si].provinces.append(pi)
+	if gen.states[from_si].provinces.is_empty():
+		gen.states[from_si].alive = false
+
+func _try_peaceful_expansion(si: int) -> void:
+	# 无主/衰败邻近省份的和平吞并（附庸化简化模型）
+	# 注意：迭代副本 —— _transfer 会向 provinces 数组追加元素，直接迭代会死循环
+	var own: Array = gen.states[si].provinces.duplicate()
+	for pi in own:
+		for nb in gen.provinces[pi].neighbors:
+			var os: int = gen.provinces[nb].state
+			if os >= 0 and os != si and gen.states[os].alive:
+				if _state_power(os) < _state_power(si) * 0.12 and rng.randf() < 0.25:
+					_transfer(nb, os, si, "和平统一")
+					return
+
+func _border_province_of(from_si: int, to_si: int) -> int:
+	var cands: Array[int] = []
+	for pi in gen.states[from_si].provinces:
+		for nb in gen.provinces[pi].neighbors:
+			if gen.provinces[nb].state == to_si:
+				cands.append(pi)
+				break
+	if cands.is_empty():
+		return -1
+	return cands[rng.randi() % cands.size()]
+
+func _transfer(pi: int, from_si: int, to_si: int, how: String) -> void:
+	var died: bool = gen.states[from_si].provinces.size() <= 1
+	_move_province(pi, from_si, to_si)
+	if died:
+		var txt := "%s 被 %s %s（灭亡）" % [gen.states[from_si].name, gen.states[to_si].name, how]
+		history.append({"date": date_str(), "text": txt, "state": to_si})
+		history.append({"date": date_str(), "text": txt, "state": from_si})
+	else:
+		var txt2 := "%s 从 %s %s省份 %s" % [gen.states[to_si].name, gen.states[from_si].name, how, gen.provinces[pi].name]
+		history.append({"date": date_str(), "text": txt2, "state": to_si})
+		history.append({"date": date_str(), "text": txt2, "state": from_si})
+	if history.size() > 800:
+		history = history.slice(history.size() - 600)
+
+# ---------- 存档（JSON, 无加密, 版本号前向兼容） ----------
+const SAVE_VERSION := 3   # v3：新增高度图/陆海/群系数据（编辑器改动可随存档保留）
+
+func save(path: String) -> bool:
+	var data := {
+		"version": SAVE_VERSION,
+		"year": year, "month": month,
+		"cell_province": var_to_str(gen.cell_province).replace("\n", ""),
+		# 编辑器改动的地形/群系必须随存档保留（base64 二进制，体积约 1/3）
+		"elevation_b64": Marshalls.raw_to_base64(gen.elevation.to_byte_array()),
+		"is_land_b64": Marshalls.raw_to_base64(gen.is_land),
+		"biome_b64": Marshalls.raw_to_base64(gen.biome),
+		"provinces": [],
+		"states": [],
+		"wars": wars,
+		"war_records": war_records,
+		"next_war_id": next_war_id,
+		"history": history,
+		"rules": rules,
+	}
+	for p in gen.provinces:
+		data.provinces.append({"name": p.name, "pop": p.pop, "defense": p.defense,
+			"state": p.state, "kind": p.get("kind", ""),
+			"max_pop": p.get("max_pop", 0), "max_defense": p.get("max_defense", 0),
+			"district_pop": p.get("district_pop", 0), "district_max_pop": p.get("district_max_pop", 0),
+			"district_defense": p.get("district_defense", 0), "district_max_defense": p.get("district_max_defense", 0),
+			"is_capital_burg": p.is_capital_burg})
+	for st in gen.states:
+		data.states.append({"name": st.name, "alive": st.alive, "polity": st.polity,
+			"capital": st.capital, "auto_diplomacy": st.get("auto_diplomacy", true),
+			"leader": st.get("leader", {}), "culture": st.get("culture", ""),
+			"religion": st.get("religion", ""), "army": st.get("army", 0),
+			"warships": st.get("warships", 0), "allies": st.get("allies", []),
+			"vassal_of": st.get("vassal_of", -1), "color": st.color,
+			"gold": st.get("gold", 0.0), "gold_per_month": st.get("gold_per_month", 0.0)})
+	data.armies = armies
+	var f := FileAccess.open(path, FileAccess.WRITE)
+	if f == null:
+		return false
+	f.store_string(JSON.stringify(data))
+	f.close()
+	return true
+
+func load(path: String) -> bool:
+	var txt := FileAccess.get_file_as_string(path)
+	if txt.is_empty():
+		return false
+	var data: Variant = JSON.parse_string(txt)
+	if not (data is Dictionary):
+		return false
+	var ver := int(data.get("version", 0))
+	if ver < 1:
+		return false
+	year = int(data.year)
+	month = int(data.month)
+	history = data.get("history", [])
+	wars = data.get("wars", [])
+	armies = data.get("armies", [])
+	war_records = data.get("war_records", [])
+	next_war_id = int(data.get("next_war_id", 1))
+	if data.has("rules"):
+		for k in data.rules:
+			if rules.has(k):
+				rules[k] = data.rules[k]
+	var cp: Array = str_to_var(String(data.cell_province))
+	gen.cell_province = PackedInt32Array(cp)
+	if data.has("elevation_b64"):
+		var eb := Marshalls.base64_to_raw(str(data.elevation_b64))
+		var ea := eb.to_float32_array()
+		if ea.size() == gen.elevation.size():
+			gen.elevation = ea
+	if data.has("is_land_b64"):
+		var lb := Marshalls.base64_to_raw(str(data.is_land_b64))
+		if lb.size() == gen.is_land.size():
+			gen.is_land = lb
+	if data.has("biome_b64"):
+		var bb := Marshalls.base64_to_raw(str(data.biome_b64))
+		if bb.size() == gen.biome.size():
+			gen.biome = bb
+	# 行省字段按存档回填（v1 只有 name/pop）
+	var provs: Array = data.get("provinces", [])
+	for i in mini(gen.provinces.size(), provs.size()):
+		var src: Dictionary = provs[i]
+		gen.provinces[i].name = str(src.get("name", gen.provinces[i].name))
+		gen.provinces[i].pop = int(src.get("pop", gen.provinces[i].pop))
+		gen.provinces[i].defense = int(src.get("defense", gen.provinces[i].defense))
+		gen.provinces[i].kind = str(src.get("kind", ""))
+		gen.provinces[i].max_pop = int(src.get("max_pop", 0))
+		gen.provinces[i].max_defense = int(src.get("max_defense", 0))
+		gen.provinces[i].district_pop = int(src.get("district_pop", 0))
+		gen.provinces[i].district_max_pop = int(src.get("district_max_pop", 0))
+		gen.provinces[i].district_defense = int(src.get("district_defense", 0))
+		gen.provinces[i].district_max_defense = int(src.get("district_max_defense", 0))
+		gen.provinces[i].is_capital_burg = bool(src.get("is_capital_burg", false))
+	var sts: Array = data.get("states", [])
+	for si in mini(gen.states.size(), sts.size()):
+		var d: Dictionary = sts[si]
+		gen.states[si].name = str(d.get("name", gen.states[si].name))
+		gen.states[si].alive = bool(d.get("alive", true))
+		gen.states[si].polity = str(d.get("polity", gen.states[si].polity))
+		gen.states[si].capital = int(d.get("capital", gen.states[si].capital))
+		gen.states[si].auto_diplomacy = bool(d.get("auto_diplomacy", true))
+		gen.states[si].leader = d.get("leader", gen.states[si].get("leader", {}))
+		gen.states[si].culture = str(d.get("culture", ""))
+		gen.states[si].religion = str(d.get("religion", ""))
+		gen.states[si].army = int(d.get("army", 0))
+		gen.states[si].warships = int(d.get("warships", 0))
+		gen.states[si].allies = d.get("allies", [])
+		gen.states[si].vassal_of = int(d.get("vassal_of", -1))
+		gen.states[si].gold = float(d.get("gold", 0.0))
+		gen.states[si].gold_per_month = float(d.get("gold_per_month", 0.0))
+	# 国家-行省归属按 cell→province 字典重建（修正 v1 把 province id 当 state id 的缺陷）
+	for st in gen.states:
+		st.provinces.clear()
+	for pi in gen.provinces.size():
+		var owner_state: int = gen.provinces[pi].state
+		if owner_state >= 0 and owner_state < gen.states.size():
+			gen.states[owner_state].provinces.append(pi)
+		else:
+			gen.provinces[pi].state = -1
+	map_changed.emit()
+	return true
+
+
+# ============================================================================
+# 国家面板的"国家行为"（对齐原版 StateInfoUI 按钮面：扩张/煽动叛乱/内战/吞并/发起战争/停战/
+# 缔结盟约/退出同盟/收为附庸/独立/腐败度/放置军队）。每个按钮都有真实数据后果。
+# ============================================================================
+
+## 扩张：对无主/弱邻行省做一次和平蚕食（复用月度扩张逻辑）
+func act_expand(si: int) -> String:
+	if si < 0 or si >= gen.states.size() or not gen.states[si].alive:
+		return "国家不存在"
+	var before: int = gen.states[si].provinces.size()
+	_try_peaceful_expansion(si)
+	var after: int = gen.states[si].provinces.size()
+	if after > before:
+		return "扩张成功：+%d 行省" % (after - before)
+	return "无可扩张目标（周边无弱国/无主行省）"
+
+## 煽动叛乱：在邻国边境省扶植叛乱政权，并立刻进入战争
+func act_incite_rebellion(si: int) -> String:
+	if not bool(rules.allow_rebellion):
+		return "全局指令已关闭叛乱"
+	var neigh := _neighbor_states(si)
+	if neigh.is_empty():
+		return "没有接壤国家可煽动"
+	var ti: int = neigh[rng.randi() % neigh.size()]
+	if gen.states[ti].provinces.size() <= 1:
+		return "%s 只有 1 个行省，无法煽动" % gen.states[ti].name
+	var victim: int = gen.states[ti].provinces[rng.randi() % gen.states[ti].provinces.size()]
+	var new_si := gen.add_state(gen.provinces[victim].name + "义军")
+	gen.provinces[victim].state = new_si
+	gen.provinces[victim].is_capital_burg = true
+	gen.states[new_si].capital = victim
+	gen.states[new_si].color = gen.states[si].color.darkened(0.15)
+	gen.rebuild_after_state_edit()
+	declare_war(new_si, ti, "WarTypeRebel", "WarGoalOccupyCount")
+	history.append({"date": date_str(), "state": si,
+		"text": "%s 煽动 %s 的 %s 叛乱" % [gen.states[si].name, gen.states[ti].name, gen.provinces[victim].name]})
+	return "已煽动 %s 叛乱（%s）" % [gen.provinces[victim].name, gen.states[new_si].name]
+
+## 内战：本国一半行省（不含首都）分裂为叛乱国并开战
+func act_civil_war(si: int) -> String:
+	if not bool(rules.allow_civil_war):
+		return "全局指令已关闭内战"
+	if gen.states[si].provinces.size() < 4:
+		return "行省太少，无法内战"
+	var capital: int = gen.states[si].capital
+	var pool: Array = []
+	for pi in gen.states[si].provinces:
+		if pi != capital:
+			pool.append(pi)
+	var take: int = maxi(1, pool.size() / 2)
+	var new_si := gen.add_state(gen.states[si].name + "内战军")
+	for k in take:
+		var pi2: int = pool[pool.size() - 1 - k]
+		gen.provinces[pi2].state = new_si
+	gen.states[new_si].capital = int(gen.states[new_si].provinces[0]) if not gen.states[new_si].provinces.is_empty() else -1
+	gen.rebuild_after_state_edit()
+	if gen.states[new_si].provinces.is_empty():
+		return "内战未爆发"
+	gen.states[new_si].capital = gen.states[new_si].provinces[0]
+	declare_war(new_si, si, "WarTypeCivilWar", "WarGoalOccupyCount")
+	return "内战爆发：%s 分裂出 %s（%d 省）" % [gen.states[si].name, gen.states[new_si].name, take]
+
+## 吞并：国力碾压时直接吞并最弱邻国（原版"吞并"按钮的强条件版本）
+func act_annex(si: int) -> String:
+	var neigh := _neighbor_states(si)
+	if neigh.is_empty():
+		return "没有可吞并的邻国"
+	var weakest := -1
+	var wp := 1 << 30
+	for ti in neigh:
+		var p := _state_power(ti)
+		if p < wp:
+			wp = p
+			weakest = ti
+	if weakest < 0:
+		return "没有可吞并的邻国"
+	if _state_power(si) < wp * 3:
+		return "国力不足（需 3 倍于 %s）" % gen.states[weakest].name
+	var nm: String = gen.states[weakest].name
+	for pi in gen.states[weakest].provinces.duplicate():
+		gen.provinces[pi].state = si
+	gen.rebuild_after_state_edit()
+	history.append({"date": date_str(), "state": si,
+		"text": "%s 吞并了 %s" % [gen.states[si].name, nm]})
+	return "已吞并 " + nm
+
+## 发起战争：对随机邻国宣战（目标按国力对比）
+func act_declare_war(si: int) -> String:
+	if is_at_war(si):
+		return "已在战争中"
+	var neigh := _neighbor_states(si)
+	if neigh.is_empty():
+		return "没有邻国"
+	var ti: int = neigh[rng.randi() % neigh.size()]
+	var goal := "WarGoalCedeProvince"
+	if _state_power(si) > _state_power(ti) * 3:
+		goal = "WarGoalAnnex"
+	declare_war(si, ti, "WarTypeConquest", goal)
+	return "已对 %s 宣战" % gen.states[ti].name
+
+## 停战：结束本国全部战争
+func act_peace(si: int) -> String:
+	var n := 0
+	for w in wars:
+		if w.active and (int(w.a) == si or int(w.d) == si):
+			w.active = false
+			n += 1
+	if n == 0:
+		return "没有进行中的战争"
+	history.append({"date": date_str(), "state": si, "text": "%s 停战（%d 场）" % [gen.states[si].name, n]})
+	return "已停战 %d 场" % n
+
+## 缔结盟约 / 退出同盟
+func act_alliance(si: int) -> String:
+	if not bool(rules.allow_alliance):
+		return "全局指令已关闭联盟"
+	var neigh := _neighbor_states(si)
+	for ti in neigh:
+		if not gen.states[si].get("allies", []).has(ti):
+			gen.states[si].allies.append(ti)
+			gen.states[ti].allies.append(si)
+			history.append({"date": date_str(), "state": si,
+				"text": t("AllianceFormedBetweenStates", "{0}与{1}结成联盟").format({
+					"0": gen.states[si].name, "1": gen.states[ti].name})})
+			return "已与 %s 结盟" % gen.states[ti].name
+	return "周边已全部结盟"
+
+func act_break_alliance(si: int) -> String:
+	var n: int = gen.states[si].get("allies", []).size()
+	for ti in gen.states[si].get("allies", []):
+		gen.states[ti].allies.erase(si)
+	gen.states[si].allies = []
+	if n == 0:
+		return "没有同盟"
+	history.append({"date": date_str(), "state": si, "text": "%s 退出所有同盟（%d）" % [gen.states[si].name, n]})
+	return "已退出 %d 个同盟" % n
+
+## 收为附庸 / 独立
+func act_make_vassal(si: int) -> String:
+	if not bool(rules.enable_vassal):
+		return "全局指令已关闭附庸"
+	var neigh := _neighbor_states(si)
+	var weakest := -1
+	var wp := 1 << 30
+	for ti in neigh:
+		if int(gen.states[ti].get("vassal_of", -1)) >= 0:
+			continue
+		var p := _state_power(ti)
+		if p < wp:
+			wp = p
+			weakest = ti
+	if weakest < 0:
+		return "没有可收为附庸的邻国"
+	if _state_power(si) < wp * 2:
+		return "国力不足（需 2 倍于 %s）" % gen.states[weakest].name
+	gen.states[weakest].vassal_of = si
+	history.append({"date": date_str(), "state": si,
+		"text": "%s 收 %s 为附庸" % [gen.states[si].name, gen.states[weakest].name]})
+	return "已收 %s 为附庸" % gen.states[weakest].name
+
+func act_release_vassal(si: int) -> String:
+	var n := 0
+	for ti in gen.states.size():
+		if int(gen.states[ti].get("vassal_of", -1)) == si:
+			gen.states[ti].vassal_of = -1
+			n += 1
+	if int(gen.states[si].get("vassal_of", -1)) >= 0:
+		gen.states[si].vassal_of = -1
+		n += 1
+	return "已解除 %d 个附庸关系" % n
+
+## 腐败度调整（原版按钮"降低/加深"）
+func act_corruption(si: int, delta: int) -> String:
+	var v: int = clampi(int(gen.states[si].get("corruption", 20)) + delta, 0, 100)
+	gen.states[si].corruption = v
+	return "腐败度 %s（%d）" % [corruption_label(v), v]
+
+func corruption_label(v: int) -> String:
+	if v < 20:
+		return "清廉"
+	if v < 45:
+		return "轻度腐败"
+	if v < 70:
+		return "中度腐败"
+	return "严重腐败"
+
+## 放置军队（原版"输入军团数量 + 放置军队"）
+func act_add_army(si: int, n: int) -> String:
+	gen.states[si].army = maxi(0, int(gen.states[si].get("army", 0)) + n)
+	return "军队数量：%d" % int(gen.states[si].army)

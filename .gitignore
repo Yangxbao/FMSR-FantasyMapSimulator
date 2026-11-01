@@ -1,0 +1,12 @@
+.godot/
+build/
+source/build/
+tools/
+logs/
+extracted_js/
+*.tmp
+reports/*.json
+reports/*.csv
+*.exe
+*.apk
+*.tpz

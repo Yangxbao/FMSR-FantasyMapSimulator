@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cwhwqfpmj8oek"
+
+[deps]
+
+files=["res://assets/origin/Religion/FantasyReligion/localization.Chinese.translation", "res://assets/origin/Religion/FantasyReligion/localization.TraditionalChinese.translation", "res://assets/origin/Religion/FantasyReligion/localization.English.translation", "res://assets/origin/Religion/FantasyReligion/localization.Russian.translation", "res://assets/origin/Religion/FantasyReligion/localization.SpanishSpain.translation", "res://assets/origin/Religion/FantasyReligion/localization.PortugueseBrazil.translation", "res://assets/origin/Religion/FantasyReligion/localization.German.translation", "res://assets/origin/Religion/FantasyReligion/localization.Japanese.translation", "res://assets/origin/Religion/FantasyReligion/localization.French.translation", "res://assets/origin/Religion/FantasyReligion/localization.Polish.translation", "res://assets/origin/Religion/FantasyReligion/localization.SpanishLatinAmerica.translation", "res://assets/origin/Religion/FantasyReligion/localization.PortuguesePortugal.translation", "res://assets/origin/Religion/FantasyReligion/localization.Korean.translation", "res://assets/origin/Religion/FantasyReligion/localization.Turkish.translation"]
+
+source_file="res://assets/origin/Religion/FantasyReligion/localization.csv"
+dest_files=["res://assets/origin/Religion/FantasyReligion/localization.Chinese.translation", "res://assets/origin/Religion/FantasyReligion/localization.TraditionalChinese.translation", "res://assets/origin/Religion/FantasyReligion/localization.English.translation", "res://assets/origin/Religion/FantasyReligion/localization.Russian.translation", "res://assets/origin/Religion/FantasyReligion/localization.SpanishSpain.translation", "res://assets/origin/Religion/FantasyReligion/localization.PortugueseBrazil.translation", "res://assets/origin/Religion/FantasyReligion/localization.German.translation", "res://assets/origin/Religion/FantasyReligion/localization.Japanese.translation", "res://assets/origin/Religion/FantasyReligion/localization.French.translation", "res://assets/origin/Religion/FantasyReligion/localization.Polish.translation", "res://assets/origin/Religion/FantasyReligion/localization.SpanishLatinAmerica.translation", "res://assets/origin/Religion/FantasyReligion/localization.PortuguesePortugal.translation", "res://assets/origin/Religion/FantasyReligion/localization.Korean.translation", "res://assets/origin/Religion/FantasyReligion/localization.Turkish.translation"]
+
+[params]
+
+compress=true
+delimiter=0

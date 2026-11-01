@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://nsir6wgtgsjr"
+
+[deps]
+
+files=["res://assets/origin/Culture/Wristhos/CityNames.Chinese.translation", "res://assets/origin/Culture/Wristhos/CityNames.English.translation", "res://assets/origin/Culture/Wristhos/CityNames.TraditionalChinese.translation", "res://assets/origin/Culture/Wristhos/CityNames.Russian.translation", "res://assets/origin/Culture/Wristhos/CityNames.SpanishSpain.translation", "res://assets/origin/Culture/Wristhos/CityNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Wristhos/CityNames.German.translation", "res://assets/origin/Culture/Wristhos/CityNames.Japanese.translation", "res://assets/origin/Culture/Wristhos/CityNames.French.translation", "res://assets/origin/Culture/Wristhos/CityNames.Polish.translation", "res://assets/origin/Culture/Wristhos/CityNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Wristhos/CityNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Wristhos/CityNames.Korean.translation", "res://assets/origin/Culture/Wristhos/CityNames.Turkish.translation"]
+
+source_file="res://assets/origin/Culture/Wristhos/CityNames.csv"
+dest_files=["res://assets/origin/Culture/Wristhos/CityNames.Chinese.translation", "res://assets/origin/Culture/Wristhos/CityNames.English.translation", "res://assets/origin/Culture/Wristhos/CityNames.TraditionalChinese.translation", "res://assets/origin/Culture/Wristhos/CityNames.Russian.translation", "res://assets/origin/Culture/Wristhos/CityNames.SpanishSpain.translation", "res://assets/origin/Culture/Wristhos/CityNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Wristhos/CityNames.German.translation", "res://assets/origin/Culture/Wristhos/CityNames.Japanese.translation", "res://assets/origin/Culture/Wristhos/CityNames.French.translation", "res://assets/origin/Culture/Wristhos/CityNames.Polish.translation", "res://assets/origin/Culture/Wristhos/CityNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Wristhos/CityNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Wristhos/CityNames.Korean.translation", "res://assets/origin/Culture/Wristhos/CityNames.Turkish.translation"]
+
+[params]
+
+compress=true
+delimiter=0

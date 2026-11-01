@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://dkmpxd80tmpfv"
+
+[deps]
+
+files=["res://assets/origin/Religion/ReligionRealWorld/localization.Chinese.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.TraditionalChinese.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.English.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.Russian.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.SpanishSpain.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.PortugueseBrazil.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.German.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.Japanese.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.French.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.Polish.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.SpanishLatinAmerica.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.PortuguesePortugal.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.Korean.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.Turkish.translation"]
+
+source_file="res://assets/origin/Religion/ReligionRealWorld/localization.csv"
+dest_files=["res://assets/origin/Religion/ReligionRealWorld/localization.Chinese.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.TraditionalChinese.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.English.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.Russian.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.SpanishSpain.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.PortugueseBrazil.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.German.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.Japanese.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.French.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.Polish.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.SpanishLatinAmerica.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.PortuguesePortugal.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.Korean.translation", "res://assets/origin/Religion/ReligionRealWorld/localization.Turkish.translation"]
+
+[params]
+
+compress=true
+delimiter=0

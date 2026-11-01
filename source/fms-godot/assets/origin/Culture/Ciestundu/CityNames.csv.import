@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://d1556jl4c1fxv"
+
+[deps]
+
+files=["res://assets/origin/Culture/Ciestundu/CityNames.Chinese.translation", "res://assets/origin/Culture/Ciestundu/CityNames.English.translation", "res://assets/origin/Culture/Ciestundu/CityNames.TraditionalChinese.translation", "res://assets/origin/Culture/Ciestundu/CityNames.Russian.translation", "res://assets/origin/Culture/Ciestundu/CityNames.SpanishSpain.translation", "res://assets/origin/Culture/Ciestundu/CityNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Ciestundu/CityNames.German.translation", "res://assets/origin/Culture/Ciestundu/CityNames.Japanese.translation", "res://assets/origin/Culture/Ciestundu/CityNames.French.translation", "res://assets/origin/Culture/Ciestundu/CityNames.Polish.translation", "res://assets/origin/Culture/Ciestundu/CityNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Ciestundu/CityNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Ciestundu/CityNames.Korean.translation", "res://assets/origin/Culture/Ciestundu/CityNames.Turkish.translation"]
+
+source_file="res://assets/origin/Culture/Ciestundu/CityNames.csv"
+dest_files=["res://assets/origin/Culture/Ciestundu/CityNames.Chinese.translation", "res://assets/origin/Culture/Ciestundu/CityNames.English.translation", "res://assets/origin/Culture/Ciestundu/CityNames.TraditionalChinese.translation", "res://assets/origin/Culture/Ciestundu/CityNames.Russian.translation", "res://assets/origin/Culture/Ciestundu/CityNames.SpanishSpain.translation", "res://assets/origin/Culture/Ciestundu/CityNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Ciestundu/CityNames.German.translation", "res://assets/origin/Culture/Ciestundu/CityNames.Japanese.translation", "res://assets/origin/Culture/Ciestundu/CityNames.French.translation", "res://assets/origin/Culture/Ciestundu/CityNames.Polish.translation", "res://assets/origin/Culture/Ciestundu/CityNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Ciestundu/CityNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Ciestundu/CityNames.Korean.translation", "res://assets/origin/Culture/Ciestundu/CityNames.Turkish.translation"]
+
+[params]
+
+compress=true
+delimiter=0

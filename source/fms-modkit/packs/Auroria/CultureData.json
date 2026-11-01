@@ -1,0 +1,47 @@
+{
+  "CultureName": "Auroria",
+  "CultureColorHex": "#8fd3a8",
+  "NameOrder": "FirstNameFirst",
+  "PoliticalSystems": [
+    "Kingdom",
+    "Federation",
+    "Republic",
+    "Empire",
+    "Tribal",
+    "Theocracy"
+  ],
+  "PoliticalSystemProbabilities": {
+    "Kingdom": 60.0,
+    "Empire": 25.0,
+    "Federation": 70.0,
+    "Republic": 30.0,
+    "Tribal": 15.0,
+    "Theocracy": 10.0
+  },
+  "EthnicAttributeProbabilities": {
+    "FishAndHunting": 30.0,
+    "Agriculture": 60.0,
+    "Nomadic": 10.0,
+    "Maritime": 20.0,
+    "Commercial": 45.0
+  },
+  "TraitProbabilities": {
+    "FightToTheEnd": 60.0,
+    "StrengthenCore": 80.0,
+    "ManifestDestiny": 30.0,
+    "BullyTheWeak": 25.0,
+    "DefyTheStrong": 70.0,
+    "TotalWar": 35.0,
+    "WellTrained": 65.0,
+    "CoreDefense": 90.0,
+    "CavalryTradition": 25.0,
+    "HomelandDefense": 85.0,
+    "Conqueror": 30.0,
+    "SiegeCapture": 50.0,
+    "FieldCombatElite": 55.0
+  },
+  "CultureDescriptionTranslations": [
+    "奥瑞利亚是滨海的商业邦联，以舰队、商站和星象历法闻名。",
+    "Auroria: 奥瑞利亚是滨海的商业邦联，以舰队、商站和星象历法闻名。"
+  ]
+}

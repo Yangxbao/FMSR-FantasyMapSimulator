@@ -1,0 +1,37 @@
+{
+  "religions": [
+    {
+      "name": "ChristianityName",
+      "colorHex": "#fccde5",
+      "description": "ChristianityDescription",
+      "holyBookName": "ChristianityHolyBookName",
+      "practices": [
+        "ChristianityPractice1",
+        "ChristianityPractice2",
+        "ChristianityPractice3"
+      ]
+    },
+    {
+      "name": "IslamName",
+      "colorHex": "#c6b9c1",
+      "description": "IslamDescription",
+      "holyBookName": "IslamHolyBookName",
+      "practices": [
+        "IslamPractice1",
+        "IslamPractice2",
+        "IslamPractice3"
+      ]
+    },
+    {
+      "name": "BuddhismName",
+      "colorHex": "#bc80bd",
+      "description": "BuddhismDescription",
+      "holyBookName": "BuddhismHolyBookName",
+      "practices": [
+        "BuddhismPractice1",
+        "BuddhismPractice2",
+        "BuddhismPractice3"
+      ]
+    }
+  ]
+}

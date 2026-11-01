@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://b7fsbb7l3tdc6"
+
+[deps]
+
+files=["res://assets/origin/Culture/Wristhos/StateNames.Chinese.translation", "res://assets/origin/Culture/Wristhos/StateNames.English.translation", "res://assets/origin/Culture/Wristhos/StateNames.TraditionalChinese.translation", "res://assets/origin/Culture/Wristhos/StateNames.Russian.translation", "res://assets/origin/Culture/Wristhos/StateNames.SpanishSpain.translation", "res://assets/origin/Culture/Wristhos/StateNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Wristhos/StateNames.German.translation", "res://assets/origin/Culture/Wristhos/StateNames.Japanese.translation", "res://assets/origin/Culture/Wristhos/StateNames.French.translation", "res://assets/origin/Culture/Wristhos/StateNames.Polish.translation", "res://assets/origin/Culture/Wristhos/StateNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Wristhos/StateNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Wristhos/StateNames.Korean.translation", "res://assets/origin/Culture/Wristhos/StateNames.Turkish.translation"]
+
+source_file="res://assets/origin/Culture/Wristhos/StateNames.csv"
+dest_files=["res://assets/origin/Culture/Wristhos/StateNames.Chinese.translation", "res://assets/origin/Culture/Wristhos/StateNames.English.translation", "res://assets/origin/Culture/Wristhos/StateNames.TraditionalChinese.translation", "res://assets/origin/Culture/Wristhos/StateNames.Russian.translation", "res://assets/origin/Culture/Wristhos/StateNames.SpanishSpain.translation", "res://assets/origin/Culture/Wristhos/StateNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Wristhos/StateNames.German.translation", "res://assets/origin/Culture/Wristhos/StateNames.Japanese.translation", "res://assets/origin/Culture/Wristhos/StateNames.French.translation", "res://assets/origin/Culture/Wristhos/StateNames.Polish.translation", "res://assets/origin/Culture/Wristhos/StateNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Wristhos/StateNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Wristhos/StateNames.Korean.translation", "res://assets/origin/Culture/Wristhos/StateNames.Turkish.translation"]
+
+[params]
+
+compress=true
+delimiter=0

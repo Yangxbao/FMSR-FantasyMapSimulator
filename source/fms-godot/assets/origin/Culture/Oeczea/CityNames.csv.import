@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bdebhhf7fieq3"
+
+[deps]
+
+files=["res://assets/origin/Culture/Oeczea/CityNames.Chinese.translation", "res://assets/origin/Culture/Oeczea/CityNames.English.translation", "res://assets/origin/Culture/Oeczea/CityNames.TraditionalChinese.translation", "res://assets/origin/Culture/Oeczea/CityNames.Russian.translation", "res://assets/origin/Culture/Oeczea/CityNames.SpanishSpain.translation", "res://assets/origin/Culture/Oeczea/CityNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Oeczea/CityNames.German.translation", "res://assets/origin/Culture/Oeczea/CityNames.Japanese.translation", "res://assets/origin/Culture/Oeczea/CityNames.French.translation", "res://assets/origin/Culture/Oeczea/CityNames.Polish.translation", "res://assets/origin/Culture/Oeczea/CityNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Oeczea/CityNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Oeczea/CityNames.Korean.translation", "res://assets/origin/Culture/Oeczea/CityNames.Turkish.translation"]
+
+source_file="res://assets/origin/Culture/Oeczea/CityNames.csv"
+dest_files=["res://assets/origin/Culture/Oeczea/CityNames.Chinese.translation", "res://assets/origin/Culture/Oeczea/CityNames.English.translation", "res://assets/origin/Culture/Oeczea/CityNames.TraditionalChinese.translation", "res://assets/origin/Culture/Oeczea/CityNames.Russian.translation", "res://assets/origin/Culture/Oeczea/CityNames.SpanishSpain.translation", "res://assets/origin/Culture/Oeczea/CityNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Oeczea/CityNames.German.translation", "res://assets/origin/Culture/Oeczea/CityNames.Japanese.translation", "res://assets/origin/Culture/Oeczea/CityNames.French.translation", "res://assets/origin/Culture/Oeczea/CityNames.Polish.translation", "res://assets/origin/Culture/Oeczea/CityNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Oeczea/CityNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Oeczea/CityNames.Korean.translation", "res://assets/origin/Culture/Oeczea/CityNames.Turkish.translation"]
+
+[params]
+
+compress=true
+delimiter=0

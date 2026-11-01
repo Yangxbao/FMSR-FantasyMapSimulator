@@ -1,0 +1,123 @@
+{
+ "_source": "FantasyMapSimulator_Data/il2cpp_data/Metadata/global-metadata.dat (IL2CPP 字符串字面量表, sanity=0xFAB11BAF, version=29)",
+ "_evidence": "HeightMapGenerator.GenerateFromTemplate 反编译: Split('\\n') → Trim → Split(' ') → 至少 2 段 → addStep；逐行解释",
+ "_note": "order_seen 现已 ≡ 原版 HeightmapTemplates.Templates 列表下标（2026-10-31 由 ..cctor 机器码 Add 顺序证实）。literal_index 是 global-metadata.dat 字面量表下标。raw 保留行首缩进，lines 已 strip。name 是 cctor 传给 HeightmapTemplate 构造的第一个字符串参数（机器码直接观测）；#2/#3/#4 共用同一名字槽位 'Continents'，显示名是否另有本地化未验证。",
+ "templates": [
+  {
+   "order_seen": 0,
+   "literal_index": 6868,
+   "name": "Volcano",
+   "line_count": 8,
+   "raw": "Hill 1 90-100 44-56 40-60\n            Multiply 0.8 50-100 0 0\n            Range 1.5 30-55 45-55 40-60\n            Smooth 3 0 0 0\n            Hill 1.5 35-45 25-30 20-75\n            Hill 1 35-55 75-80 25-75\n            Hill 0.5 20-25 10-15 20-25\n            Mask 3 0 0 0",
+   "lines": [
+    "Hill 1 90-100 44-56 40-60",
+    "Multiply 0.8 50-100 0 0",
+    "Range 1.5 30-55 45-55 40-60",
+    "Smooth 3 0 0 0",
+    "Hill 1.5 35-45 25-30 20-75",
+    "Hill 1 35-55 75-80 25-75",
+    "Hill 0.5 20-25 10-15 20-25",
+    "Mask 3 0 0 0"
+   ]
+  },
+  {
+   "order_seen": 1,
+   "literal_index": 6869,
+   "name": "High Island",
+   "line_count": 14,
+   "raw": "Hill 1 90-100 65-75 47-53\n            Add 7 all 0 0\n            Hill 5-6 20-30 25-55 45-55\n            Range 1 40-50 45-55 45-55\n            Multiply 0.8 land 0 0\n            Mask 3 0 0 0\n            Smooth 2 0 0 0\n            Trough 2-3 20-30 20-30 20-30\n            Trough 2-3 20-30 60-80 70-80\n            Hill 1 10-15 60-60 50-50\n            Hill 1.5 13-16 15-20 20-75\n            Range 1.5 30-40 15-85 30-40\n            Range 1.5 30-40 15-85 60-70\n            Pit 3-5 10-30 15-85 20-80",
+   "lines": [
+    "Hill 1 90-100 65-75 47-53",
+    "Add 7 all 0 0",
+    "Hill 5-6 20-30 25-55 45-55",
+    "Range 1 40-50 45-55 45-55",
+    "Multiply 0.8 land 0 0",
+    "Mask 3 0 0 0",
+    "Smooth 2 0 0 0",
+    "Trough 2-3 20-30 20-30 20-30",
+    "Trough 2-3 20-30 60-80 70-80",
+    "Hill 1 10-15 60-60 50-50",
+    "Hill 1.5 13-16 15-20 20-75",
+    "Range 1.5 30-40 15-85 30-40",
+    "Range 1.5 30-40 15-85 60-70",
+    "Pit 3-5 10-30 15-85 20-80"
+   ]
+  },
+  {
+   "order_seen": 2,
+   "literal_index": 6866,
+   "name": "Continents",
+   "line_count": 15,
+   "raw": "Hill 1 80-85 60-80 40-60\n            Hill 1 80-85 20-30 40-60\n            Hill 6-7 15-30 25-75 15-85\n            Multiply 0.6 land 0 0\n            Hill 8-10 5-10 15-85 20-80\n            Range 1-2 30-60 5-15 25-75\n            Range 1-2 30-60 80-95 25-75\n            Range 0-3 30-60 80-90 20-80\n            Strait 2 vertical 0 0\n            Strait 1 vertical 0 0\n            Smooth 3 0 0 0\n            Trough 3-4 15-20 15-85 20-80\n            Trough 3-4 5-10 45-55 45-55\n            Pit 3-4 10-20 15-85 20-80\n            Mask 4 0 0 0",
+   "lines": [
+    "Hill 1 80-85 60-80 40-60",
+    "Hill 1 80-85 20-30 40-60",
+    "Hill 6-7 15-30 25-75 15-85",
+    "Multiply 0.6 land 0 0",
+    "Hill 8-10 5-10 15-85 20-80",
+    "Range 1-2 30-60 5-15 25-75",
+    "Range 1-2 30-60 80-95 25-75",
+    "Range 0-3 30-60 80-90 20-80",
+    "Strait 2 vertical 0 0",
+    "Strait 1 vertical 0 0",
+    "Smooth 3 0 0 0",
+    "Trough 3-4 15-20 15-85 20-80",
+    "Trough 3-4 5-10 45-55 45-55",
+    "Pit 3-4 10-20 15-85 20-80",
+    "Mask 4 0 0 0"
+   ]
+  },
+  {
+   "order_seen": 3,
+   "literal_index": 6867,
+   "name": "Continents",
+   "line_count": 20,
+   "raw": "Hill 1 80-85 70-90 70-90\n            Hill 1 50-85 20-30 20-30\n            Hill 1 50-85 70-90 20-30\n            Hill 1 50-85 20-30 70-90\n            Hill 1 50-85 20-80 10-90\n            Hill 1 50-85 10-90 10-90\n            Hill 3-7 15-30 10-95 10-90\n            Range 1-2 30-60 5-75 25-75\n            Range 1-2 30-60 10-95 25-75\n            Range 1-2 50-70 10-95 25-75\n            Range 0-3 30-60 10-90 20-80\n            Range 1-2 30-60 5-75 25-75\n            Range 1-2 30-60 10-95 25-75\n            Range 1-2 50-70 10-95 25-75\n            Range 0-3 30-60 10-90 20-80\n            Range 1-2 30-60 10-95 25-75\n            Range 1-2 50-70 10-95 25-75\n            Range 0-3 30-60 10-90 20-80\n            Strait 2 vertical 0 0\n            Smooth 3 0 0 0",
+   "lines": [
+    "Hill 1 80-85 70-90 70-90",
+    "Hill 1 50-85 20-30 20-30",
+    "Hill 1 50-85 70-90 20-30",
+    "Hill 1 50-85 20-30 70-90",
+    "Hill 1 50-85 20-80 10-90",
+    "Hill 1 50-85 10-90 10-90",
+    "Hill 3-7 15-30 10-95 10-90",
+    "Range 1-2 30-60 5-75 25-75",
+    "Range 1-2 30-60 10-95 25-75",
+    "Range 1-2 50-70 10-95 25-75",
+    "Range 0-3 30-60 10-90 20-80",
+    "Range 1-2 30-60 5-75 25-75",
+    "Range 1-2 30-60 10-95 25-75",
+    "Range 1-2 50-70 10-95 25-75",
+    "Range 0-3 30-60 10-90 20-80",
+    "Range 1-2 30-60 10-95 25-75",
+    "Range 1-2 50-70 10-95 25-75",
+    "Range 0-3 30-60 10-90 20-80",
+    "Strait 2 vertical 0 0",
+    "Smooth 3 0 0 0"
+   ]
+  },
+  {
+   "order_seen": 4,
+   "literal_index": 10442,
+   "name": "Continents",
+   "line_count": 13,
+   "raw": "Range 1-2 30-60 5-75 25-75\n            Range 1-2 30-60 10-95 25-75\n            Range 1-2 50-70 10-95 25-75\n            Range 0-3 30-60 10-90 20-80\n            Range 1-2 30-60 5-75 25-75\n            Range 1-2 30-60 10-95 25-75\n            Range 1-2 50-70 10-95 25-75\n            Range 0-3 30-60 10-90 20-80\n            Range 1-2 30-60 10-95 25-75\n            Range 1-2 50-70 10-95 25-75\n            Range 0-3 30-60 10-90 20-80\n            Strait 2 vertical 0 0\n            Smooth 3 0 0 0",
+   "lines": [
+    "Range 1-2 30-60 5-75 25-75",
+    "Range 1-2 30-60 10-95 25-75",
+    "Range 1-2 50-70 10-95 25-75",
+    "Range 0-3 30-60 10-90 20-80",
+    "Range 1-2 30-60 5-75 25-75",
+    "Range 1-2 30-60 10-95 25-75",
+    "Range 1-2 50-70 10-95 25-75",
+    "Range 0-3 30-60 10-90 20-80",
+    "Range 1-2 30-60 10-95 25-75",
+    "Range 1-2 50-70 10-95 25-75",
+    "Range 0-3 30-60 10-90 20-80",
+    "Strait 2 vertical 0 0",
+    "Smooth 3 0 0 0"
+   ]
+  }
+ ],
+ "_verified": "模板列表插入顺序证明链：(1) HeightmapTemplates..cctor @ VA 0x18039B350（RVA 0x39b350，ghidra_seeds.txt），函数体止于 get_Templates @ 0x18039B690；(2) v29 字符串 usage 槽位编码 = (5<<29)|(literal_index<<1)，8 个槽位位于 .data 0x182EBE5C0..0x182EEB328 且仅被 cctor 的 RIP 相对引用（全 .text 反查无他处引用）；(3) cctor = 序言 13 次惰性初始化调用 + 5 个等距 0x69 字节构造块，第 k 块恰好引用一对字符串槽位（正文,名字）：(6868,Volcano)(6869,High Island)(6866,Continents)(6867,Continents)(10442,Continents)，块内各含一次 ctor 调用与一次列表 Add（0x180304090，ICF 折叠地址见 ghidra_seeds.txt 标注）；(4) 名字↔正文语义三重匹配 Azgaar 参考副本（reference/azgaar/heightmap-templates.ts）：High Island=highIsland、Volcano=volcano、Continents=continents；6867 与 10442 不在 Azgaar 中，为游戏自创模板；(5) GenerateFromTemplate 反编译证实 get_Templates() 后走 IReadOnlyList 接口 get_Item(param_2)——GenerateFromTemplate(this,3,0) 的 3 是列表下标，不是字典键。工具：tools/scan_template_order.py；第二轮确认：logs/dec_HeightmapTemplates__cctor.json（Ghidra 队列产出）。"
+}

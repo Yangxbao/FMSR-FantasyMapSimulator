@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c6mga7h2e32sx"
+
+[deps]
+
+files=["res://assets/origin/Culture/WorldII/CityNames.Chinese.translation", "res://assets/origin/Culture/WorldII/CityNames.English.translation", "res://assets/origin/Culture/WorldII/CityNames.TraditionalChinese.translation", "res://assets/origin/Culture/WorldII/CityNames.Russian.translation", "res://assets/origin/Culture/WorldII/CityNames.SpanishSpain.translation", "res://assets/origin/Culture/WorldII/CityNames.PortugueseBrazil.translation", "res://assets/origin/Culture/WorldII/CityNames.German.translation", "res://assets/origin/Culture/WorldII/CityNames.Japanese.translation", "res://assets/origin/Culture/WorldII/CityNames.French.translation", "res://assets/origin/Culture/WorldII/CityNames.Polish.translation", "res://assets/origin/Culture/WorldII/CityNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/WorldII/CityNames.PortuguesePortugal.translation", "res://assets/origin/Culture/WorldII/CityNames.Korean.translation"]
+
+source_file="res://assets/origin/Culture/WorldII/CityNames.csv"
+dest_files=["res://assets/origin/Culture/WorldII/CityNames.Chinese.translation", "res://assets/origin/Culture/WorldII/CityNames.English.translation", "res://assets/origin/Culture/WorldII/CityNames.TraditionalChinese.translation", "res://assets/origin/Culture/WorldII/CityNames.Russian.translation", "res://assets/origin/Culture/WorldII/CityNames.SpanishSpain.translation", "res://assets/origin/Culture/WorldII/CityNames.PortugueseBrazil.translation", "res://assets/origin/Culture/WorldII/CityNames.German.translation", "res://assets/origin/Culture/WorldII/CityNames.Japanese.translation", "res://assets/origin/Culture/WorldII/CityNames.French.translation", "res://assets/origin/Culture/WorldII/CityNames.Polish.translation", "res://assets/origin/Culture/WorldII/CityNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/WorldII/CityNames.PortuguesePortugal.translation", "res://assets/origin/Culture/WorldII/CityNames.Korean.translation"]
+
+[params]
+
+compress=true
+delimiter=0

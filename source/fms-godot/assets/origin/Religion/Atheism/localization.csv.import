@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c18utikhtbxv6"
+
+[deps]
+
+files=["res://assets/origin/Religion/Atheism/localization.Chinese.translation", "res://assets/origin/Religion/Atheism/localization.TraditionalChinese.translation", "res://assets/origin/Religion/Atheism/localization.English.translation", "res://assets/origin/Religion/Atheism/localization.Russian.translation", "res://assets/origin/Religion/Atheism/localization.SpanishSpain.translation", "res://assets/origin/Religion/Atheism/localization.PortugueseBrazil.translation", "res://assets/origin/Religion/Atheism/localization.German.translation", "res://assets/origin/Religion/Atheism/localization.Japanese.translation", "res://assets/origin/Religion/Atheism/localization.French.translation", "res://assets/origin/Religion/Atheism/localization.Polish.translation", "res://assets/origin/Religion/Atheism/localization.SpanishLatinAmerica.translation", "res://assets/origin/Religion/Atheism/localization.PortuguesePortugal.translation", "res://assets/origin/Religion/Atheism/localization.Korean.translation", "res://assets/origin/Religion/Atheism/localization.Turkish.translation"]
+
+source_file="res://assets/origin/Religion/Atheism/localization.csv"
+dest_files=["res://assets/origin/Religion/Atheism/localization.Chinese.translation", "res://assets/origin/Religion/Atheism/localization.TraditionalChinese.translation", "res://assets/origin/Religion/Atheism/localization.English.translation", "res://assets/origin/Religion/Atheism/localization.Russian.translation", "res://assets/origin/Religion/Atheism/localization.SpanishSpain.translation", "res://assets/origin/Religion/Atheism/localization.PortugueseBrazil.translation", "res://assets/origin/Religion/Atheism/localization.German.translation", "res://assets/origin/Religion/Atheism/localization.Japanese.translation", "res://assets/origin/Religion/Atheism/localization.French.translation", "res://assets/origin/Religion/Atheism/localization.Polish.translation", "res://assets/origin/Religion/Atheism/localization.SpanishLatinAmerica.translation", "res://assets/origin/Religion/Atheism/localization.PortuguesePortugal.translation", "res://assets/origin/Religion/Atheism/localization.Korean.translation", "res://assets/origin/Religion/Atheism/localization.Turkish.translation"]
+
+[params]
+
+compress=true
+delimiter=0

@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://ds4f6cvhrj0f2"
+
+[deps]
+
+files=["res://assets/origin/biome_localization.Chinese.translation", "res://assets/origin/biome_localization.TraditionalChinese.translation", "res://assets/origin/biome_localization.English.translation", "res://assets/origin/biome_localization.Russian.translation", "res://assets/origin/biome_localization.SpanishSpain.translation", "res://assets/origin/biome_localization.PortugueseBrazil.translation", "res://assets/origin/biome_localization.German.translation", "res://assets/origin/biome_localization.Japanese.translation", "res://assets/origin/biome_localization.French.translation", "res://assets/origin/biome_localization.Polish.translation", "res://assets/origin/biome_localization.SpanishLatinAmerica.translation", "res://assets/origin/biome_localization.PortuguesePortugal.translation", "res://assets/origin/biome_localization.Korean.translation", "res://assets/origin/biome_localization.Turkish.translation"]
+
+source_file="res://assets/origin/biome_localization.csv"
+dest_files=["res://assets/origin/biome_localization.Chinese.translation", "res://assets/origin/biome_localization.TraditionalChinese.translation", "res://assets/origin/biome_localization.English.translation", "res://assets/origin/biome_localization.Russian.translation", "res://assets/origin/biome_localization.SpanishSpain.translation", "res://assets/origin/biome_localization.PortugueseBrazil.translation", "res://assets/origin/biome_localization.German.translation", "res://assets/origin/biome_localization.Japanese.translation", "res://assets/origin/biome_localization.French.translation", "res://assets/origin/biome_localization.Polish.translation", "res://assets/origin/biome_localization.SpanishLatinAmerica.translation", "res://assets/origin/biome_localization.PortuguesePortugal.translation", "res://assets/origin/biome_localization.Korean.translation", "res://assets/origin/biome_localization.Turkish.translation"]
+
+[params]
+
+compress=true
+delimiter=0

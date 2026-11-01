@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://7uurh56w3uf4"
+
+[deps]
+
+files=["res://assets/origin/Culture/Wristhos/CharacterLastNames.Chinese.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.English.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.TraditionalChinese.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.Russian.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.SpanishSpain.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.German.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.Japanese.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.French.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.Polish.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.Korean.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.Turkish.translation"]
+
+source_file="res://assets/origin/Culture/Wristhos/CharacterLastNames.csv"
+dest_files=["res://assets/origin/Culture/Wristhos/CharacterLastNames.Chinese.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.English.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.TraditionalChinese.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.Russian.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.SpanishSpain.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.German.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.Japanese.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.French.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.Polish.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.Korean.translation", "res://assets/origin/Culture/Wristhos/CharacterLastNames.Turkish.translation"]
+
+[params]
+
+compress=true
+delimiter=0

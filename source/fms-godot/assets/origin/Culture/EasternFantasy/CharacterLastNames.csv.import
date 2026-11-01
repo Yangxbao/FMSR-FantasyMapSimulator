@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c7ccwx0w3hjsr"
+
+[deps]
+
+files=["res://assets/origin/Culture/EasternFantasy/CharacterLastNames.Chinese.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.English.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.TraditionalChinese.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.Russian.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.SpanishSpain.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.PortugueseBrazil.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.German.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.Japanese.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.French.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.Polish.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.PortuguesePortugal.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.Korean.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.Turkish.translation"]
+
+source_file="res://assets/origin/Culture/EasternFantasy/CharacterLastNames.csv"
+dest_files=["res://assets/origin/Culture/EasternFantasy/CharacterLastNames.Chinese.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.English.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.TraditionalChinese.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.Russian.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.SpanishSpain.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.PortugueseBrazil.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.German.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.Japanese.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.French.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.Polish.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.PortuguesePortugal.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.Korean.translation", "res://assets/origin/Culture/EasternFantasy/CharacterLastNames.Turkish.translation"]
+
+[params]
+
+compress=true
+delimiter=0

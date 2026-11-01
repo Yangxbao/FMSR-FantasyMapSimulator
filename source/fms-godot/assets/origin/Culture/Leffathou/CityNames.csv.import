@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://coo2go3fllimj"
+
+[deps]
+
+files=["res://assets/origin/Culture/Leffathou/CityNames.Chinese.translation", "res://assets/origin/Culture/Leffathou/CityNames.English.translation", "res://assets/origin/Culture/Leffathou/CityNames.TraditionalChinese.translation", "res://assets/origin/Culture/Leffathou/CityNames.Russian.translation", "res://assets/origin/Culture/Leffathou/CityNames.SpanishSpain.translation", "res://assets/origin/Culture/Leffathou/CityNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Leffathou/CityNames.German.translation", "res://assets/origin/Culture/Leffathou/CityNames.Japanese.translation", "res://assets/origin/Culture/Leffathou/CityNames.French.translation", "res://assets/origin/Culture/Leffathou/CityNames.Polish.translation", "res://assets/origin/Culture/Leffathou/CityNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Leffathou/CityNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Leffathou/CityNames.Korean.translation", "res://assets/origin/Culture/Leffathou/CityNames.Turkish.translation"]
+
+source_file="res://assets/origin/Culture/Leffathou/CityNames.csv"
+dest_files=["res://assets/origin/Culture/Leffathou/CityNames.Chinese.translation", "res://assets/origin/Culture/Leffathou/CityNames.English.translation", "res://assets/origin/Culture/Leffathou/CityNames.TraditionalChinese.translation", "res://assets/origin/Culture/Leffathou/CityNames.Russian.translation", "res://assets/origin/Culture/Leffathou/CityNames.SpanishSpain.translation", "res://assets/origin/Culture/Leffathou/CityNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Leffathou/CityNames.German.translation", "res://assets/origin/Culture/Leffathou/CityNames.Japanese.translation", "res://assets/origin/Culture/Leffathou/CityNames.French.translation", "res://assets/origin/Culture/Leffathou/CityNames.Polish.translation", "res://assets/origin/Culture/Leffathou/CityNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Leffathou/CityNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Leffathou/CityNames.Korean.translation", "res://assets/origin/Culture/Leffathou/CityNames.Turkish.translation"]
+
+[params]
+
+compress=true
+delimiter=0

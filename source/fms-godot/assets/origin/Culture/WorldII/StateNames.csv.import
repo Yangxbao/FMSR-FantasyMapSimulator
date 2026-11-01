@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://b7bwgxmlu133v"
+
+[deps]
+
+files=["res://assets/origin/Culture/WorldII/StateNames.Chinese.translation", "res://assets/origin/Culture/WorldII/StateNames.English.translation", "res://assets/origin/Culture/WorldII/StateNames.TraditionalChinese.translation", "res://assets/origin/Culture/WorldII/StateNames.Russian.translation", "res://assets/origin/Culture/WorldII/StateNames.SpanishSpain.translation", "res://assets/origin/Culture/WorldII/StateNames.PortugueseBrazil.translation", "res://assets/origin/Culture/WorldII/StateNames.German.translation", "res://assets/origin/Culture/WorldII/StateNames.Japanese.translation", "res://assets/origin/Culture/WorldII/StateNames.French.translation", "res://assets/origin/Culture/WorldII/StateNames.Polish.translation", "res://assets/origin/Culture/WorldII/StateNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/WorldII/StateNames.PortuguesePortugal.translation", "res://assets/origin/Culture/WorldII/StateNames.Korean.translation"]
+
+source_file="res://assets/origin/Culture/WorldII/StateNames.csv"
+dest_files=["res://assets/origin/Culture/WorldII/StateNames.Chinese.translation", "res://assets/origin/Culture/WorldII/StateNames.English.translation", "res://assets/origin/Culture/WorldII/StateNames.TraditionalChinese.translation", "res://assets/origin/Culture/WorldII/StateNames.Russian.translation", "res://assets/origin/Culture/WorldII/StateNames.SpanishSpain.translation", "res://assets/origin/Culture/WorldII/StateNames.PortugueseBrazil.translation", "res://assets/origin/Culture/WorldII/StateNames.German.translation", "res://assets/origin/Culture/WorldII/StateNames.Japanese.translation", "res://assets/origin/Culture/WorldII/StateNames.French.translation", "res://assets/origin/Culture/WorldII/StateNames.Polish.translation", "res://assets/origin/Culture/WorldII/StateNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/WorldII/StateNames.PortuguesePortugal.translation", "res://assets/origin/Culture/WorldII/StateNames.Korean.translation"]
+
+[params]
+
+compress=true
+delimiter=0

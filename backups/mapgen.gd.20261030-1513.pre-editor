@@ -1,0 +1,992 @@
+class_name MapGen
+## 世界生成（忠实版）：高度图 → 陆地 → 细网格多源BFS省份 → 首都生长国家
+## 附加：城邑点位 / 下游河流 / 山地与植被散布 / 国家质心
+## 算法结构参考 Azgaar's Fantasy Map Generator 公开资料（burgs/states/provinces 领域模型），
+## 实现为本项目原创 GDScript；数值参数待 Ghidra 反编译原版后校准（见 reports/）。
+
+const W := 480
+const H := 280
+const CELL := 4.0
+const SEA_LEVEL := 0.30
+const PROVINCE_STEP := 11
+
+var elevation := PackedFloat32Array()
+var is_land := PackedByteArray()
+var sea_level_effective := SEA_LEVEL
+var cell_province := PackedInt32Array()   # 陆地格->省份id, -1=海
+var provinces: Array = []                 # {cells, state, name, neighbors, pop, burg:Vector2, is_capital_burg:bool}
+var states: Array = []                    # {name, color, capital:int(省), provinces:[], alive, centroid:Vector2}
+var rivers: Array = []                    # [PackedVector2Array]
+var mountain_spots: Array = []            # [Vector2, scale, flip]
+var tree_spots: Array = []
+
+func generate(state_count: int, seed_val: int) -> void:
+	var rng := RandomNumberGenerator.new()
+	rng.seed = seed_val
+	# 幂等：多次生成（换种子/新世界）必须完全重置（否则旧数据追加导致省份/国家暴涨）
+	provinces.clear()
+	states.clear()
+	rivers.clear()
+	mountain_spots.clear()
+	tree_spots.clear()
+	_gen_elevation(seed_val)
+	_gen_provinces(rng)
+	_gen_rivers(rng)
+	_scatter_terrain(rng)
+	_gen_states(rng, state_count)
+	_assign_names(rng)
+
+func _gen_elevation(seed_val: int) -> void:
+	var noise := FastNoiseLite.new()
+	noise.seed = seed_val
+	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
+	noise.fractal_type = FastNoiseLite.FRACTAL_FBM
+	noise.fractal_octaves = 5
+	noise.frequency = 0.012
+	var warp := FastNoiseLite.new()
+	warp.seed = seed_val + 999
+	warp.frequency = 0.01
+	# 构图式大陆：每种子确定性放置 2~4 个大板块 + 细节噪声
+	# （近似实现：保证"少量大块大陆+沿岸岛屿"的原版地图特征；正式算法待反编译 HeightMapGenerator）
+	var rng := RandomNumberGenerator.new()
+	rng.seed = seed_val + 555
+	var k := 2 + (seed_val % 3)
+	var centers: Array[Vector2] = []
+	var radii: Array[float] = []
+	for ci in k:
+		var cx := rng.randf_range(W * 0.22, W * 0.78)
+		var cy := rng.randf_range(H * 0.25, H * 0.75)
+		var cr := minf(W, H) * rng.randf_range(0.22, 0.34)
+		centers.append(Vector2(cx, cy))
+		radii.append(cr)
+	# 大陆轮廓扰动：按角向低频噪声摆动半径，消除正圆形人工感
+	var blob := FastNoiseLite.new()
+	blob.seed = seed_val + 31337
+	blob.frequency = 0.05
+	elevation.resize(W * H)
+	for y in H:
+		for x in W:
+			var i := y * W + x
+			var wx := x + warp.get_noise_2d(x * 2.0, y * 2.0) * 30.0
+			var wy := y + warp.get_noise_2d(x * 2.0 + 500.0, y * 2.0 + 500.0) * 30.0
+			var detail := noise.get_noise_2d(wx, wy) * 0.5 + 0.5
+			# 板块场：取各大陆的衰减最大值
+			var field := 0.0
+			for ci in k:
+				var dv := Vector2(x, y) - centers[ci]
+				var ang := atan2(dv.y, dv.x)
+				var rr := radii[ci] * (1.0 + 0.38 * blob.get_noise_2d(cos(ang) * 30.0 + ci * 91.0, sin(ang) * 30.0))
+				var d := dv.length() / rr
+				var f := 1.0 - clampf(d * d, 0.0, 1.0)
+				field = maxf(field, f)
+			# 细节噪声仅在大陆近旁生效（门控），避免开阔海域喷出岛链
+			var detail_gated := detail * smoothstep(0.05, 0.45, field)
+			var n := clampf(field * 0.85 + detail_gated * 0.55 - 0.18, 0.0, 1.0)
+			# 微量基底：打破海面并列值，保证分位数海平面可控
+			n = maxf(n, detail * 0.004 + 0.001)
+			# 地图边缘淡出为海
+			var edge := minf(minf(x, W - 1 - x) / 24.0, minf(y, H - 1 - y) / 18.0)
+			n *= clampf(edge, 0.0, 1.0)
+			elevation[i] = n
+	# 海平面自适应：抽样排序取分位数，保证陆地占比稳定在 ~38%
+	var sample: Array[float] = []
+	for i in range(0, W * H, 7):
+		sample.append(elevation[i])
+	sample.sort()
+	var target := SEA_LEVEL
+	if sample.size() > 0:
+		var idx := int(sample.size() * 0.62)
+		target = clampf(sample[idx], 0.001, 0.42)
+	sea_level_effective = target
+	is_land.clear()
+	for i in W * H:
+		is_land.append(1 if elevation[i] > sea_level_effective else 0)
+	_remove_small_islands()
+
+## 小岛清除：连通面积 < MIN_ISLAND_CELLS 的陆块并入海洋
+## （近似：原版海岸线干净、少碎岛；正式参数待反编译确认 —— restoration-acceptance.md §1.1）
+const MIN_ISLAND_CELLS := 14
+
+func _remove_small_islands() -> void:
+	var visited := PackedByteArray()
+	visited.resize(W * H)
+	var stack: Array[int] = []
+	for start in W * H:
+		if is_land[start] == 0 or visited[start] == 1:
+			continue
+		var region: Array[int] = []
+		var size := 0
+		stack.append(start)
+		visited[start] = 1
+		while not stack.is_empty():
+			var i: int = stack.pop_back()
+			region.append(i)
+			size += 1
+			var x := i % W
+			var y := i / W
+			for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+				var nx := x + int(d.x)
+				var ny := y + int(d.y)
+				if nx < 0 or ny < 0 or nx >= W or ny >= H:
+					continue
+				var ni := ny * W + nx
+				if is_land[ni] == 1 and visited[ni] == 0:
+					visited[ni] = 1
+					stack.append(ni)
+		if size < MIN_ISLAND_CELLS:
+			for i in region:
+				is_land[i] = 0
+				elevation[i] = minf(elevation[i], sea_level_effective - 0.02)
+
+func _smoothstep(a: float, b: float, x: float) -> float:
+	var t := clampf((x - a) / (b - a), 0.0, 1.0)
+	return t * t * (3.0 - 2.0 * t)
+
+func _gen_provinces(rng: RandomNumberGenerator) -> void:
+	cell_province.resize(W * H)
+	cell_province.fill(-1)
+	_seed_provinces(rng)
+	# 省份扩张：多源 Dijkstra（忠实还原原版 ExpandProvinces，见 reports/decompiled/）
+	_expand_provinces_dijkstra()
+	# 原版 FilterProvinceCells：由 cell→province 字典重建各省 cell 集合
+	_rebuild_province_cells()
+	# 原版 EnsureProvinceConnectivity：内陆断裂碎片并入邻省（跨海碎片保留）
+	_ensure_province_connectivity()
+	_rebuild_province_cells()
+	# 原版 CreateSeaProvinces + ExpandSeaProvinces：按海域建省并洪水填充
+	_gen_sea_provinces()
+	_rebuild_province_cells()
+	for y in H:
+		for x in range(W - 1):
+			_link(x + y * W, (x + 1) + y * W)
+	for y in range(H - 1):
+		for x in W:
+			_link(x + y * W, x + (y + 1) * W)
+	_absorb_orphan_cells()
+	# 城邑：设在省份中心 cell（原版 prov+0x64 center cell，即扩张种子），首都省标记
+	for pi in provinces.size():
+		if provinces[pi].get("is_sea", false):
+			provinces[pi].burg = Vector2(-1, -1)  # 海域省无城邑（不消耗随机数，保持随机流不变）
+			continue
+		var c: int = provinces[pi].center
+		if c < 0 and provinces[pi].cells.size() > 0:
+			c = provinces[pi].cells[0]
+		provinces[pi].burg = Vector2(c % W, c / W) * CELL + Vector2(CELL, CELL) * 0.5
+		provinces[pi].defense = rng.randi_range(20, 90)  # 城市防御力（原版字段 CityDefense）
+
+## 省份种子：抖动网格布点（对应原版 PlaceProvincialCapitalsByJitterGrid 的等距抖动网格思想）
+## 每省记录 center = 种子 cell（原版 prov+0x64，ExpandProvinces 的扩张起点）
+func _seed_provinces(rng: RandomNumberGenerator) -> void:
+	var step := PROVINCE_STEP
+	var pid := 0
+	for sy in range(3, H - 3, step):
+		for sx in range(3, W - 3, step):
+			for _try in 14:
+				var px := sx + rng.randi_range(-4, 4)
+				var py := sy + rng.randi_range(-4, 4)
+				if px < 1 or py < 1 or px >= W - 1 or py >= H - 1:
+					continue
+				var i := py * W + px
+				if is_land[i] == 1 and cell_province[i] == -1:
+					cell_province[i] = pid
+					var pop0 := rng.randi_range(400, 1200)
+					provinces.append({"cells": PackedInt32Array([i]), "center": i, "state": -1,
+						"name": "", "neighbors": {}, "pop": pop0,
+						"burg": Vector2.ZERO, "is_capital_burg": false, "defense": 20 + (pop0 % 40),
+						# 原版 ProvinceInfoUI 字段：行省类型 / 人口与城防的上限 / 区域(子区域)人口与防御
+						"kind": "", "max_pop": pop0 * 3, "max_defense": 100,
+						"district_pop": pop0 / 6, "district_max_pop": pop0 / 2,
+						"district_defense": 20, "district_max_defense": 60})
+					pid += 1
+					break
+
+## ===== 省份扩张代价常数（全部来自反编译，见 reports/decompiled/BurgsAndStateGenerator_ExpandProvinces.c）=====
+const PROV_BASE_COST := 10.0        # L417: prevCost + 10.0 + extra/mult
+const PROV_TERRAIN_MAX := 20.0      # L366: 20.0 - 高度值；L338: 高度<0x14(20) 视为水
+const PROV_TERRAIN_MISS := 5000.0   # L353: 高度浮点表缺失(<=0) → 罚 5000
+const PROV_CULTURE_SAME := -9.0     # L325: 与省份文化相同 → -9
+const PROV_CULTURE_DIFF := 100.0    # L327: 文化不同 → +100
+const PROV_SEED_COST := 1.0         # L193: 种子 cell 代价表置 1.0（0x3f800000）
+const PROV_MULT := 1.0              # 省份扩张除数：Province 构造第 5 实参恒为 1.0（CreateProvinces/CreateSeaProvinces）
+const PROV_TERRAIN_SCALE := 40.0    # 近似：elevation(0..1) → 原版 0..20 高度分位
+## 原版允许前沿穿越水域：L431 只在 height>=20 时写归属，而代价计算与入队对所有邻格都做，
+## 因此省份可以越过水面抢到离岛（EnsureProvinceConnectivity 专门保留"触海碎片"亦为佐证）。
+## 注：原版的海洋代价会额外叠加 biome 项（跨 biome 时取 Biome 代价表值），该项尚未接入。
+const PROV_TRAVERSE_SEA := true
+
+## ===== 海洋省：忠实还原 CreateSeaProvinces + ExpandSeaProvinces =====
+## 证据：reports/decompiled/BurgsAndStateGenerator_CreateSeaProvinces.c（逐海域建省）
+##       reports/decompiled/BurgsAndStateGenerator_ExpandSeaProvinces.c（FIFO 洪水填充）
+## CreateSeaProvinces：为每个海域建一个 Province，id 接在陆地省之后，isLand 标志写 0；
+##                     只写 cell→对象索引，**不**写 cell→province（留给扩张阶段）。
+## ExpandSeaProvinces：普通 Queue（非优先队列）；从各省中心入队，出队后遍历邻格，
+##                     满足 "cell→province == 0 且 height < 20（海）" 才写入归属并入队；
+##                     节点代价字段固定填 1.0f，**没有任何代价公式、没有松弛**。
+func _gen_sea_provinces() -> void:
+	# 1) 海域分组：4 邻域连通的海格（对应 World+0x278 的海域集合）
+	var mark := PackedByteArray()
+	mark.resize(W * H)
+	var groups: Array = []
+	for start in W * H:
+		if is_land[start] == 1 or mark[start] == 1:
+			continue
+		var cells: Array[int] = []
+		var stack: Array[int] = [start]
+		mark[start] = 1
+		while not stack.is_empty():
+			var cur: int = stack.pop_back()
+			cells.append(cur)
+			var x := cur % W
+			var y := cur / W
+			for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+				var nx := x + int(d.x)
+				var ny := y + int(d.y)
+				if nx < 0 or ny < 0 or nx >= W or ny >= H:
+					continue
+				var ni := ny * W + nx
+				if is_land[ni] == 0 and mark[ni] == 0:
+					mark[ni] = 1
+					stack.append(ni)
+		if cells.size() > 0:
+			groups.append(cells)
+	# 2) 每组建一个海洋省；center = 离组质心最近的格
+	var n_land := provinces.size()
+	for gi in groups.size():
+		var cells: Array = groups[gi]
+		var acc := Vector2.ZERO
+		for c in cells:
+			acc += Vector2(int(c) % W, int(c) / W)
+		var centroid := acc / float(cells.size())
+		var best := int(cells[0])
+		var bd := INF
+		for c2 in cells:
+			var cc: int = c2
+			var d2 := Vector2(cc % W, cc / W).distance_squared_to(centroid)
+			if d2 < bd:
+				bd = d2
+				best = cc
+		provinces.append({"cells": PackedInt32Array(), "center": best, "state": -1,
+			"name": "", "neighbors": {}, "pop": 0,
+			"burg": Vector2(-1, -1), "is_capital_burg": false, "defense": 0,
+			"kind": "", "max_pop": 0, "max_defense": 0,
+			"district_pop": 0, "district_max_pop": 0,
+			"district_defense": 0, "district_max_defense": 0,
+			"is_sea": true, "sea_index": gi,
+			# 海域规模分级：World.DefineOceanGroup 用 size 与 总格数 的比值分三档
+			# （<=1% → 最小档，<=4% → 中档，其余 → 大档；对应 DAT_182eb81b8/182e86b60/182ef5518 三个字符串常量）
+			"sea_tier": (2 if float(cells.size()) > float(W * H) * 0.04 else (1 if float(cells.size()) > float(W * H) * 0.01 else 0))})
+	# 3) ExpandSeaProvinces：普通 FIFO 队列从各省中心洪水填充
+	var queue: Array[int] = []
+	for pi in range(n_land, provinces.size()):
+		var c0: int = provinces[pi].center
+		if c0 >= 0 and is_land[c0] == 0:
+			cell_province[c0] = pi
+			queue.append(c0)
+	var head := 0
+	while head < queue.size():
+		var cur2: int = queue[head]
+		head += 1
+		var pid: int = cell_province[cur2]
+		var x2 := cur2 % W
+		var y2 := cur2 / W
+		for d3 in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+			var nx3 := x2 + int(d3.x)
+			var ny3 := y2 + int(d3.y)
+			if nx3 < 0 or ny3 < 0 or nx3 >= W or ny3 >= H:
+				continue
+			var ni3 := ny3 * W + nx3
+			if is_land[ni3] == 0 and cell_province[ni3] < 0:
+				cell_province[ni3] = pid
+				queue.append(ni3)
+
+## 省份扩张：多源 Dijkstra（忠实还原 ExpandProvinces）
+## 与原版逐条对应：
+##   队列      = 最小优先队列（FUN_1814e95d0 Add(item,priority) / FUN_1814e6c30 Dequeue 取最小）
+##   种子      = 每个陆地省的 center cell，代价表 1.0，入队优先级 0
+##   松弛      = costTable[nb]==0.0 || newCost<costTable[nb]（L418-421）
+##   代价      = prevCost + 10.0 + max(0, 文化项+地形项+biome+0.0+river+type)/provMult（L404-417）
+##   归属      = 仅当目标为陆地（height>=20）才写 cell→province（L431）
+##   已归属格  = 目标省为陆地省（id>=1）则整段跳过，不覆盖（L306 门 + L300 中心格保护）
+func _expand_provinces_dijkstra() -> void:
+	var n := W * H
+	var cost := PackedFloat32Array()
+	cost.resize(n)
+	cost.fill(0.0)  # 原版 0.0 = 未访问（与 state 扩张用 -1 哨兵不同）
+	var owner := PackedInt32Array()
+	owner.resize(n)
+	owner.fill(-1)
+	_heap_cost = PackedFloat32Array()
+	_heap_cell = PackedInt32Array()
+	for pi in provinces.size():
+		var c0: int = provinces[pi].center
+		if c0 < 0 or c0 >= n or is_land[c0] == 0:
+			continue
+		cost[c0] = PROV_SEED_COST
+		owner[c0] = pi
+		cell_province[c0] = pi
+		_heap_push(0.0, c0)
+	while not _heap_empty():
+		var c := _heap_cost[0]
+		var i := _heap_pop()
+		if cost[i] != 0.0 and c > cost[i] + 0.001:
+			continue
+		var pi2: int = owner[i]
+		if pi2 < 0:
+			continue
+		var x := i % W
+		var y := i / W
+		for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+			var nx := x + int(d.x)
+			var ny := y + int(d.y)
+			if nx < 0 or ny < 0 or nx >= W or ny >= H:
+				continue
+			var ni := ny * W + nx
+			if cell_province[ni] >= 0:
+				continue  # 已归属省份的 cell（含各省中心）不覆盖
+			if is_land[ni] == 0 and not PROV_TRAVERSE_SEA:
+				continue
+			var extra := _province_extra_cost(i, ni, pi2)
+			var nc: float = c + PROV_BASE_COST + extra / PROV_MULT
+			if cost[ni] == 0.0 or nc < cost[ni]:
+				if is_land[ni] == 1:
+					cell_province[ni] = pi2
+				cost[ni] = nc
+				owner[ni] = pi2
+				_heap_push(nc, ni)
+
+## 单步附加代价：按反编译的 6 项顺序相加，最后整体下限 0（L404-407）
+## 已确认：文化项（同-9/异+100）、地形项（20-高度, 下限0, 缺表5000）
+## 未接入：biome 项（原版=同 biome 记 0、跨 biome 取 Biome 代价表值；重建版无生物群系数据）
+##         river / type 项（原版 = g__getRiverCost|27_2 / g__getTypeCost|27_3，重建版无对应 cell 数据）
+## 这三项当前恒为 0，是明确的未还原项，不是原版参数。
+func _province_extra_cost(_origin: int, target: int, pi: int) -> float:
+	var e := 0.0
+	e += _culture_cost(pi, target)
+	e += _terrain_cost(target)
+	e += _biome_cost(target)
+	e += 0.0  # 原版此处第 4 项 ExpandProvinces 特有的是字面 0.0（ExpandStates 对应项为 getHeightCost）
+	e += _river_cost(target)
+	e += _type_cost(target)
+	return maxf(e, 0.0)
+
+## 文化项：原版 dict_0x88[cell]（cell→文化）与省份文化字段比较，相同 -9 / 不同 +100
+## 重建版尚无文化系统（文化包未接入）→ 全图同文化，取相同分支 -9（按原式代入默认数据，非猜测参数）
+func _culture_cost(_pi: int, _target: int) -> float:
+	return PROV_CULTURE_SAME
+
+## 地形项：高度<20（水）→ 0；否则 20-高度（下限 0）；查表失败 → 5000
+func _terrain_cost(target: int) -> float:
+	if is_land[target] == 0:
+		return 0.0
+	var v := clampf((elevation[target] - sea_level_effective) * PROV_TERRAIN_SCALE, 0.0, PROV_TERRAIN_MAX)
+	if v <= 0.0:
+		return PROV_TERRAIN_MISS
+	return maxf(PROV_TERRAIN_MAX - v, 0.0)
+
+## biome 项：已反编译（reports/decompiled/BurgsAndStateGenerator_getBiomeCost_27_0.c）
+##   原版：起点与目标 biome 相同 → 0；不同 → 查 Biomes 静态代价表（表值在运行时数据里，未取到）
+##   重建版无 biome 图（Biome 系统未实现）→ 恒 0
+func _biome_cost(_target: int) -> float:
+	return 0.0
+
+## 河流项：原版 <ExpandProvinces>g__getRiverCost|27_2（反编译进行中），重建版无 cell→river id 数据 → 0
+func _river_cost(_target: int) -> float:
+	return 0.0
+
+## cell 类型项：原版 <ExpandProvinces>g__getTypeCost|27_3（反编译进行中），重建版无 cell→type 数据 → 0
+func _type_cost(_target: int) -> float:
+	return 0.0
+
+## 原版 FilterProvinceCells 语义：清空各省 cell 集合后，按 cell→province 字典逐 cell 回填
+func _rebuild_province_cells() -> void:
+	for pi in provinces.size():
+		provinces[pi].cells = PackedInt32Array()
+	for i in W * H:
+		var p := cell_province[i]
+		if p >= 0 and p < provinces.size():
+			provinces[p].cells.append(i)
+
+## 原版 EnsureProvinceConnectivity：
+##   每省取主分量（含 center 者）；非主分量若触海 → 保留为离岛；若不触海（内陆飞地）→ 逐 cell 并入邻接最多的省
+##   （原版 FindBestNeighborProvince/CollectComponent 为局部函数未反编译，"邻接最多"为可观测量下的等价近似）
+func _ensure_province_connectivity() -> void:
+	var dirs := [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]
+	var mark := PackedByteArray()
+	mark.resize(W * H)
+	for pi in provinces.size():
+		var cells: PackedInt32Array = provinces[pi].cells
+		if cells.size() <= 1:
+			continue
+		var comps: Array = []
+		for start in cells:
+			if mark[start] == 1:
+				continue
+			var comp: Array[int] = []
+			var stack: Array[int] = [start]
+			mark[start] = 1
+			while not stack.is_empty():
+				var cur: int = stack.pop_back()
+				comp.append(cur)
+				var x := cur % W
+				var y := cur / W
+				for d in dirs:
+					var nx := x + int(d.x)
+					var ny := y + int(d.y)
+					if nx < 0 or ny < 0 or nx >= W or ny >= H:
+						continue
+					var ni := ny * W + nx
+					if mark[ni] == 0 and cell_province[ni] == pi:
+						mark[ni] = 1
+						stack.append(ni)
+			comps.append(comp)
+		if comps.size() <= 1:
+			continue
+		var main := 0
+		for ci in comps.size():
+			var c_arr: Array = comps[ci]
+			if c_arr.has(provinces[pi].center):
+				main = ci
+				break
+		for ci in comps.size():
+			if ci == main:
+				continue
+			var comp2: Array = comps[ci]
+			var touches_sea := false
+			for cv in comp2:
+				var cur2: int = cv
+				var x2 := cur2 % W
+				var y2 := cur2 / W
+				for d2 in dirs:
+					var nx2 := x2 + int(d2.x)
+					var ny2 := y2 + int(d2.y)
+					if nx2 < 0 or ny2 < 0 or nx2 >= W or ny2 >= H:
+						continue
+					if is_land[ny2 * W + nx2] == 0:
+						touches_sea = true
+						break
+				if touches_sea:
+					break
+			if touches_sea:
+				continue
+			for cv3 in comp2:
+				var cur3: int = cv3
+				var counts := {}
+				var x3 := cur3 % W
+				var y3 := cur3 / W
+				for d3 in dirs:
+					var nx3 := x3 + int(d3.x)
+					var ny3 := y3 + int(d3.y)
+					if nx3 < 0 or ny3 < 0 or nx3 >= W or ny3 >= H:
+						continue
+					var np := cell_province[ny3 * W + nx3]
+					if np >= 0 and np != pi:
+						counts[np] = int(counts.get(np, 0)) + 1
+				var best := -1
+				var bn := 0
+				for k in counts:
+					if counts[k] > bn:
+						bn = counts[k]
+						best = k
+				if best >= 0:
+					cell_province[cur3] = best
+
+func _link(a: int, b: int) -> void:
+	var pa := cell_province[a]
+	var pb := cell_province[b]
+	if pa == pb or pa < 0 or pb < 0:
+		return
+	# 海洋省不参与陆地省邻接图（重建版的"陆块编号/岛屿建国"依赖陆地邻接，
+	# 混入海域会把两块大陆串成一块），但单独记录"海岸相邻"的陆地省，供海洋省面板使用
+	var sa: bool = provinces[pa].get("is_sea", false)
+	var sb: bool = provinces[pb].get("is_sea", false)
+	if sa and sb:
+		return
+	if sa or sb:
+		var sea_p: int = pa if sa else pb
+		var land_p: int = pb if sa else pa
+		if not provinces[sea_p].has("coast_land_provs"):
+			provinces[sea_p].coast_land_provs = {}
+		provinces[sea_p].coast_land_provs[land_p] = true
+		return
+	provinces[pa].neighbors[pb] = true
+	provinces[pb].neighbors[pa] = true
+
+func _absorb_orphan_cells() -> void:
+	var guard := 0
+	while guard < 64:
+		guard += 1
+		var changed := false
+		for y in H:
+			for x in W:
+				var i := y * W + x
+				if is_land[i] == 1 and cell_province[i] == -1:
+					var take := -1
+					for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+						var nx := x + int(d.x)
+						var ny := y + int(d.y)
+						if nx < 0 or ny < 0 or nx >= W or ny >= H:
+							continue
+						var np := cell_province[ny * W + nx]
+						if np >= 0:
+							take = np
+							break
+					if take >= 0:
+						cell_province[i] = take
+						provinces[take].cells.append(i)
+						changed = true
+		if not changed:
+			break
+	var pid_next := provinces.size()
+	for y in H:
+		for x in W:
+			var i2 := y * W + x
+			if is_land[i2] == 1 and cell_province[i2] == -1:
+				cell_province[i2] = pid_next
+				provinces.append({"cells": PackedInt32Array([i2]), "center": i2, "state": -1,
+					"name": "", "neighbors": {}, "pop": 300,
+					"burg": Vector2(x, y) * CELL, "is_capital_burg": false, "defense": 30,
+					"kind": "", "max_pop": 900, "max_defense": 100,
+					"district_pop": 50, "district_max_pop": 150,
+					"district_defense": 20, "district_max_defense": 60})
+				var stack: Array[int] = [i2]
+				while not stack.is_empty():
+					var j: int = stack.pop_back()
+					for d2 in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+						var nx2 := (j % W) + int(d2.x)
+						var ny2 := (j / W) + int(d2.y)
+						if nx2 < 0 or ny2 < 0 or nx2 >= W or ny2 >= H:
+							continue
+						var nj := ny2 * W + nx2
+						if is_land[nj] == 1 and cell_province[nj] == -1:
+							cell_province[nj] = pid_next
+							provinces[pid_next].cells.append(nj)
+							stack.append(nj)
+				pid_next += 1
+	for y in H:
+		for x in range(W - 1):
+			_link(x + y * W, (x + 1) + y * W)
+	for y in range(H - 1):
+		for x in W:
+			_link(x + y * W, x + (y + 1) * W)
+
+## 河流：从高地格 downhill 走到海，形成细蓝线
+func _gen_rivers(rng: RandomNumberGenerator) -> void:
+	rivers.clear()
+	var sources: Array[int] = []
+	for _i in 90:
+		var x := rng.randi_range(4, W - 5)
+		var y := rng.randi_range(4, H - 5)
+		var i := y * W + x
+		if is_land[i] == 1 and elevation[i] > sea_level_effective + 0.24:
+			sources.append(i)
+	for s in sources:
+		var pts := PackedVector2Array()
+		var cur := s
+		var guard := 0
+		while guard < 400:
+			guard += 1
+			pts.append(Vector2(cur % W, cur / W) * CELL + Vector2(CELL, CELL) * 0.5)
+			var best := -1
+			var be := elevation[cur]
+			var x := cur % W
+			var y := cur / W
+			for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1), Vector2i(1, 1), Vector2i(-1, -1), Vector2i(1, -1), Vector2i(-1, 1)]:
+				var nx := x + int(d.x)
+				var ny := y + int(d.y)
+				if nx < 0 or ny < 0 or nx >= W or ny >= H:
+					continue
+				var ni := ny * W + nx
+				if elevation[ni] < be:
+					be = elevation[ni]
+					best = ni
+			if best < 0:
+				break
+			cur = best
+			if is_land[cur] == 0:
+				pts.append(Vector2(cur % W, cur / W) * CELL + Vector2(CELL, CELL) * 0.5)
+				break
+		if pts.size() > 6:
+			rivers.append(pts)
+
+## 地形散布：山地在高海拔，树木在中海拔带
+func _scatter_terrain(rng: RandomNumberGenerator) -> void:
+	mountain_spots.clear()
+	tree_spots.clear()
+	var mnoise := FastNoiseLite.new()
+	mnoise.seed = rng.seed + 31
+	mnoise.frequency = 0.03
+	var tnoise := FastNoiseLite.new()
+	tnoise.seed = rng.seed + 77
+	tnoise.frequency = 0.04
+	for y in range(2, H - 2, 9):
+		for x in range(2, W - 2, 9):
+			var i := y * W + x
+			if is_land[i] == 0:
+				continue
+			var pos := Vector2(x, y) * CELL
+			var e := elevation[i]
+			var m := mnoise.get_noise_2d(x, y)
+			var mountain_line := sea_level_effective + 0.22
+			var tree_low := sea_level_effective + 0.06
+			if e > mountain_line and m > 0.30:
+				mountain_spots.append([pos + Vector2(rng.randf_range(-5, 5), rng.randf_range(-5, 5)),
+					rng.randf_range(0.50, 0.68), rng.randf() < 0.5])
+			elif e > tree_low and e < mountain_line and tnoise.get_noise_2d(x, y) > 0.30:
+				tree_spots.append([pos + Vector2(rng.randf_range(-5, 5), rng.randf_range(-5, 5)),
+					rng.randf_range(0.18, 0.26), rng.randf() < 0.5])
+
+## ===== 首都挑选（忠实还原 SelectCapitalsFromProvinces）=====
+## 证据：reports/decompiled/BurgsAndStateGenerator_SelectCapitalsFromProvinces.c
+##   radius = sqrt(总 cell 数 / 目标国数)                     （L88-100）
+##   候选 = 陆地且尚未归属国家的 cell（重建版以"省中心"为代表，省即最小单位）
+##   接受条件 = 与所有已选点 平方距离 > radius²               （L175-201）
+##   候选不足 = radius /= 1.2 重试；radius <= 1.0 直接兜底接受（L150-212）
+##   取前 need 个（原版对列表做 Take(need) 截断）
+const CAPITAL_RADIUS_SHRINK := 1.2  # L211: dVar17 / 1.2000000476837158
+const CAPITAL_RADIUS_MIN := 1.0     # L139: dVar17 <= 1.0 兜底
+
+func _select_capital_provinces(state_count: int) -> Array:
+	var cand: Array[int] = []
+	for pi in provinces.size():
+		var c: int = provinces[pi].center
+		if c >= 0 and is_land[c] == 1:
+			cand.append(pi)
+	var want := maxi(state_count, 1)
+	var radius := sqrt(float(W * H) / float(want))
+	var chosen: Array[int] = []
+	var guard := 0
+	while guard < 64:
+		guard += 1
+		chosen.clear()
+		var pos: Array[Vector2] = []
+		var r2 := radius * radius
+		for pi in cand:
+			var c2: int = provinces[pi].center
+			var p := Vector2(c2 % W, c2 / W)
+			var ok := true
+			for q in pos:
+				if p.distance_squared_to(q) <= r2:
+					ok = false
+					break
+			if ok:
+				chosen.append(pi)
+				pos.append(p)
+				if chosen.size() >= want:
+					break
+		if chosen.size() >= want or radius <= CAPITAL_RADIUS_MIN:
+			break
+		radius /= CAPITAL_RADIUS_SHRINK
+	return chosen
+
+func _gen_states(rng: RandomNumberGenerator, state_count: int) -> void:
+	_label_landmasses()
+	states.clear()
+	# 首都挑选：忠实还原 SelectCapitalsFromProvinces（伪代码见 reports/decompiled/）
+	var capitals := _select_capital_provinces(state_count)
+	var polities := ["君主制", "帝制", "共和制", "联邦制", "城邦联盟", "神权政体", "部落制"]
+	# 文化/宗教/领袖：原版由 CultureGenerator / StateLeaderGenerator 生成（后者含性别与最小年龄），
+	# 尚未反编译 → 这里用内置词库占位，字段结构与原版一致（StateInfoUI 的 Culture/Religion/Leader）。
+	var cultures := ["汉风", "羌胡", "百越", "西域", "东夷"]
+	var religions := ["祖先崇拜", "天命信仰", "山岳祭祀", "河神信仰"]
+	for si in capitals.size():
+		provinces[capitals[si]].state = si
+		provinces[capitals[si]].is_capital_burg = true
+		var col := Color.from_hsv(rng.randf(), rng.randf_range(0.38, 0.60), rng.randf_range(0.60, 0.82))
+		# 每国随机扩张乘数 1~6（一位小数）——反编译 ExpandStates L926：惩罚/该乘数
+		var mult := snappedf(rng.randf() * 5.0 + 1.0, 0.1)
+		states.append({"name": "", "color": col, "capital": capitals[si], "provinces": [], "alive": true,
+			"centroid": Vector2.ZERO, "polity": polities[rng.randi() % polities.size()],
+			"auto_diplomacy": true, "mult": mult,
+			"army": 0, "warships": 0, "allies": [], "vassal_of": -1})
+	# 第二遍补领袖/文化/宗教：放在所有国家的 mult 抽取之后，保证扩张乘数序列不被新字段打乱
+	for si2 in states.size():
+		states[si2].leader = _gen_leader(rng)
+		states[si2].culture = cultures[rng.randi() % cultures.size()]
+		states[si2].religion = religions[rng.randi() % religions.size()]
+	# 国家扩张：多源 Dijkstra（忠实还原 ExpandStates 机制）
+	#   新代价 = 当前代价 + 10 + 地形惩罚/国乘数；地形惩罚 = 20-高度值（下限0）
+	#   松弛：新代价 < 旧代价（或首次到达）时占用该 cell
+	_expand_states_dijkstra()
+	# 省份归属 = 省内 cell 的多数归属（忠实还原 RecalculateProvinceState 语义）
+	_recalculate_province_state()
+	# 硬保证：首都省必须归本国。
+	# 依据：原版 ExpandStates 里首都 cell 是"预占且不被覆盖"的（种子代价 0），所以首都省体内
+	# 必然含本国 cell；但省份按 cell 多数改判时，小省可能被邻国多数覆盖 → 出现"零省国家"。
+	# 这里把同一保证上提到省粒度，避免出现无领土国家。
+	for si in states.size():
+		var cap: int = states[si].capital
+		if cap >= 0 and cap < provinces.size():
+			provinces[cap].state = si
+	_fill_unassigned_provinces()
+	# 汇总各国行省与质心（含填充阶段追加的岛国）
+	for si in states.size():
+		states[si].provinces.clear()
+	for pi in provinces.size():
+		var s: int = provinces[pi].state
+		if s >= 0 and s < states.size():
+			states[s].provinces.append(pi)
+	for si in states.size():
+		states[si].centroid = _state_centroid(states[si].provinces)
+
+## 二叉小顶堆（GDScript 实现，服务 Dijkstra）
+var _heap_cost := PackedFloat32Array()
+var _heap_cell := PackedInt32Array()
+
+func _heap_push(c: float, cell: int) -> void:
+	_heap_cost.append(c)
+	_heap_cell.append(cell)
+	var i := _heap_cost.size() - 1
+	while i > 0:
+		var parent := (i - 1) / 2
+		if _heap_cost[parent] <= _heap_cost[i]:
+			break
+		var tc := _heap_cost[parent]; var tx := _heap_cell[parent]
+		_heap_cost[parent] = _heap_cost[i]; _heap_cell[parent] = _heap_cell[i]
+		_heap_cost[i] = tc; _heap_cell[i] = tx
+		i = parent
+
+func _heap_pop() -> int:
+	var top := _heap_cell[0]
+	var lc := _heap_cost[_heap_cost.size() - 1]
+	var lx := _heap_cell[_heap_cell.size() - 1]
+	_heap_cost.resize(_heap_cost.size() - 1)
+	_heap_cell.resize(_heap_cell.size() - 1)
+	if _heap_cost.size() == 0:
+		return top
+	_heap_cost[0] = lc
+	_heap_cell[0] = lx
+	var i := 0
+	while true:
+		var l := i * 2 + 1
+		var r := i * 2 + 2
+		var m := i
+		if l < _heap_cost.size() and _heap_cost[l] < _heap_cost[m]:
+			m = l
+		if r < _heap_cost.size() and _heap_cost[r] < _heap_cost[m]:
+			m = r
+		if m == i:
+			break
+		var tc := _heap_cost[m]; var tx := _heap_cell[m]
+		_heap_cost[m] = _heap_cost[i]; _heap_cell[m] = _heap_cell[i]
+		_heap_cost[i] = tc; _heap_cell[i] = tx
+		i = m
+	return top
+
+func _heap_empty() -> bool:
+	return _heap_cost.size() == 0
+
+## 多源 Dijkstra 国家扩张（忠实还原 ExpandStates 机制）
+func _expand_states_dijkstra() -> void:
+	var n := W * H
+	var cost := PackedFloat32Array()
+	cost.resize(n)
+	cost.fill(-1.0)
+	var owner := PackedInt32Array()
+	owner.resize(n)
+	owner.fill(-1)
+	_heap_cost = PackedFloat32Array()
+	_heap_cell = PackedInt32Array()
+	for si in states.size():
+		var cap_cells: PackedInt32Array = provinces[states[si].capital].cells
+		var start := cap_cells[cap_cells.size() / 2]
+		cost[start] = 0.0
+		owner[start] = si
+		_heap_push(0.0, start)
+	while not _heap_empty():
+		var c := _heap_cost[0]
+		var i := _heap_pop()
+		if cost[i] != -1.0 and c > cost[i] + 0.001:
+			continue
+		var si: int = owner[i]
+		var mult: float = states[si].mult if states[si].get("mult", 0.0) > 0.0 else 3.0
+		var x := i % W
+		var y := i / W
+		for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+			var nx := x + int(d.x)
+			var ny := y + int(d.y)
+			if nx < 0 or ny < 0 or nx >= W or ny >= H:
+				continue
+			var ni := ny * W + nx
+			# 原版 ExpandStates 与 ExpandProvinces 同构：代价计算与入队对**所有**邻格都做，
+			# 只有 height>=20（陆地）才写归属（L478 门）⇒ 国家同样可以越过水面抢离岛。
+			# 地形惩罚项对水格恒为 0（原版 height<20 → 0）。
+			var extra := 0.0
+			if is_land[ni] == 1:
+				var h20 := clampf((elevation[ni] - sea_level_effective) * 40.0, 0.0, 20.0)
+				extra = 20.0 - h20
+			var nc: float = c + 10.0 + extra / mult
+			if cost[ni] == -1.0 or nc < cost[ni]:
+				cost[ni] = nc
+				if is_land[ni] == 1:
+					owner[ni] = si
+				elif owner[ni] < 0:
+					owner[ni] = si  # 水格也需携带 owner 才能继续传播
+				_heap_push(nc, ni)
+	# cell 归属缓存（省份多数计算用）
+	_cell_state_owner = owner
+
+var _cell_state_owner := PackedInt32Array()
+
+## 省份归属 = 省内 cell 的多数归属（RecalculateProvinceState 语义）
+func _recalculate_province_state() -> void:
+	for pi in provinces.size():
+		if provinces[pi].get("is_sea", false):
+			provinces[pi].state = -1
+			continue
+		var counts := {}
+		for ci in provinces[pi].cells:
+			var s: int = _cell_state_owner[ci]
+			if s >= 0:
+				counts[s] = int(counts.get(s, 0)) + 1
+		var best := -1
+		var bn := 0
+		for k in counts:
+			if counts[k] > bn:
+				bn = counts[k]
+				best = k
+		provinces[pi].state = best
+
+func _state_centroid(plist: Array) -> Vector2:
+	var acc := Vector2.ZERO
+	var n := 0
+	for pi in plist:
+		acc += provinces[pi].burg
+		n += 1
+	return acc / maxf(n, 1)
+
+## 陆块编号：省份邻接图的连通分量 = 地理陆块（国家不跨海，对齐原版岛屿国家表现）
+func _label_landmasses() -> void:
+	for p in provinces:
+		p.landmass = -1
+	var lm := 0
+	for pi in provinces.size():
+		if provinces[pi].landmass != -1:
+			continue
+		var stack: Array[int] = [pi]
+		provinces[pi].landmass = lm
+		while not stack.is_empty():
+			var cur: int = stack.pop_back()
+			for nb in provinces[cur].neighbors:
+				if provinces[nb].landmass == -1:
+					provinces[nb].landmass = lm
+					stack.append(nb)
+		lm += 1
+
+func _landmass_of(pi: int) -> int:
+	return provinces[pi].get("landmass", 0)
+
+## 生长概率留下的空洞省份：先按邻接膨胀；再在同陆块内就近并入；
+## 整块无主的陆块自成新国家（原版岛屿国家表现；国家总数相应增加）
+func _fill_unassigned_provinces() -> void:
+	var guard := 0
+	while guard < 128:
+		guard += 1
+		var changed := false
+		for pi in provinces.size():
+			if provinces[pi].state != -1 or provinces[pi].get("is_sea", false):
+				continue
+			for nb in provinces[pi].neighbors:
+				if provinces[nb].state != -1:
+					provinces[pi].state = provinces[nb].state
+					changed = true
+					break
+		if not changed:
+			break
+	# 同陆块内就近并入
+	for pi in provinces.size():
+		if provinces[pi].state != -1 or provinces[pi].get("is_sea", false):
+			continue
+		var best := -1
+		var bd := INF
+		var a := _province_center(pi)
+		for pj in provinces.size():
+			if provinces[pj].state == -1 or _landmass_of(pj) != _landmass_of(pi):
+				continue
+			var d := a.distance_squared_to(_province_center(pj))
+			if d < bd:
+				bd = d
+				best = pj
+		if best >= 0:
+			provinces[pi].state = provinces[best].state
+	# 仍整块无主的陆块 → 自成新国家（两段式：先分组后追加，保证 ID 连续）
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 777
+	var new_states := {}
+	for pi in provinces.size():
+		if provinces[pi].state != -1 or provinces[pi].get("is_sea", false):
+			continue
+		var lm := _landmass_of(pi)
+		if not new_states.has(lm):
+			new_states[lm] = []
+		new_states[lm].append(pi)
+	for lm in new_states:
+		var still: Array = new_states[lm]
+		if still.size() < 6:
+			# 小岛群并入最近国家（原版表现：少量岛国，小岛归入既有国家）
+			var best := -1
+			var bd := INF
+			var a := _province_center(still[0])
+			for pj in provinces.size():
+				var s: int = provinces[pj].state
+				if s < 0:
+					continue
+				var d := a.distance_squared_to(_province_center(pj))
+				if d < bd:
+					bd = d
+					best = s
+			if best >= 0:
+				for pi in still:
+					provinces[pi].state = best
+				continue
+		var new_si := states.size()
+		var col := Color.from_hsv(rng.randf(), rng.randf_range(0.38, 0.60), rng.randf_range(0.60, 0.82))
+		var acc := Vector2.ZERO
+		for pi in still:
+			provinces[pi].state = new_si
+			acc += provinces[pi].burg
+		states.append({"name": "", "color": col, "capital": still[0], "provinces": still.duplicate(),
+			"alive": true, "centroid": acc / still.size(), "polity": "城邦联盟", "auto_diplomacy": true,
+			"mult": 3.0, "leader": _gen_leader(rng), "culture": "汉风", "religion": "祖先崇拜",
+			"army": 0, "warships": 0, "allies": [], "vassal_of": -1})
+
+func _province_center(pi: int) -> Vector2:
+	var cells: PackedInt32Array = provinces[pi].cells
+	var i := cells[cells.size() / 2]
+	return Vector2(i % W, i / W)
+
+## 领袖生成占位：原版 StateLeaderGenerator 未反编译，但字段已确凿（StateInfoUI 有男女按钮色与最小年龄）
+func _gen_leader(rng: RandomNumberGenerator) -> Dictionary:
+	var clan := ["嬴", "芈", "姬", "姜", "妫", "姒", "子", "妘"]
+	var given := ["昭", "武", "文", "桓", "穆", "襄", "悼", "简", "灵", "惠", "成", "康", "幽", "厉", "平", "献"]
+	return {"name": clan[rng.randi() % clan.size()] + given[rng.randi() % given.size()],
+		"gender": "男" if rng.randf() < 0.78 else "女",
+		"age": rng.randi_range(18, 62)}
+
+func _assign_names(rng: RandomNumberGenerator) -> void:
+	# 双字/三字汉风国名 + 单字省名（贴近原版中文观感；正式命名集走 Mods 数据）
+	var pre := ["东", "西", "南", "北", "大", "小", "安", "定", "平", "远", "镇", "朔", "临", "武", "文", "昭"]
+	var core := ["魏", "蜀", "吴", "晋", "秦", "楚", "燕", "赵", "齐", "鲁", "梁", "陈", "汉", "唐", "周", "隋", "明", "凉", "雍", "并"]
+	var suffix := ["侯", "公", "伯", "国", "郡", "州"]
+	var single := ["丰", "沛", "昆", "陵", "兰", "桂", "榆", "松", "泓", "渭", "汾", "沂", "岱", "岚", "泸", "淇"]
+	for si in states.size():
+		var n := ""
+		if rng.randf() < 0.6:
+			n += pre[rng.randi() % pre.size()]
+		n += core[rng.randi() % core.size()]
+		if rng.randf() < 0.55:
+			n += suffix[rng.randi() % suffix.size()]
+		states[si].name = n
+	var sea_n := 0
+	for pi in provinces.size():
+		if provinces[pi].get("is_sea", false):
+			sea_n += 1
+			provinces[pi].name = "海域 %d" % sea_n
+		else:
+			provinces[pi].name = single[rng.randi() % single.size()]
+
+func cell_index_at(world_pos: Vector2) -> int:
+	var x := int(world_pos.x / CELL)
+	var y := int(world_pos.y / CELL)
+	if x < 0 or y < 0 or x >= W or y >= H:
+		return -1
+	return y * W + x

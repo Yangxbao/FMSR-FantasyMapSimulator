@@ -1,0 +1,725 @@
+{
+  "CultureName": "Leffathou",
+  "CultureColorHex": "#dababf",
+  "NameOrder": "FirstNameFirst",
+  "PoliticalSystems": [
+    "Kingdom",
+    "Federation",
+    "Theocracy"
+  ],
+  "PoliticalSystemProbabilities": {
+    "Kingdom": 95.0,
+    "Empire": 30.0,
+    "Federation": 50.0,
+    "Republic": 5.0,
+    "Tribal": 40.0,
+    "Theocracy": 55.0
+  },
+  "EthnicAttributeProbabilities": {
+    "FishAndHunting": 90.0,
+    "Agriculture": 40.0,
+    "Nomadic": 10.0,
+    "Maritime": 0.0,
+    "Commercial": 60.0
+  },
+  "TraitProbabilities": {
+    "FightToTheEnd": 70.0,
+    "StrengthenCore": 80.0,
+    "ManifestDestiny": 25.0,
+    "BullyTheWeak": 30.0,
+    "DefyTheStrong": 75.0,
+    "TotalWar": 30.0,
+    "WellTrained": 85.0,
+    "CoreDefense": 90.0,
+    "CavalryTradition": 15.0,
+    "HomelandDefense": 100.0,
+    "Conqueror": 20.0,
+    "SiegeCapture": 20.0,
+    "FieldCombatElite": 70.0
+  },
+  "CultureDescriptionTranslations": [
+    "莱法芙是古老的林中王国，以独特的森林管理、精锐弓箭手及草药学闻名。王室与林地领主共治，经济依赖林业、草药与狩猎。",
+    "Leffathou is an ancient forest kingdom, renowned for its unique forest management, elite archers, and herbalism. Royalty and forest lords co-rule, and the economy relies on forestry, herbs, and hunting.",
+    "萊法芙是古老的林中王國，以獨特的森林管理、精銳弓箭手及草藥學聞名。王室與林地領主共治，經濟依賴林業、草藥與狩獵。",
+    "Леффату — это древнее лесное королевство, известное своим уникальным управлением лесами, элитными лучниками и траволечением. Королевская власть и лесные лорды правят совместно, а экономика зависит от лесного хозяйства, трав и охоты.",
+    "Leffathou es un antiguo reino forestal, renombrado por su singular gestión forestal, arqueros de élite y herboristería. La realeza y los señores del bosque co-gobiernan, y la economía se basa en la silvicultura, las hierbas y la caza.",
+    "Leffathou é um antigo reino florestal, renomado por seu manejo florestal único, arqueiros de elite e herbalismo. A realeza e os senhores da floresta co-governam, e a economia depende da silvicultura, ervas e caça.",
+    "Leffathou ist ein altes Waldkönigreich, bekannt für seine einzigartige Waldbewirtschaftung, Elitebogenschützen und Kräuterkunde. Königtum und Waldfürsten regieren gemeinsam, und die Wirtschaft stützt sich auf Forstwirtschaft, Kräuter und Jagd.",
+    "レファソウは古代の森の王国であり、独自の森林管理、精鋭の射手、薬草学で名高い。王室と森林領主が共同統治し、経済は林業、薬草、狩猟に依存している。",
+    "Leffathou est un ancien royaume forestier, réputé pour sa gestion forestière unique, ses archers d'élite et son herboristerie. La royauté et les seigneurs forestiers co-gouvernent, et l'économie repose sur la sylviculture, les herbes et la chasse.",
+    "Leffathou to starożytne leśne królestwo, znane z unikalnego zarządzania lasami, elitarnych łuczników i zielarstwa. Współrządzą królowie i leśni władcy, a gospodarka opiera się na leśnictwie, ziołach i łowiectwie.",
+    "Leffathou es un antiguo reino forestal, renombrado por su singular gestión forestal, arqueros de élite y herboristería. La realeza y los señores del bosque co-gobiernan, y la economía se basa en la silvicultura, las hierbas y la caza.",
+    "Leffathou é um antigo reino florestal, de renome pela sua gestão florestal única, arqueiros de elite e herbalismo. A realeza e os senhores da floresta co-governam, e a economia depende da silvicultura, ervas e caça.",
+    "레파푸는 독특한 산림 관리, 정예 궁수, 약초학으로 유명한 고대 숲의 왕국입니다. 왕족과 삼림 영주가 공동으로 통치하며 경제는 임업, 약초, 사냥에 의존합니다.",
+    "Leffathou, eşsiz orman yönetimi, seçkin okçuları ve şifalı bitki uzmanlığıyla tanınan kadim bir orman krallığıdır. Kraliyet ailesi ve orman lordları birlikte hüküm sürer ve ekonomi ormancılığa, şifalı bitkilere ve avcılığa dayanır."
+  ],
+  "MapCultureTranslations": [
+    "莱法芙",
+    "Leffathou",
+    "萊法芙",
+    "Леффату",
+    "Leffathou",
+    "Leffathou",
+    "Leffathou",
+    "レファソウ",
+    "Leffathou",
+    "Leffathou",
+    "Leffathou",
+    "Leffathou",
+    "레파푸",
+    "Leffathou"
+  ],
+  "OfficialTitles": {
+    "PresetId": "Leffathou",
+    "Entries": {
+      "Kingdom|Governor": {
+        "Translations": {
+          "Chinese": "树邑守望",
+          "TraditionalChinese": "樹邑守望",
+          "English": "Tree-Town Warden",
+          "Russian": "Страж древесного города",
+          "SpanishSpain": "Guardián de la villa arbórea",
+          "PortugueseBrazil": "Guardião da vila arbórea",
+          "German": "Vogt der Baumstadt",
+          "Japanese": "樹邑の守り手",
+          "French": "Gardien du bourg des arbres",
+          "Polish": "Strażnik nadrzewnej osady",
+          "SpanishLatinAmerica": "Guardián de la villa arbórea",
+          "PortuguesePortugal": "Guardião da vila arbórea",
+          "Korean": "나무 마을 수호관",
+          "Turkish": "Ağaç Kasabası Muhafızı"
+        }
+      },
+      "Kingdom|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "林地守望",
+          "TraditionalChinese": "林地守望",
+          "English": "Glade Warden",
+          "Russian": "Страж рощ",
+          "SpanishSpain": "Guardián del claro",
+          "PortugueseBrazil": "Guardião da clareira",
+          "German": "Hainvogt",
+          "Japanese": "林地の守り手",
+          "French": "Gardien des clairières",
+          "Polish": "Strażnik polan",
+          "SpanishLatinAmerica": "Guardián del claro",
+          "PortuguesePortugal": "Guardião da clareira",
+          "Korean": "숲 수호관",
+          "Turkish": "Koru Muhafızı"
+        }
+      },
+      "Kingdom|Chancellor": {
+        "Translations": {
+          "Chinese": "王冠首席之声",
+          "TraditionalChinese": "王冠首席之聲",
+          "English": "First Voice of the Crown",
+          "Russian": "Первый голос короны",
+          "SpanishSpain": "Primera voz de la corona",
+          "PortugueseBrazil": "Primeira voz da coroa",
+          "German": "Erste Stimme der Krone",
+          "Japanese": "王冠の首席の声",
+          "French": "Première voix de la couronne",
+          "Polish": "Pierwszy głos korony",
+          "SpanishLatinAmerica": "Primera voz de la corona",
+          "PortuguesePortugal": "Primeira voz da coroa",
+          "Korean": "왕관의 수석 대변자",
+          "Turkish": "Tacın Baş Sesi"
+        }
+      },
+      "Kingdom|Steward": {
+        "Translations": {
+          "Chinese": "王林总管",
+          "TraditionalChinese": "王林總管",
+          "English": "Keeper of the Royal Woods",
+          "Russian": "Хранитель королевских лесов",
+          "SpanishSpain": "Guardián de los bosques reales",
+          "PortugueseBrazil": "Guardião dos bosques reais",
+          "German": "Verwalter der königlichen Wälder",
+          "Japanese": "王林総管",
+          "French": "Gardien des forêts royales",
+          "Polish": "Zarządca lasów królewskich",
+          "SpanishLatinAmerica": "Guardián de los bosques reales",
+          "PortuguesePortugal": "Guardião dos bosques reais",
+          "Korean": "왕실 숲 총관",
+          "Turkish": "Kraliyet Ormanları Emini"
+        }
+      },
+      "Kingdom|Marshal": {
+        "Translations": {
+          "Chinese": "王家长弓元帅",
+          "TraditionalChinese": "王家長弓元帥",
+          "English": "Royal Longbow Marshal",
+          "Russian": "Королевский маршал длинных луков",
+          "SpanishSpain": "Mariscal real de arcos largos",
+          "PortugueseBrazil": "Marechal real dos arcos longos",
+          "German": "Königlicher Langbogenmarschall",
+          "Japanese": "王家長弓元帥",
+          "French": "Maréchal royal des grands arcs",
+          "Polish": "Królewski marszałek długich łuków",
+          "SpanishLatinAmerica": "Mariscal real de arcos largos",
+          "PortuguesePortugal": "Marechal real dos arcos longos",
+          "Korean": "왕실 장궁 원수",
+          "Turkish": "Kraliyet Uzun Yay Mareşali"
+        }
+      },
+      "Kingdom|WarCommander": {
+        "Translations": {
+          "Chinese": "王命猎官",
+          "TraditionalChinese": "王命獵官",
+          "English": "Royal Master of the Hunt",
+          "Russian": "Королевский ловчий",
+          "SpanishSpain": "Montero real",
+          "PortugueseBrazil": "Monteiro real",
+          "German": "Königlicher Jägermeister",
+          "Japanese": "王命猟官",
+          "French": "Veneur royal",
+          "Polish": "Łowczy królewski",
+          "SpanishLatinAmerica": "Montero real",
+          "PortuguesePortugal": "Monteiro real",
+          "Korean": "왕명 수렵관",
+          "Turkish": "Kraliyet Avcıbaşısı"
+        }
+      },
+      "Empire|Governor": {
+        "Translations": {
+          "Chinese": "冠邑执政",
+          "TraditionalChinese": "冠邑執政",
+          "English": "Canopy-Town Prefect",
+          "Russian": "Префект кронного города",
+          "SpanishSpain": "Prefecto de la villa del dosel",
+          "PortugueseBrazil": "Prefeito da vila da copa",
+          "German": "Präfekt der Wipfelstadt",
+          "Japanese": "冠邑執政",
+          "French": "Préfet du bourg de la canopée",
+          "Polish": "Prefekt osady koron",
+          "SpanishLatinAmerica": "Prefecto de la villa del dosel",
+          "PortuguesePortugal": "Prefeito da vila da copa",
+          "Korean": "수관 마을 집정관",
+          "Turkish": "Taç Kasabası Emini"
+        }
+      },
+      "Empire|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "冠林总督",
+          "TraditionalChinese": "冠林總督",
+          "English": "Prefect of the Canopy",
+          "Russian": "Префект кроны",
+          "SpanishSpain": "Prefecto del dosel",
+          "PortugueseBrazil": "Prefeito da copa",
+          "German": "Präfekt des Blätterdachs",
+          "Japanese": "冠林総督",
+          "French": "Préfet de la canopée",
+          "Polish": "Prefekt koron drzew",
+          "SpanishLatinAmerica": "Prefecto del dosel",
+          "PortuguesePortugal": "Prefeito da copa",
+          "Korean": "수관림 총독",
+          "Turkish": "Taç Ormanı Valisi"
+        }
+      },
+      "Empire|Chancellor": {
+        "Translations": {
+          "Chinese": "万叶大执政",
+          "TraditionalChinese": "萬葉大執政",
+          "English": "Chancellor of the Thousand Leaves",
+          "Russian": "Канцлер тысячи листьев",
+          "SpanishSpain": "Canciller de las mil hojas",
+          "PortugueseBrazil": "Chanceler das mil folhas",
+          "German": "Kanzler der tausend Blätter",
+          "Japanese": "万葉大執政",
+          "French": "Chancelier des mille feuilles",
+          "Polish": "Kanclerz tysiąca liści",
+          "SpanishLatinAmerica": "Canciller de las mil hojas",
+          "PortuguesePortugal": "Chanceler das mil folhas",
+          "Korean": "만엽 대집정관",
+          "Turkish": "Bin Yaprak Şansölyesi"
+        }
+      },
+      "Empire|Steward": {
+        "Translations": {
+          "Chinese": "林产总监",
+          "TraditionalChinese": "林產總監",
+          "English": "Comptroller of Forest Bounty",
+          "Russian": "Распорядитель лесных даров",
+          "SpanishSpain": "Interventor de los frutos del bosque",
+          "PortugueseBrazil": "Controlador das riquezas da floresta",
+          "German": "Verwalter der Waldgaben",
+          "Japanese": "林産総監",
+          "French": "Intendant des richesses de la forêt",
+          "Polish": "Zarządca darów lasu",
+          "SpanishLatinAmerica": "Interventor de los frutos del bosque",
+          "PortuguesePortugal": "Controlador das riquezas da floresta",
+          "Korean": "숲 산물 총감",
+          "Turkish": "Orman Nimetleri Emini"
+        }
+      },
+      "Empire|Marshal": {
+        "Translations": {
+          "Chinese": "帝国长弓大元帅",
+          "TraditionalChinese": "帝國長弓大元帥",
+          "English": "Grand Longbow Marshal",
+          "Russian": "Великий маршал длинных луков",
+          "SpanishSpain": "Gran mariscal de arcos largos",
+          "PortugueseBrazil": "Grão-marechal dos arcos longos",
+          "German": "Großer Langbogenmarschall",
+          "Japanese": "帝国長弓大元帥",
+          "French": "Grand maréchal des grands arcs",
+          "Polish": "Wielki marszałek długich łuków",
+          "SpanishLatinAmerica": "Gran mariscal de arcos largos",
+          "PortuguesePortugal": "Grão-marechal dos arcos longos",
+          "Korean": "제국 장궁 대원수",
+          "Turkish": "Büyük Uzun Yay Mareşali"
+        }
+      },
+      "Empire|WarCommander": {
+        "Translations": {
+          "Chinese": "帝国猎官",
+          "TraditionalChinese": "帝國獵官",
+          "English": "Imperial Master of the Hunt",
+          "Russian": "Имперский ловчий",
+          "SpanishSpain": "Montero imperial",
+          "PortugueseBrazil": "Monteiro imperial",
+          "German": "Kaiserlicher Jägermeister",
+          "Japanese": "帝国猟官",
+          "French": "Veneur impérial",
+          "Polish": "Łowczy cesarski",
+          "SpanishLatinAmerica": "Montero imperial",
+          "PortuguesePortugal": "Monteiro imperial",
+          "Korean": "제국 수렵관",
+          "Turkish": "İmparatorluk Avcıbaşısı"
+        }
+      },
+      "Federation|Governor": {
+        "Translations": {
+          "Chinese": "林邑执事",
+          "TraditionalChinese": "林邑執事",
+          "English": "Glade-Town Reeve",
+          "Russian": "Управитель лесного селения",
+          "SpanishSpain": "Alguacil de la villa del bosque",
+          "PortugueseBrazil": "Regedor da vila do bosque",
+          "German": "Vogt der Hainsiedlung",
+          "Japanese": "林邑執事",
+          "French": "Bailli du bourg des bois",
+          "Polish": "Włodarz leśnej osady",
+          "SpanishLatinAmerica": "Alguacil de la villa del bosque",
+          "PortuguesePortugal": "Regedor da vila do bosque",
+          "Korean": "숲 마을 집사",
+          "Turkish": "Koru Kasabası Kahyası"
+        }
+      },
+      "Federation|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "盟林守望",
+          "TraditionalChinese": "盟林守望",
+          "English": "Warden of the Allied Groves",
+          "Russian": "Страж союзных рощ",
+          "SpanishSpain": "Guardián de las arboledas aliadas",
+          "PortugueseBrazil": "Guardião dos bosques aliados",
+          "German": "Vogt der verbündeten Haine",
+          "Japanese": "盟林の守り手",
+          "French": "Gardien des bosquets alliés",
+          "Polish": "Strażnik sprzymierzonych gajów",
+          "SpanishLatinAmerica": "Guardián de las arboledas aliadas",
+          "PortuguesePortugal": "Guardião dos bosques aliados",
+          "Korean": "동맹 숲 수호관",
+          "Turkish": "Müttefik Koruların Muhafızı"
+        }
+      },
+      "Federation|Chancellor": {
+        "Translations": {
+          "Chinese": "诸林首席之声",
+          "TraditionalChinese": "諸林首席之聲",
+          "English": "First Voice of the Groves",
+          "Russian": "Первый голос рощ",
+          "SpanishSpain": "Primera voz de las arboledas",
+          "PortugueseBrazil": "Primeira voz dos bosques",
+          "German": "Erste Stimme der Haine",
+          "Japanese": "諸林の首席の声",
+          "French": "Première voix des bosquets",
+          "Polish": "Pierwszy głos gajów",
+          "SpanishLatinAmerica": "Primera voz de las arboledas",
+          "PortuguesePortugal": "Primeira voz dos bosques",
+          "Korean": "숲들의 수석 대변자",
+          "Turkish": "Koruların Baş Sesi"
+        }
+      },
+      "Federation|Steward": {
+        "Translations": {
+          "Chinese": "林盟司库",
+          "TraditionalChinese": "林盟司庫",
+          "English": "Treasurer of the Grove League",
+          "Russian": "Казначей лесного союза",
+          "SpanishSpain": "Tesorero de la liga de las arboledas",
+          "PortugueseBrazil": "Tesoureiro da liga dos bosques",
+          "German": "Schatzmeister des Hainbundes",
+          "Japanese": "林盟司庫",
+          "French": "Trésorier de la ligue des bosquets",
+          "Polish": "Skarbnik związku gajów",
+          "SpanishLatinAmerica": "Tesorero de la liga de las arboledas",
+          "PortuguesePortugal": "Tesoureiro da liga dos bosques",
+          "Korean": "숲 연맹 재무관",
+          "Turkish": "Koru Birliği Hazinedarı"
+        }
+      },
+      "Federation|Marshal": {
+        "Translations": {
+          "Chinese": "林盟长弓元帅",
+          "TraditionalChinese": "林盟長弓元帥",
+          "English": "Longbow Marshal of the Groves",
+          "Russian": "Маршал длинных луков рощ",
+          "SpanishSpain": "Mariscal de arcos largos de las arboledas",
+          "PortugueseBrazil": "Marechal dos arcos longos dos bosques",
+          "German": "Langbogenmarschall der Haine",
+          "Japanese": "林盟長弓元帥",
+          "French": "Maréchal des grands arcs des bosquets",
+          "Polish": "Marszałek długich łuków gajów",
+          "SpanishLatinAmerica": "Mariscal de arcos largos de las arboledas",
+          "PortuguesePortugal": "Marechal dos arcos longos dos bosques",
+          "Korean": "숲 연맹 장궁 원수",
+          "Turkish": "Koruların Uzun Yay Mareşali"
+        }
+      },
+      "Federation|WarCommander": {
+        "Translations": {
+          "Chinese": "盟约猎官",
+          "TraditionalChinese": "盟約獵官",
+          "English": "Master of the Moot Hunt",
+          "Russian": "Ловчий союза",
+          "SpanishSpain": "Montero de la asamblea",
+          "PortugueseBrazil": "Monteiro da assembleia",
+          "German": "Jägermeister des Bundes",
+          "Japanese": "盟約猟官",
+          "French": "Veneur de l'assemblée",
+          "Polish": "Łowczy przymierza",
+          "SpanishLatinAmerica": "Montero de la asamblea",
+          "PortuguesePortugal": "Monteiro da assembleia",
+          "Korean": "맹약 수렵관",
+          "Turkish": "Ahit Avcıbaşısı"
+        }
+      },
+      "Republic|Governor": {
+        "Translations": {
+          "Chinese": "绿荫市政官",
+          "TraditionalChinese": "綠蔭市政官",
+          "English": "Bower Magistrate",
+          "Russian": "Магистрат зелёной сени",
+          "SpanishSpain": "Magistrado de la enramada",
+          "PortugueseBrazil": "Magistrado do arvoredo",
+          "German": "Magistrat der Lauben",
+          "Japanese": "緑陰市政官",
+          "French": "Magistrat des frondaisons",
+          "Polish": "Zarządca zielonej osady",
+          "SpanishLatinAmerica": "Magistrado de la enramada",
+          "PortuguesePortugal": "Magistrado do arvoredo",
+          "Korean": "녹음 시정관",
+          "Turkish": "Gölgelik Kadısı"
+        }
+      },
+      "Republic|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "林邑执政官",
+          "TraditionalChinese": "林邑執政官",
+          "English": "Grove Magistrate",
+          "Russian": "Магистрат лесного селения",
+          "SpanishSpain": "Magistrado de la arboleda",
+          "PortugueseBrazil": "Magistrado do bosque",
+          "German": "Hainmagistrat",
+          "Japanese": "林邑執政官",
+          "French": "Magistrat du bosquet",
+          "Polish": "Zarządca gaju",
+          "SpanishLatinAmerica": "Magistrado de la arboleda",
+          "PortuguesePortugal": "Magistrado do bosque",
+          "Korean": "숲 고을 집정관",
+          "Turkish": "Koru Kadısı"
+        }
+      },
+      "Republic|Chancellor": {
+        "Translations": {
+          "Chinese": "绿叶议会首席",
+          "TraditionalChinese": "綠葉議會首席",
+          "English": "First Speaker of the Green Council",
+          "Russian": "Первый спикер Зелёного совета",
+          "SpanishSpain": "Primer portavoz del Consejo Verde",
+          "PortugueseBrazil": "Primeiro porta-voz do Conselho Verde",
+          "German": "Erster Sprecher des Grünen Rates",
+          "Japanese": "緑葉議会首席",
+          "French": "Premier porte-parole du Conseil vert",
+          "Polish": "Pierwszy mówca Zielonej Rady",
+          "SpanishLatinAmerica": "Primer portavoz del Consejo Verde",
+          "PortuguesePortugal": "Primeiro porta-voz do Conselho Verde",
+          "Korean": "녹엽 의회 수석",
+          "Turkish": "Yeşil Meclis Baş Sözcüsü"
+        }
+      },
+      "Republic|Steward": {
+        "Translations": {
+          "Chinese": "公林药库官",
+          "TraditionalChinese": "公林藥庫官",
+          "English": "Commissioner of Groves and Herb-Stores",
+          "Russian": "Комиссар рощ и травохранилищ",
+          "SpanishSpain": "Comisionado de arboledas y herbolarios",
+          "PortugueseBrazil": "Comissário de bosques e ervas",
+          "German": "Kommissar für Haine und Kräuterlager",
+          "Japanese": "公林薬庫官",
+          "French": "Commissaire aux bosquets et aux herberies",
+          "Polish": "Komisarz gajów i zielarni",
+          "SpanishLatinAmerica": "Comisionado de arboledas y herbolarios",
+          "PortuguesePortugal": "Comissário de bosques e ervas",
+          "Korean": "공림 약고관",
+          "Turkish": "Koru ve Şifalı Ot Emini"
+        }
+      },
+      "Republic|Marshal": {
+        "Translations": {
+          "Chinese": "公民长弓统帅",
+          "TraditionalChinese": "公民長弓統帥",
+          "English": "Commander of the Civic Longbows",
+          "Russian": "Командующий гражданскими длинными луками",
+          "SpanishSpain": "Comandante de los arcos largos cívicos",
+          "PortugueseBrazil": "Comandante dos arcos longos cívicos",
+          "German": "Kommandant der Bürgerlangbögen",
+          "Japanese": "市民長弓統帥",
+          "French": "Commandant des grands arcs civiques",
+          "Polish": "Dowódca obywatelskich długich łuków",
+          "SpanishLatinAmerica": "Comandante de los arcos largos cívicos",
+          "PortuguesePortugal": "Comandante dos arcos longos cívicos",
+          "Korean": "시민 장궁 사령관",
+          "Turkish": "Yurttaş Uzun Yayları Komutanı"
+        }
+      },
+      "Republic|WarCommander": {
+        "Translations": {
+          "Chinese": "公推猎官",
+          "TraditionalChinese": "公推獵官",
+          "English": "Elected Master of the Hunt",
+          "Russian": "Избранный ловчий",
+          "SpanishSpain": "Montero electo",
+          "PortugueseBrazil": "Monteiro eleito",
+          "German": "Gewählter Jägermeister",
+          "Japanese": "公選猟官",
+          "French": "Veneur élu",
+          "Polish": "Wybrany łowczy",
+          "SpanishLatinAmerica": "Montero electo",
+          "PortuguesePortugal": "Monteiro eleito",
+          "Korean": "선출 수렵관",
+          "Turkish": "Seçilmiş Avcıbaşı"
+        }
+      },
+      "Tribal|Governor": {
+        "Translations": {
+          "Chinese": "林寨头人",
+          "TraditionalChinese": "林寨頭人",
+          "English": "Grove-Camp Headman",
+          "Russian": "Староста лесного стойбища",
+          "SpanishSpain": "Jefe del campamento del bosque",
+          "PortugueseBrazil": "Chefe do acampamento da floresta",
+          "German": "Vorsteher des Waldlagers",
+          "Japanese": "林寨の頭人",
+          "French": "Chef du camp des bois",
+          "Polish": "Starosta leśnej osady",
+          "SpanishLatinAmerica": "Jefe del campamento del bosque",
+          "PortuguesePortugal": "Chefe do acampamento da floresta",
+          "Korean": "숲 야영지 촌장",
+          "Turkish": "Orman Obası Ağası"
+        }
+      },
+      "Tribal|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "林族长老",
+          "TraditionalChinese": "林族長老",
+          "English": "Grove Elder",
+          "Russian": "Старейшина лесного народа",
+          "SpanishSpain": "Anciano de la arboleda",
+          "PortugueseBrazil": "Ancião do bosque",
+          "German": "Hainältester",
+          "Japanese": "林族の長老",
+          "French": "Ancien des bosquets",
+          "Polish": "Starszy gaju",
+          "SpanishLatinAmerica": "Anciano de la arboleda",
+          "PortuguesePortugal": "Ancião do bosque",
+          "Korean": "숲 부족 장로",
+          "Turkish": "Koru Aksakalı"
+        }
+      },
+      "Tribal|Chancellor": {
+        "Translations": {
+          "Chinese": "长老环首席之声",
+          "TraditionalChinese": "長老環首席之聲",
+          "English": "First Voice of the Elder Ring",
+          "Russian": "Первый голос круга старейшин",
+          "SpanishSpain": "Primera voz del círculo de ancianos",
+          "PortugueseBrazil": "Primeira voz do círculo de anciãos",
+          "German": "Erste Stimme des Ältestenrings",
+          "Japanese": "長老環の首席の声",
+          "French": "Première voix du cercle des anciens",
+          "Polish": "Pierwszy głos kręgu starszych",
+          "SpanishLatinAmerica": "Primera voz del círculo de ancianos",
+          "PortuguesePortugal": "Primeira voz do círculo de anciãos",
+          "Korean": "장로회 수석 대변자",
+          "Turkish": "Aksakallar Çemberinin Baş Sesi"
+        }
+      },
+      "Tribal|Steward": {
+        "Translations": {
+          "Chinese": "种籽粮仓守护",
+          "TraditionalChinese": "種籽糧倉守護",
+          "English": "Keeper of Seed and Store",
+          "Russian": "Хранитель семян и запасов",
+          "SpanishSpain": "Guardián de semillas y graneros",
+          "PortugueseBrazil": "Guardião de sementes e celeiros",
+          "German": "Hüter von Saat und Speicher",
+          "Japanese": "種と蔵の守り手",
+          "French": "Gardien des semences et des greniers",
+          "Polish": "Strażnik nasion i spichrzy",
+          "SpanishLatinAmerica": "Guardián de semillas y graneros",
+          "PortuguesePortugal": "Guardião de sementes e celeiros",
+          "Korean": "씨앗과 곳간 지킴이",
+          "Turkish": "Tohum ve Ambar Bekçisi"
+        }
+      },
+      "Tribal|Marshal": {
+        "Translations": {
+          "Chinese": "首席猎手",
+          "TraditionalChinese": "首席獵手",
+          "English": "First Hunter",
+          "Russian": "Первый охотник",
+          "SpanishSpain": "Primer cazador",
+          "PortugueseBrazil": "Primeiro caçador",
+          "German": "Erster Jäger",
+          "Japanese": "首席猟師",
+          "French": "Premier chasseur",
+          "Polish": "Pierwszy łowca",
+          "SpanishLatinAmerica": "Primer cazador",
+          "PortuguesePortugal": "Primeiro caçador",
+          "Korean": "수석 사냥꾼",
+          "Turkish": "Baş Avcı"
+        }
+      },
+      "Tribal|WarCommander": {
+        "Translations": {
+          "Chinese": "战猎首领",
+          "TraditionalChinese": "戰獵首領",
+          "English": "Leader of the War Hunt",
+          "Russian": "Предводитель боевой охоты",
+          "SpanishSpain": "Líder de la cacería de guerra",
+          "PortugueseBrazil": "Líder da caçada de guerra",
+          "German": "Führer der Kriegsjagd",
+          "Japanese": "戦猟の首領",
+          "French": "Meneur de la chasse de guerre",
+          "Polish": "Przywódca wojennych łowów",
+          "SpanishLatinAmerica": "Líder de la cacería de guerra",
+          "PortuguesePortugal": "Líder da caçada de guerra",
+          "Korean": "전쟁 사냥 수장",
+          "Turkish": "Savaş Avının Önderi"
+        }
+      },
+      "Theocracy|Governor": {
+        "Translations": {
+          "Chinese": "圣树祭司",
+          "TraditionalChinese": "聖樹祭司",
+          "English": "Priest of the Home Tree",
+          "Russian": "Жрец родового древа",
+          "SpanishSpain": "Sacerdote del árbol natal",
+          "PortugueseBrazil": "Sacerdote da árvore natal",
+          "German": "Priester des Heimatbaums",
+          "Japanese": "聖樹の祭司",
+          "French": "Prêtre de l'arbre-mère",
+          "Polish": "Kapłan rodzimego drzewa",
+          "SpanishLatinAmerica": "Sacerdote del árbol natal",
+          "PortuguesePortugal": "Sacerdote da árvore natal",
+          "Korean": "신성한 나무의 사제",
+          "Turkish": "Yurt Ağacının Rahibi"
+        }
+      },
+      "Theocracy|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "圣林守望",
+          "TraditionalChinese": "聖林守望",
+          "English": "Warden of the Sacred Grove",
+          "Russian": "Страж священной рощи",
+          "SpanishSpain": "Guardián del bosque sagrado",
+          "PortugueseBrazil": "Guardião do bosque sagrado",
+          "German": "Hüter des heiligen Hains",
+          "Japanese": "聖林の守り手",
+          "French": "Gardien du bois sacré",
+          "Polish": "Strażnik świętego gaju",
+          "SpanishLatinAmerica": "Guardián del bosque sagrado",
+          "PortuguesePortugal": "Guardião do bosque sagrado",
+          "Korean": "신성한 숲의 수호관",
+          "Turkish": "Kutsal Koru Muhafızı"
+        }
+      },
+      "Theocracy|Chancellor": {
+        "Translations": {
+          "Chinese": "初树神谕官",
+          "TraditionalChinese": "初樹神諭官",
+          "English": "Oracle of the First Tree",
+          "Russian": "Оракул Первого древа",
+          "SpanishSpain": "Oráculo del Primer Árbol",
+          "PortugueseBrazil": "Oráculo da Primeira Árvore",
+          "German": "Orakel des Ersten Baums",
+          "Japanese": "始まりの樹の神託官",
+          "French": "Oracle du Premier Arbre",
+          "Polish": "Wyrocznia Pierwszego Drzewa",
+          "SpanishLatinAmerica": "Oráculo del Primer Árbol",
+          "PortuguesePortugal": "Oráculo da Primeira Árvore",
+          "Korean": "최초의 나무 신탁관",
+          "Turkish": "İlk Ağacın Kahini"
+        }
+      },
+      "Theocracy|Steward": {
+        "Translations": {
+          "Chinese": "供物药库祭司",
+          "TraditionalChinese": "供物藥庫祭司",
+          "English": "Keeper of Offerings and Herbs",
+          "Russian": "Хранитель подношений и трав",
+          "SpanishSpain": "Guardián de ofrendas y hierbas",
+          "PortugueseBrazil": "Guardião de oferendas e ervas",
+          "German": "Hüter der Gaben und Kräuter",
+          "Japanese": "供物と薬草の祭司",
+          "French": "Gardien des offrandes et des herbes",
+          "Polish": "Strażnik ofiar i ziół",
+          "SpanishLatinAmerica": "Guardián de ofrendas y hierbas",
+          "PortuguesePortugal": "Guardião de oferendas e ervas",
+          "Korean": "공물과 약초 관리인",
+          "Turkish": "Adak ve Şifalı Ot Emini"
+        }
+      },
+      "Theocracy|Marshal": {
+        "Translations": {
+          "Chinese": "荆棘护教元帅",
+          "TraditionalChinese": "荊棘護教元帥",
+          "English": "Thorn-Marshal of the Faith",
+          "Russian": "Терновый маршал веры",
+          "SpanishSpain": "Mariscal de espinas de la fe",
+          "PortugueseBrazil": "Marechal dos espinhos da fé",
+          "German": "Dornenmarschall des Glaubens",
+          "Japanese": "荊棘の護教元帥",
+          "French": "Maréchal des épines de la foi",
+          "Polish": "Cierniowy marszałek wiary",
+          "SpanishLatinAmerica": "Mariscal de espinas de la fe",
+          "PortuguesePortugal": "Marechal dos espinhos da fé",
+          "Korean": "가시 호교 원수",
+          "Turkish": "İnancın Diken Mareşali"
+        }
+      },
+      "Theocracy|WarCommander": {
+        "Translations": {
+          "Chinese": "护教猎官",
+          "TraditionalChinese": "護教獵官",
+          "English": "Huntmaster of the Faith",
+          "Russian": "Ловчий веры",
+          "SpanishSpain": "Montero de la fe",
+          "PortugueseBrazil": "Monteiro da fé",
+          "German": "Jägermeister des Glaubens",
+          "Japanese": "護教猟官",
+          "French": "Veneur de la foi",
+          "Polish": "Łowczy wiary",
+          "SpanishLatinAmerica": "Montero de la fe",
+          "PortuguesePortugal": "Monteiro da fé",
+          "Korean": "호교 수렵관",
+          "Turkish": "İnancın Avcıbaşısı"
+        }
+      }
+    }
+  }
+}

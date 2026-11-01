@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c2py6yutbt0k4"
+
+[deps]
+
+files=["res://assets/origin/Culture/Leffathou/StateNames.Chinese.translation", "res://assets/origin/Culture/Leffathou/StateNames.English.translation", "res://assets/origin/Culture/Leffathou/StateNames.TraditionalChinese.translation", "res://assets/origin/Culture/Leffathou/StateNames.Russian.translation", "res://assets/origin/Culture/Leffathou/StateNames.SpanishSpain.translation", "res://assets/origin/Culture/Leffathou/StateNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Leffathou/StateNames.German.translation", "res://assets/origin/Culture/Leffathou/StateNames.Japanese.translation", "res://assets/origin/Culture/Leffathou/StateNames.French.translation", "res://assets/origin/Culture/Leffathou/StateNames.Polish.translation", "res://assets/origin/Culture/Leffathou/StateNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Leffathou/StateNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Leffathou/StateNames.Korean.translation", "res://assets/origin/Culture/Leffathou/StateNames.Turkish.translation"]
+
+source_file="res://assets/origin/Culture/Leffathou/StateNames.csv"
+dest_files=["res://assets/origin/Culture/Leffathou/StateNames.Chinese.translation", "res://assets/origin/Culture/Leffathou/StateNames.English.translation", "res://assets/origin/Culture/Leffathou/StateNames.TraditionalChinese.translation", "res://assets/origin/Culture/Leffathou/StateNames.Russian.translation", "res://assets/origin/Culture/Leffathou/StateNames.SpanishSpain.translation", "res://assets/origin/Culture/Leffathou/StateNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Leffathou/StateNames.German.translation", "res://assets/origin/Culture/Leffathou/StateNames.Japanese.translation", "res://assets/origin/Culture/Leffathou/StateNames.French.translation", "res://assets/origin/Culture/Leffathou/StateNames.Polish.translation", "res://assets/origin/Culture/Leffathou/StateNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Leffathou/StateNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Leffathou/StateNames.Korean.translation", "res://assets/origin/Culture/Leffathou/StateNames.Turkish.translation"]
+
+[params]
+
+compress=true
+delimiter=0

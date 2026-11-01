@@ -1,0 +1,725 @@
+{
+  "CultureName": "Wristhos",
+  "CultureColorHex": "#80b1d3",
+  "NameOrder": "FirstNameFirst",
+  "PoliticalSystems": [
+    "Tribal",
+    "Federation",
+    "Kingdom"
+  ],
+  "PoliticalSystemProbabilities": {
+    "Kingdom": 60.0,
+    "Empire": 35.0,
+    "Federation": 80.0,
+    "Republic": 10.0,
+    "Tribal": 90.0,
+    "Theocracy": 20.0
+  },
+  "EthnicAttributeProbabilities": {
+    "FishAndHunting": 40.0,
+    "Agriculture": 10.0,
+    "Nomadic": 100.0,
+    "Maritime": 0.0,
+    "Commercial": 65.0
+  },
+  "TraitProbabilities": {
+    "FightToTheEnd": 70.0,
+    "StrengthenCore": 50.0,
+    "ManifestDestiny": 60.0,
+    "BullyTheWeak": 55.0,
+    "DefyTheStrong": 65.0,
+    "TotalWar": 30.0,
+    "WellTrained": 80.0,
+    "CoreDefense": 60.0,
+    "CavalryTradition": 100.0,
+    "HomelandDefense": 75.0,
+    "Conqueror": 70.0,
+    "SiegeCapture": 20.0,
+    "FieldCombatElite": 90.0
+  },
+  "CultureDescriptionTranslations": [
+    "莱斯索斯是强大的草原游牧联盟，以精锐骑兵与皮革、金属工艺闻名。社会由军事贵族与部落长老主导，掌控畜牧经济与商路。",
+    "Wristhos is a powerful grassland nomadic alliance, renowned for its elite cavalry and craftsmanship in leather and metal. Society is dominated by military nobility and tribal elders, controlling the pastoral economy and trade routes.",
+    "萊斯索斯是強大的草原游牧聯盟，以精銳騎兵與皮革、金屬工藝聞名。社會由軍事貴族與部落長老主導，掌控畜牧經濟与商路。",
+    "Вристос — это могущественный союз кочевников степей, известный своей элитной кавалерией и мастерством в обработке кожи и металла. Общество контролируется военной знатью и племенными старейшинами, которые управляют пастбищным хозяйством и торговыми путями.",
+    "Wristhos es una poderosa alianza nómada de las praderas, renombrada por su caballería de élite y su artesanía en cuero y metal. La sociedad está dominada por la nobleza militar y los ancianos tribales, que controlan la economía pastoral y las rutas comerciales.",
+    "Wristhos é uma poderosa aliança nômade das estepes, renomada por sua cavalaria de elite e seu artesanato em couro e metal. A sociedade é dominada pela nobreza militar e pelos anciãos tribais, que controlam a economia pastoral e as rotas comerciais.",
+    "Wristhos ist eine mächtige nomadische Allianz des Graslandes, bekannt für ihre Elitekavallerie und ihre Handwerkskunst in Leder und Metall. Die Gesellschaft wird von militärischem Adel und Stammesältesten dominiert, die die Weidewirtschaft und Handelsrouten kontrollieren.",
+    "ライストソスは強力な草原の遊牧民同盟であり、精鋭な騎兵隊と皮革・金属工芸で名高い。社会は軍事貴族と部族の長老によって主導され、牧畜経済と交易路を掌握している。",
+    "Wristhos est une puissante alliance nomade des prairies, renommée pour sa cavalerie d'élite et son artisanat du cuir et du métal. La société est dominée par la noblesse militaire et les anciens des tribus, qui contrôlent l'économie pastorale et les routes commerciales.",
+    "Wristhos to potężny sojusz nomadów z pastwisk, znany z elitarnej kawalerii oraz rzemiosła skórzanego i metalowego. Społeczeństwo jest zdominowane przez arystokrację wojskową i starszyznę plemienną, kontrolującą gospodarkę pasterską i szlaki handlowe.",
+    "Wristhos es una poderosa alianza nómada de las praderas, renombrada por su caballería de élite y su artesanía en cuero y metal. La sociedad está dominada por la nobleza militar y los ancianos tribales, que controlan la economía pastoral y las rutas comerciales.",
+    "Wristhos é uma poderosa aliança nómada das pradarias, de renome pela sua cavalaria de elite e pelo seu artesanato em couro e metal. A sociedade é dominada pela nobreza militar e pelos anciãos tribais, que controlam a economia pastoral e as rotas comerciais.",
+    "라이스토스는 강력한 초원 유목 연맹으로, 정예 기병대와 가죽 및 금속 공예로 유명합니다. 사회는 군사 귀족과 부족 장로들이 주도하며 목축 경제와 교역로를 장악하고 있습니다.",
+    "Wristhos, seçkin süvarileri ve deri ile metal işçiliğiyle tanınan güçlü bir bozkır göçebe ittifakıdır. Toplum, pastoral ekonomiyi ve ticaret yollarını kontrol eden askeri soylular ve kabile büyükleri tarafından yönetilir."
+  ],
+  "MapCultureTranslations": [
+    "莱斯索斯",
+    "Wristhos",
+    "萊斯索斯",
+    "Вристос",
+    "Wristhos",
+    "Wristhos",
+    "Wristhos",
+    "ライストソス",
+    "Wristhos",
+    "Wristhos",
+    "Wristhos",
+    "Wristhos",
+    "라이스토스",
+    "Wristhos"
+  ],
+  "OfficialTitles": {
+    "PresetId": "Wristhos",
+    "Entries": {
+      "Kingdom|Governor": {
+        "Translations": {
+          "Chinese": "帐落诺颜",
+          "TraditionalChinese": "帳落諾顏",
+          "English": "Camp Noyan",
+          "Russian": "Нойон стойбища",
+          "SpanishSpain": "Noyán del campamento",
+          "PortugueseBrazil": "Noyan do acampamento",
+          "German": "Lager-Nojan",
+          "Japanese": "宿営のノヤン",
+          "French": "Noyan du campement",
+          "Polish": "Nojon obozowiska",
+          "SpanishLatinAmerica": "Noyán del campamento",
+          "PortuguesePortugal": "Noyan do acampamento",
+          "Korean": "야영지 노얀",
+          "Turkish": "Oba Noyanı"
+        }
+      },
+      "Kingdom|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "旗地诺颜",
+          "TraditionalChinese": "旗地諾顏",
+          "English": "Banner Noyan",
+          "Russian": "Нойон знамени",
+          "SpanishSpain": "Noyán del estandarte",
+          "PortugueseBrazil": "Noyan do estandarte",
+          "German": "Banner-Nojan",
+          "Japanese": "旗地のノヤン",
+          "French": "Noyan de la bannière",
+          "Polish": "Nojon chorągwi",
+          "SpanishLatinAmerica": "Noyán del estandarte",
+          "PortuguesePortugal": "Noyan do estandarte",
+          "Korean": "깃발 노얀",
+          "Turkish": "Sancak Noyanı"
+        }
+      },
+      "Kingdom|Chancellor": {
+        "Translations": {
+          "Chinese": "大帐断事官",
+          "TraditionalChinese": "大帳斷事官",
+          "English": "Arbiter of the Royal Camp",
+          "Russian": "Судья великой ставки",
+          "SpanishSpain": "Árbitro del gran campamento",
+          "PortugueseBrazil": "Árbitro do grande acampamento",
+          "German": "Richter des großen Lagers",
+          "Japanese": "大帳の断事官",
+          "French": "Arbitre du grand campement",
+          "Polish": "Sędzia wielkiego obozu",
+          "SpanishLatinAmerica": "Árbitro del gran campamento",
+          "PortuguesePortugal": "Árbitro do grande acampamento",
+          "Korean": "대장막 재판관",
+          "Turkish": "Ulu Otağ Yargıcı"
+        }
+      },
+      "Kingdom|Steward": {
+        "Translations": {
+          "Chinese": "牧税总管",
+          "TraditionalChinese": "牧稅總管",
+          "English": "Master of Pastoral Tribute",
+          "Russian": "Управляющий пастушьей данью",
+          "SpanishSpain": "Maestre del tributo de los pastos",
+          "PortugueseBrazil": "Mestre do tributo dos pastos",
+          "German": "Meister des Weidetributs",
+          "Japanese": "牧税総管",
+          "French": "Maître du tribut des pâturages",
+          "Polish": "Zarządca daniny pasterskiej",
+          "SpanishLatinAmerica": "Maestre del tributo de los pastos",
+          "PortuguesePortugal": "Mestre do tributo dos pastos",
+          "Korean": "목축세 총관",
+          "Turkish": "Otlak Vergisi Emini"
+        }
+      },
+      "Kingdom|Marshal": {
+        "Translations": {
+          "Chinese": "万骑长",
+          "TraditionalChinese": "萬騎長",
+          "English": "Commander of Ten Thousand Horse",
+          "Russian": "Темник конницы",
+          "SpanishSpain": "Comandante de diez mil jinetes",
+          "PortugueseBrazil": "Comandante de dez mil cavaleiros",
+          "German": "Führer der zehntausend Reiter",
+          "Japanese": "万騎長",
+          "French": "Commandant des dix mille cavaliers",
+          "Polish": "Dowódca dziesięciu tysięcy jazdy",
+          "SpanishLatinAmerica": "Comandante de diez mil jinetes",
+          "PortuguesePortugal": "Comandante de dez mil cavaleiros",
+          "Korean": "만기장",
+          "Turkish": "On Bin Atlı Beyi"
+        }
+      },
+      "Kingdom|WarCommander": {
+        "Translations": {
+          "Chinese": "王命统军使",
+          "TraditionalChinese": "王命統軍使",
+          "English": "Royal Commissioner of the Host",
+          "Russian": "Королевский воевода",
+          "SpanishSpain": "Comandante real de las huestes",
+          "PortugueseBrazil": "Comandante real das hostes",
+          "German": "Königlicher Heerführer",
+          "Japanese": "王命統軍使",
+          "French": "Commandant royal de l'ost",
+          "Polish": "Królewski wojewoda",
+          "SpanishLatinAmerica": "Comandante real de las huestes",
+          "PortuguesePortugal": "Comandante real das hostes",
+          "Korean": "왕명 병마사",
+          "Turkish": "Kraliyet Seraskeri"
+        }
+      },
+      "Empire|Governor": {
+        "Translations": {
+          "Chinese": "千户",
+          "TraditionalChinese": "千戶",
+          "English": "Chiliarch",
+          "Russian": "Тысячник",
+          "SpanishSpain": "Quiliarca",
+          "PortugueseBrazil": "Quiliarca",
+          "German": "Chiliarch",
+          "Japanese": "千戸長",
+          "French": "Chiliarque",
+          "Polish": "Tysięcznik",
+          "SpanishLatinAmerica": "Quiliarca",
+          "PortuguesePortugal": "Quiliarca",
+          "Korean": "천호장",
+          "Turkish": "Binbaşı"
+        }
+      },
+      "Empire|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "达鲁花赤",
+          "TraditionalChinese": "達魯花赤",
+          "English": "Darughachi",
+          "Russian": "Баскак",
+          "SpanishSpain": "Darugachi",
+          "PortugueseBrazil": "Darugachi",
+          "German": "Darughatschi",
+          "Japanese": "ダルガチ",
+          "French": "Darughachi",
+          "Polish": "Baskak",
+          "SpanishLatinAmerica": "Darugachi",
+          "PortuguesePortugal": "Darugachi",
+          "Korean": "다루가치",
+          "Turkish": "Darugaçi"
+        }
+      },
+      "Empire|Chancellor": {
+        "Translations": {
+          "Chinese": "大断事官",
+          "TraditionalChinese": "大斷事官",
+          "English": "Grand Arbiter",
+          "Russian": "Великий судья",
+          "SpanishSpain": "Gran árbitro",
+          "PortugueseBrazil": "Grão-árbitro",
+          "German": "Großrichter",
+          "Japanese": "大断事官",
+          "French": "Grand arbitre",
+          "Polish": "Wielki sędzia",
+          "SpanishLatinAmerica": "Gran árbitro",
+          "PortuguesePortugal": "Grão-árbitro",
+          "Korean": "대재판관",
+          "Turkish": "Ulu Yargıç"
+        }
+      },
+      "Empire|Steward": {
+        "Translations": {
+          "Chinese": "商路监",
+          "TraditionalChinese": "商路監",
+          "English": "Warden of the Trade Routes",
+          "Russian": "Смотритель торговых путей",
+          "SpanishSpain": "Guardián de las rutas comerciales",
+          "PortugueseBrazil": "Guardião das rotas comerciais",
+          "German": "Wächter der Handelswege",
+          "Japanese": "商路監",
+          "French": "Gardien des routes marchandes",
+          "Polish": "Strażnik szlaków handlowych",
+          "SpanishLatinAmerica": "Guardián de las rutas comerciales",
+          "PortuguesePortugal": "Guardião das rotas comerciais",
+          "Korean": "상로 감독관",
+          "Turkish": "Kervan Yolları Emini"
+        }
+      },
+      "Empire|Marshal": {
+        "Translations": {
+          "Chinese": "万户",
+          "TraditionalChinese": "萬戶",
+          "English": "Lord of Ten Thousand",
+          "Russian": "Темник",
+          "SpanishSpain": "Señor de diez mil",
+          "PortugueseBrazil": "Senhor de dez mil",
+          "German": "Herr der Zehntausend",
+          "Japanese": "万戸長",
+          "French": "Seigneur des dix mille",
+          "Polish": "Pan dziesięciu tysięcy",
+          "SpanishLatinAmerica": "Señor de diez mil",
+          "PortuguesePortugal": "Senhor de dez mil",
+          "Korean": "만호",
+          "Turkish": "Tümen Beyi"
+        }
+      },
+      "Empire|WarCommander": {
+        "Translations": {
+          "Chinese": "征行都元帅",
+          "TraditionalChinese": "征行都元帥",
+          "English": "Marshal-in-Chief of the Campaign",
+          "Russian": "Верховный маршал похода",
+          "SpanishSpain": "Mariscal supremo de la campaña",
+          "PortugueseBrazil": "Marechal supremo da campanha",
+          "German": "Oberster Marschall des Feldzugs",
+          "Japanese": "征行都元帥",
+          "French": "Maréchal suprême de la campagne",
+          "Polish": "Najwyższy marszałek wyprawy",
+          "SpanishLatinAmerica": "Mariscal supremo de la campaña",
+          "PortuguesePortugal": "Marechal supremo da campanha",
+          "Korean": "원정 도원수",
+          "Turkish": "Sefer Serdarı"
+        }
+      },
+      "Federation|Governor": {
+        "Translations": {
+          "Chinese": "帐城总管",
+          "TraditionalChinese": "帳城總管",
+          "English": "Master of the Tent-City",
+          "Russian": "Управляющий шатровым городом",
+          "SpanishSpain": "Maestre de la ciudad de tiendas",
+          "PortugueseBrazil": "Mestre da cidade de tendas",
+          "German": "Meister der Zeltstadt",
+          "Japanese": "帳城総管",
+          "French": "Maître de la ville des tentes",
+          "Polish": "Zarządca miasta namiotów",
+          "SpanishLatinAmerica": "Maestre de la ciudad de tiendas",
+          "PortuguesePortugal": "Mestre da cidade de tendas",
+          "Korean": "천막 도시 총관",
+          "Turkish": "Çadır Şehri Emini"
+        }
+      },
+      "Federation|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "盟部诺颜",
+          "TraditionalChinese": "盟部諾顏",
+          "English": "League Noyan",
+          "Russian": "Нойон союза",
+          "SpanishSpain": "Noyán de la liga",
+          "PortugueseBrazil": "Noyan da liga",
+          "German": "Bundes-Nojan",
+          "Japanese": "盟部のノヤン",
+          "French": "Noyan de la ligue",
+          "Polish": "Nojon związku",
+          "SpanishLatinAmerica": "Noyán de la liga",
+          "PortuguesePortugal": "Noyan da liga",
+          "Korean": "동맹 노얀",
+          "Turkish": "Birlik Noyanı"
+        }
+      },
+      "Federation|Chancellor": {
+        "Translations": {
+          "Chinese": "长老会首席之声",
+          "TraditionalChinese": "長老會首席之聲",
+          "English": "First Voice of the Elders",
+          "Russian": "Первый голос старейшин",
+          "SpanishSpain": "Primera voz de los ancianos",
+          "PortugueseBrazil": "Primeira voz dos anciãos",
+          "German": "Erste Stimme der Ältesten",
+          "Japanese": "長老会の首席の声",
+          "French": "Première voix des anciens",
+          "Polish": "Pierwszy głos starszyzny",
+          "SpanishLatinAmerica": "Primera voz de los ancianos",
+          "PortuguesePortugal": "Primeira voz dos anciãos",
+          "Korean": "장로회 수석 대변자",
+          "Turkish": "Aksakalların Baş Sesi"
+        }
+      },
+      "Federation|Steward": {
+        "Translations": {
+          "Chinese": "金帐司库",
+          "TraditionalChinese": "金帳司庫",
+          "English": "Treasurer of the Golden Tent",
+          "Russian": "Казначей золотого шатра",
+          "SpanishSpain": "Tesorero de la tienda dorada",
+          "PortugueseBrazil": "Tesoureiro da tenda dourada",
+          "German": "Schatzmeister des Goldenen Zeltes",
+          "Japanese": "金帳司庫",
+          "French": "Trésorier de la tente dorée",
+          "Polish": "Skarbnik złotego namiotu",
+          "SpanishLatinAmerica": "Tesorero de la tienda dorada",
+          "PortuguesePortugal": "Tesoureiro da tenda dourada",
+          "Korean": "황금 천막 재무관",
+          "Turkish": "Altın Otağ Hazinedarı"
+        }
+      },
+      "Federation|Marshal": {
+        "Translations": {
+          "Chinese": "骑军都统",
+          "TraditionalChinese": "騎軍都統",
+          "English": "Marshal of the Allied Horse",
+          "Russian": "Маршал союзной конницы",
+          "SpanishSpain": "Mariscal de la caballería aliada",
+          "PortugueseBrazil": "Marechal da cavalaria aliada",
+          "German": "Marschall der verbündeten Reiterei",
+          "Japanese": "騎軍都統",
+          "French": "Maréchal de la cavalerie alliée",
+          "Polish": "Marszałek sprzymierzonej jazdy",
+          "SpanishLatinAmerica": "Mariscal de la caballería aliada",
+          "PortuguesePortugal": "Marechal da cavalaria aliada",
+          "Korean": "연합 기마군 원수",
+          "Turkish": "Müttefik Atlıları Mareşali"
+        }
+      },
+      "Federation|WarCommander": {
+        "Translations": {
+          "Chinese": "会盟都元帅",
+          "TraditionalChinese": "會盟都元帥",
+          "English": "Marshal-in-Chief of the Moot Host",
+          "Russian": "Верховный маршал союзного воинства",
+          "SpanishSpain": "Mariscal supremo de la hueste de la asamblea",
+          "PortugueseBrazil": "Marechal supremo da hoste da assembleia",
+          "German": "Oberster Marschall des Bundesheeres",
+          "Japanese": "会盟都元帥",
+          "French": "Maréchal suprême de l'ost de l'assemblée",
+          "Polish": "Najwyższy marszałek zastępów przymierza",
+          "SpanishLatinAmerica": "Mariscal supremo de la hueste de la asamblea",
+          "PortuguesePortugal": "Marechal supremo da hoste da assembleia",
+          "Korean": "회맹 도원수",
+          "Turkish": "Kurultay Serdarı"
+        }
+      },
+      "Republic|Governor": {
+        "Translations": {
+          "Chinese": "帐市执政官",
+          "TraditionalChinese": "帳市執政官",
+          "English": "Tent-Market Magistrate",
+          "Russian": "Магистрат шатрового рынка",
+          "SpanishSpain": "Magistrado del mercado de tiendas",
+          "PortugueseBrazil": "Magistrado do mercado de tendas",
+          "German": "Magistrat des Zeltmarktes",
+          "Japanese": "帳市執政官",
+          "French": "Magistrat du marché des tentes",
+          "Polish": "Zarządca namiotowego targu",
+          "SpanishLatinAmerica": "Magistrado del mercado de tiendas",
+          "PortuguesePortugal": "Magistrado do mercado de tendas",
+          "Korean": "천막 시장 행정관",
+          "Turkish": "Çadır Pazarı Kadısı"
+        }
+      },
+      "Republic|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "营地执政官",
+          "TraditionalChinese": "營地執政官",
+          "English": "Camp Magistrate",
+          "Russian": "Магистрат лагеря",
+          "SpanishSpain": "Magistrado del campamento",
+          "PortugueseBrazil": "Magistrado do acampamento",
+          "German": "Lagermagistrat",
+          "Japanese": "営地執政官",
+          "French": "Magistrat du camp",
+          "Polish": "Zarządca obozu",
+          "SpanishLatinAmerica": "Magistrado del campamento",
+          "PortuguesePortugal": "Magistrado do acampamento",
+          "Korean": "야영지 집정관",
+          "Turkish": "Ordugâh Kadısı"
+        }
+      },
+      "Republic|Chancellor": {
+        "Translations": {
+          "Chinese": "议帐首席",
+          "TraditionalChinese": "議帳首席",
+          "English": "First Speaker of the Assembly Tent",
+          "Russian": "Первый спикер совещательного шатра",
+          "SpanishSpain": "Primer portavoz de la tienda de asambleas",
+          "PortugueseBrazil": "Primeiro porta-voz da tenda da assembleia",
+          "German": "Erster Sprecher des Versammlungszelts",
+          "Japanese": "議帳首席",
+          "French": "Premier porte-parole de la tente d'assemblée",
+          "Polish": "Pierwszy mówca namiotu obrad",
+          "SpanishLatinAmerica": "Primer portavoz de la tienda de asambleas",
+          "PortuguesePortugal": "Primeiro porta-voz da tenda da assembleia",
+          "Korean": "회의 천막 수석",
+          "Turkish": "Divan Çadırı Baş Sözcüsü"
+        }
+      },
+      "Republic|Steward": {
+        "Translations": {
+          "Chinese": "牧税商队财务官",
+          "TraditionalChinese": "牧稅商隊財務官",
+          "English": "Treasurer of Herds and Caravans",
+          "Russian": "Казначей стад и караванов",
+          "SpanishSpain": "Tesorero de rebaños y caravanas",
+          "PortugueseBrazil": "Tesoureiro de rebanhos e caravanas",
+          "German": "Schatzmeister der Herden und Karawanen",
+          "Japanese": "牧税隊商財務官",
+          "French": "Trésorier des troupeaux et des caravanes",
+          "Polish": "Skarbnik stad i karawan",
+          "SpanishLatinAmerica": "Tesorero de rebaños y caravanas",
+          "PortuguesePortugal": "Tesoureiro de rebanhos e caravanas",
+          "Korean": "목축과 대상 재무관",
+          "Turkish": "Sürü ve Kervan Hazinedarı"
+        }
+      },
+      "Republic|Marshal": {
+        "Translations": {
+          "Chinese": "公民骑军总长",
+          "TraditionalChinese": "公民騎軍總長",
+          "English": "Captain-General of the Civic Horse",
+          "Russian": "Капитан-генерал гражданской конницы",
+          "SpanishSpain": "Capitán general de la caballería cívica",
+          "PortugueseBrazil": "Capitão-general da cavalaria cívica",
+          "German": "Generalkapitän der Bürgerreiterei",
+          "Japanese": "市民騎軍総長",
+          "French": "Capitaine général de la cavalerie civique",
+          "Polish": "Kapitan generalny jazdy obywatelskiej",
+          "SpanishLatinAmerica": "Capitán general de la caballería cívica",
+          "PortuguesePortugal": "Capitão-general da cavalaria cívica",
+          "Korean": "시민 기마군 총장",
+          "Turkish": "Yurttaş Atlıları Başkaptanı"
+        }
+      },
+      "Republic|WarCommander": {
+        "Translations": {
+          "Chinese": "公推都元帅",
+          "TraditionalChinese": "公推都元帥",
+          "English": "Elected Marshal-in-Chief",
+          "Russian": "Избранный верховный маршал",
+          "SpanishSpain": "Mariscal supremo electo",
+          "PortugueseBrazil": "Marechal supremo eleito",
+          "German": "Gewählter oberster Marschall",
+          "Japanese": "公選都元帥",
+          "French": "Maréchal suprême élu",
+          "Polish": "Wybrany najwyższy marszałek",
+          "SpanishLatinAmerica": "Mariscal supremo electo",
+          "PortuguesePortugal": "Marechal supremo eleito",
+          "Korean": "선출 도원수",
+          "Turkish": "Seçilmiş Serdar"
+        }
+      },
+      "Tribal|Governor": {
+        "Translations": {
+          "Chinese": "营帐头人",
+          "TraditionalChinese": "營帳頭人",
+          "English": "Camp Headman",
+          "Russian": "Староста стойбища",
+          "SpanishSpain": "Jefe del campamento",
+          "PortugueseBrazil": "Chefe do acampamento",
+          "German": "Lagervorsteher",
+          "Japanese": "営帳の頭人",
+          "French": "Chef du camp",
+          "Polish": "Starosta obozowiska",
+          "SpanishLatinAmerica": "Jefe del campamento",
+          "PortuguesePortugal": "Chefe do acampamento",
+          "Korean": "천막 촌장",
+          "Turkish": "Oba Kethüdası"
+        }
+      },
+      "Tribal|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "部族首领",
+          "TraditionalChinese": "部族首領",
+          "English": "Clan Chief",
+          "Russian": "Вождь племени",
+          "SpanishSpain": "Jefe del clan",
+          "PortugueseBrazil": "Chefe do clã",
+          "German": "Stammeshäuptling",
+          "Japanese": "部族の首領",
+          "French": "Chef de clan",
+          "Polish": "Wódz plemienia",
+          "SpanishLatinAmerica": "Jefe del clan",
+          "PortuguesePortugal": "Chefe do clã",
+          "Korean": "부족장",
+          "Turkish": "Boy Beyi"
+        }
+      },
+      "Tribal|Chancellor": {
+        "Translations": {
+          "Chinese": "首席长老",
+          "TraditionalChinese": "首席長老",
+          "English": "First Elder",
+          "Russian": "Первый старейшина",
+          "SpanishSpain": "Primer anciano",
+          "PortugueseBrazil": "Primeiro ancião",
+          "German": "Erster Ältester",
+          "Japanese": "首席長老",
+          "French": "Premier ancien",
+          "Polish": "Pierwszy starszy",
+          "SpanishLatinAmerica": "Primer anciano",
+          "PortuguesePortugal": "Primeiro ancião",
+          "Korean": "수석 장로",
+          "Turkish": "Baş Aksakal"
+        }
+      },
+      "Tribal|Steward": {
+        "Translations": {
+          "Chinese": "牧群保管者",
+          "TraditionalChinese": "牧群保管者",
+          "English": "Keeper of the Herds",
+          "Russian": "Хранитель стад",
+          "SpanishSpain": "Guardián de los rebaños",
+          "PortugueseBrazil": "Guardião dos rebanhos",
+          "German": "Hüter der Herden",
+          "Japanese": "牧群の管理人",
+          "French": "Gardien des troupeaux",
+          "Polish": "Strażnik stad",
+          "SpanishLatinAmerica": "Guardián de los rebaños",
+          "PortuguesePortugal": "Guardião dos rebanhos",
+          "Korean": "가축 무리 관리인",
+          "Turkish": "Sürülerin Bekçisi"
+        }
+      },
+      "Tribal|Marshal": {
+        "Translations": {
+          "Chinese": "首席骑战酋",
+          "TraditionalChinese": "首席騎戰酋",
+          "English": "High Horse-War Chief",
+          "Russian": "Верховный вождь конной войны",
+          "SpanishSpain": "Gran jefe de la guerra montada",
+          "PortugueseBrazil": "Grande chefe da guerra montada",
+          "German": "Oberster Reiterkriegshäuptling",
+          "Japanese": "首席騎馬戦酋長",
+          "French": "Grand chef de la guerre montée",
+          "Polish": "Naczelny wódz konnej wojny",
+          "SpanishLatinAmerica": "Gran jefe de la guerra montada",
+          "PortuguesePortugal": "Grande chefe da guerra montada",
+          "Korean": "수석 기마 전쟁 족장",
+          "Turkish": "Ulu Atlı Savaş Beyi"
+        }
+      },
+      "Tribal|WarCommander": {
+        "Translations": {
+          "Chinese": "诸部战酋",
+          "TraditionalChinese": "諸部戰酋",
+          "English": "War-Chief of the Tribes",
+          "Russian": "Военный вождь племён",
+          "SpanishSpain": "Jefe de guerra de las tribus",
+          "PortugueseBrazil": "Chefe de guerra das tribos",
+          "German": "Kriegshäuptling der Stämme",
+          "Japanese": "諸部族戦酋長",
+          "French": "Chef de guerre des tribus",
+          "Polish": "Wódz wojenny plemion",
+          "SpanishLatinAmerica": "Jefe de guerra de las tribus",
+          "PortuguesePortugal": "Chefe de guerra das tribos",
+          "Korean": "부족 전쟁 족장",
+          "Turkish": "Boyların Savaş Beyi"
+        }
+      },
+      "Theocracy|Governor": {
+        "Translations": {
+          "Chinese": "祭帐守护",
+          "TraditionalChinese": "祭帳守護",
+          "English": "Keeper of the Shrine-Tent",
+          "Russian": "Хранитель священного шатра",
+          "SpanishSpain": "Guardián de la tienda del altar",
+          "PortugueseBrazil": "Guardião da tenda sagrada",
+          "German": "Hüter des Schreinzelts",
+          "Japanese": "祭帳の守り手",
+          "French": "Gardien de la tente-sanctuaire",
+          "Polish": "Strażnik namiotu-świątyni",
+          "SpanishLatinAmerica": "Guardián de la tienda del altar",
+          "PortuguesePortugal": "Guardião da tenda sagrada",
+          "Korean": "제단 천막 수호자",
+          "Turkish": "Mabet Çadırının Bekçisi"
+        }
+      },
+      "Theocracy|DistrictGovernor": {
+        "Translations": {
+          "Chinese": "圣旗守护者",
+          "TraditionalChinese": "聖旗守護者",
+          "English": "Warden of the Sacred Banner",
+          "Russian": "Хранитель священного знамени",
+          "SpanishSpain": "Guardián del estandarte sagrado",
+          "PortugueseBrazil": "Guardião do estandarte sagrado",
+          "German": "Hüter des heiligen Banners",
+          "Japanese": "聖旗の守護者",
+          "French": "Gardien de la bannière sacrée",
+          "Polish": "Strażnik świętej chorągwi",
+          "SpanishLatinAmerica": "Guardián del estandarte sagrado",
+          "PortuguesePortugal": "Guardião do estandarte sagrado",
+          "Korean": "신성한 깃발의 수호자",
+          "Turkish": "Kutsal Sancağın Muhafızı"
+        }
+      },
+      "Theocracy|Chancellor": {
+        "Translations": {
+          "Chinese": "长天代言祭司",
+          "TraditionalChinese": "長天代言祭司",
+          "English": "Voice of the Eternal Sky",
+          "Russian": "Глас Вечного неба",
+          "SpanishSpain": "Voz del Cielo Eterno",
+          "PortugueseBrazil": "Voz do Céu Eterno",
+          "German": "Stimme des Ewigen Himmels",
+          "Japanese": "永遠なる天の代言者",
+          "French": "Voix du Ciel éternel",
+          "Polish": "Głos Wiecznego Nieba",
+          "SpanishLatinAmerica": "Voz del Cielo Eterno",
+          "PortuguesePortugal": "Voz do Céu Eterno",
+          "Korean": "영원한 하늘의 대변자",
+          "Turkish": "Ebedi Göğün Sesi"
+        }
+      },
+      "Theocracy|Steward": {
+        "Translations": {
+          "Chinese": "圣畜贡物保管者",
+          "TraditionalChinese": "聖畜貢物保管者",
+          "English": "Keeper of Sacred Herds and Tribute",
+          "Russian": "Хранитель священных стад и дани",
+          "SpanishSpain": "Guardián de los rebaños sagrados y el tributo",
+          "PortugueseBrazil": "Guardião dos rebanhos sagrados e do tributo",
+          "German": "Hüter der heiligen Herden und des Tributs",
+          "Japanese": "聖畜と貢物の管理人",
+          "French": "Gardien des troupeaux sacrés et du tribut",
+          "Polish": "Strażnik świętych stad i daniny",
+          "SpanishLatinAmerica": "Guardián de los rebaños sagrados y el tributo",
+          "PortuguesePortugal": "Guardião dos rebanhos sagrados e do tributo",
+          "Korean": "신성한 가축과 공물 관리인",
+          "Turkish": "Kutsal Sürüler ve Haraç Emini"
+        }
+      },
+      "Theocracy|Marshal": {
+        "Translations": {
+          "Chinese": "雷骑大元帅",
+          "TraditionalChinese": "雷騎大元帥",
+          "English": "Thunder Horse-Marshal",
+          "Russian": "Великий маршал громовой конницы",
+          "SpanishSpain": "Gran mariscal de la caballería del trueno",
+          "PortugueseBrazil": "Grão-marechal da cavalaria do trovão",
+          "German": "Großmarschall der Donnerreiter",
+          "Japanese": "雷騎大元帥",
+          "French": "Grand maréchal des cavaliers du tonnerre",
+          "Polish": "Wielki marszałek gromowej jazdy",
+          "SpanishLatinAmerica": "Gran mariscal de la caballería del trueno",
+          "PortuguesePortugal": "Grão-marechal da cavalaria do trovão",
+          "Korean": "뇌기 대원수",
+          "Turkish": "Gök Gürültüsü Atlıları Mareşali"
+        }
+      },
+      "Theocracy|WarCommander": {
+        "Translations": {
+          "Chinese": "长天都元帅",
+          "TraditionalChinese": "長天都元帥",
+          "English": "Marshal-in-Chief of the Eternal Sky",
+          "Russian": "Верховный маршал Вечного неба",
+          "SpanishSpain": "Mariscal supremo del Cielo Eterno",
+          "PortugueseBrazil": "Marechal supremo do Céu Eterno",
+          "German": "Oberster Marschall des Ewigen Himmels",
+          "Japanese": "永遠なる天の都元帥",
+          "French": "Maréchal suprême du Ciel éternel",
+          "Polish": "Najwyższy marszałek Wiecznego Nieba",
+          "SpanishLatinAmerica": "Mariscal supremo del Cielo Eterno",
+          "PortuguesePortugal": "Marechal supremo do Céu Eterno",
+          "Korean": "영원한 하늘의 도원수",
+          "Turkish": "Ebedi Göğün Serdarı"
+        }
+      }
+    }
+  }
+}

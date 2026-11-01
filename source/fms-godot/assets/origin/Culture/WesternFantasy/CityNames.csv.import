@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://b1td55tqi1mla"
+
+[deps]
+
+files=["res://assets/origin/Culture/WesternFantasy/CityNames.Chinese.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.English.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.TraditionalChinese.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.Russian.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.SpanishSpain.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.PortugueseBrazil.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.German.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.Japanese.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.French.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.Polish.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.PortuguesePortugal.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.Korean.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.Turkish.translation"]
+
+source_file="res://assets/origin/Culture/WesternFantasy/CityNames.csv"
+dest_files=["res://assets/origin/Culture/WesternFantasy/CityNames.Chinese.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.English.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.TraditionalChinese.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.Russian.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.SpanishSpain.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.PortugueseBrazil.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.German.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.Japanese.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.French.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.Polish.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.PortuguesePortugal.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.Korean.translation", "res://assets/origin/Culture/WesternFantasy/CityNames.Turkish.translation"]
+
+[params]
+
+compress=true
+delimiter=0

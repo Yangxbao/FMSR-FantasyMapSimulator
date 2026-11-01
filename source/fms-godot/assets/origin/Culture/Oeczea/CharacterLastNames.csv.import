@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://iwu7syowy82g"
+
+[deps]
+
+files=["res://assets/origin/Culture/Oeczea/CharacterLastNames.Chinese.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.English.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.TraditionalChinese.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.Russian.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.SpanishSpain.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.German.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.Japanese.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.French.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.Polish.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.Korean.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.Turkish.translation"]
+
+source_file="res://assets/origin/Culture/Oeczea/CharacterLastNames.csv"
+dest_files=["res://assets/origin/Culture/Oeczea/CharacterLastNames.Chinese.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.English.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.TraditionalChinese.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.Russian.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.SpanishSpain.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.German.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.Japanese.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.French.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.Polish.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.Korean.translation", "res://assets/origin/Culture/Oeczea/CharacterLastNames.Turkish.translation"]
+
+[params]
+
+compress=true
+delimiter=0

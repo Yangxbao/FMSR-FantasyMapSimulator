@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://b3iugxayw71be"
+
+[deps]
+
+files=["res://assets/origin/Culture/Leffathou/CharacterLastNames.Chinese.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.English.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.TraditionalChinese.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.Russian.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.SpanishSpain.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.German.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.Japanese.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.French.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.Polish.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.Korean.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.Turkish.translation"]
+
+source_file="res://assets/origin/Culture/Leffathou/CharacterLastNames.csv"
+dest_files=["res://assets/origin/Culture/Leffathou/CharacterLastNames.Chinese.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.English.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.TraditionalChinese.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.Russian.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.SpanishSpain.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.German.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.Japanese.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.French.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.Polish.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.Korean.translation", "res://assets/origin/Culture/Leffathou/CharacterLastNames.Turkish.translation"]
+
+[params]
+
+compress=true
+delimiter=0

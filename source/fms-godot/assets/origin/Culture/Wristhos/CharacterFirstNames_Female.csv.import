@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://ck5tk8xvuqqf5"
+
+[deps]
+
+files=["res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.Chinese.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.English.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.TraditionalChinese.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.Russian.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.SpanishSpain.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.PortugueseBrazil.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.German.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.Japanese.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.French.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.Polish.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.PortuguesePortugal.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.Korean.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.Turkish.translation"]
+
+source_file="res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.csv"
+dest_files=["res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.Chinese.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.English.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.TraditionalChinese.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.Russian.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.SpanishSpain.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.PortugueseBrazil.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.German.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.Japanese.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.French.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.Polish.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.PortuguesePortugal.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.Korean.translation", "res://assets/origin/Culture/Wristhos/CharacterFirstNames_Female.Turkish.translation"]
+
+[params]
+
+compress=true
+delimiter=0

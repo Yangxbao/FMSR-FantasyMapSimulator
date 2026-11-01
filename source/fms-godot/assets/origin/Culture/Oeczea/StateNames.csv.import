@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://b8iglidc2q1k2"
+
+[deps]
+
+files=["res://assets/origin/Culture/Oeczea/StateNames.Chinese.translation", "res://assets/origin/Culture/Oeczea/StateNames.English.translation", "res://assets/origin/Culture/Oeczea/StateNames.TraditionalChinese.translation", "res://assets/origin/Culture/Oeczea/StateNames.Russian.translation", "res://assets/origin/Culture/Oeczea/StateNames.SpanishSpain.translation", "res://assets/origin/Culture/Oeczea/StateNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Oeczea/StateNames.German.translation", "res://assets/origin/Culture/Oeczea/StateNames.Japanese.translation", "res://assets/origin/Culture/Oeczea/StateNames.French.translation", "res://assets/origin/Culture/Oeczea/StateNames.Polish.translation", "res://assets/origin/Culture/Oeczea/StateNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Oeczea/StateNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Oeczea/StateNames.Korean.translation", "res://assets/origin/Culture/Oeczea/StateNames.Turkish.translation"]
+
+source_file="res://assets/origin/Culture/Oeczea/StateNames.csv"
+dest_files=["res://assets/origin/Culture/Oeczea/StateNames.Chinese.translation", "res://assets/origin/Culture/Oeczea/StateNames.English.translation", "res://assets/origin/Culture/Oeczea/StateNames.TraditionalChinese.translation", "res://assets/origin/Culture/Oeczea/StateNames.Russian.translation", "res://assets/origin/Culture/Oeczea/StateNames.SpanishSpain.translation", "res://assets/origin/Culture/Oeczea/StateNames.PortugueseBrazil.translation", "res://assets/origin/Culture/Oeczea/StateNames.German.translation", "res://assets/origin/Culture/Oeczea/StateNames.Japanese.translation", "res://assets/origin/Culture/Oeczea/StateNames.French.translation", "res://assets/origin/Culture/Oeczea/StateNames.Polish.translation", "res://assets/origin/Culture/Oeczea/StateNames.SpanishLatinAmerica.translation", "res://assets/origin/Culture/Oeczea/StateNames.PortuguesePortugal.translation", "res://assets/origin/Culture/Oeczea/StateNames.Korean.translation", "res://assets/origin/Culture/Oeczea/StateNames.Turkish.translation"]
+
+[params]
+
+compress=true
+delimiter=0

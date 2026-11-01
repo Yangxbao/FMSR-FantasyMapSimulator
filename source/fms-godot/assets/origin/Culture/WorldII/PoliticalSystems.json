@@ -1,0 +1,10 @@
+{
+    "PoliticalSystems": [
+        "Kingdom",
+        "Empire",
+        "Federation",
+        "Republic",
+        "Tribal",
+        "Theocracy"
+    ]
+}

@@ -1,0 +1,70 @@
+{
+  "source": "Base/BiomeResource/BiomeResource.json + localization.csv",
+  "biomes": [
+    {
+      "index": 0,
+      "name": "Marine",
+      "name_zh": "海洋"
+    },
+    {
+      "index": 1,
+      "name": "Hot desert",
+      "name_zh": "热带沙漠"
+    },
+    {
+      "index": 2,
+      "name": "Cold desert",
+      "name_zh": "寒带沙漠"
+    },
+    {
+      "index": 3,
+      "name": "Savanna",
+      "name_zh": "热带草原"
+    },
+    {
+      "index": 4,
+      "name": "Steppe",
+      "name_zh": "草原"
+    },
+    {
+      "index": 5,
+      "name": "Tropical seasonal forest",
+      "name_zh": "热带季节性森林"
+    },
+    {
+      "index": 6,
+      "name": "Temperate deciduous forest",
+      "name_zh": "温带落叶林"
+    },
+    {
+      "index": 7,
+      "name": "Tropical rainforest",
+      "name_zh": "热带雨林"
+    },
+    {
+      "index": 8,
+      "name": "Subtropical evergreen broadleaf forest",
+      "name_zh": "亚热带常绿阔叶林"
+    },
+    {
+      "index": 9,
+      "name": "Taiga",
+      "name_zh": "针叶林"
+    },
+    {
+      "index": 10,
+      "name": "Tundra",
+      "name_zh": "苔原"
+    },
+    {
+      "index": 11,
+      "name": "Snow-covered land",
+      "name_zh": "积雪地带"
+    },
+    {
+      "index": 12,
+      "name": "Wetland",
+      "name_zh": "湿地"
+    }
+  ]
+}
